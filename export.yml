@@ -17,4 +17,5 @@
 
   - name: Debug inventory_export
     ansible.builtin.debug:
-      var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
+      # var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
+      var: inventory_export
