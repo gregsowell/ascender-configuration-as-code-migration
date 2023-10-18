@@ -1,6 +1,6 @@
 ---
 - name: Export config as code info from AWX, AAP, or Ascender
-  hosts: ascender-primary
+  hosts: localhost
   gather_facts: false
   vars:
   tasks:
