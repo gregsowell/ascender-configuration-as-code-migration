@@ -3,13 +3,18 @@
   hosts: localhost
   gather_facts: false
   vars:
+  environment:
+    CONTROLLER_HOST: "{{ export_host }}"
+    CONTROLLER_USERNAME: "{{ gen1_user }}"
+    CONTROLLER_PASSWORD: "{{ gen1_pword }}"
+    CONTROLLER_VERIFY_SSL: False
   tasks:
   - name: Export all inventories
     awx.awx.export:
-      controller_host: "{{ export_host }}"
-      controller_username: "{{ gen1_user }}"
-      controller_host: "{{ gen1_pword }}"
-      validate_certs: false
+  #    controller_host: "{{ export_host }}"
+  #    controller_username: "{{ gen1_user }}"
+  #    controller_host: "{{ gen1_pword }}"
+  #    validate_certs: false
       inventory: 'all'
     register: inventory_export
 
