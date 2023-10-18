@@ -1,18 +1,13 @@
 ---
-- name: Export all inventories
+- name: Export all {{ item }}
   awx.awx.export:
     {{ item }}: 'all'
   register: exported_info
-
-#- name: Debug inventory_export
-#  ansible.builtin.debug:
-#    # var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
-#    var: exported_info
 
 - name: Export data to file
   ansible.builtin.copy:
     content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yaml"
 
-- name: Cat file
+- name: Cat {{ item }} file
   ansible.builtin.shell: "cat /tmp/export_files/{{ item }}.yaml"
