@@ -3,19 +3,46 @@
   hosts: localhost
   gather_facts: false
   vars:
+    export_objects: 
+#      - applications
+#      - credentials
+#      - credential_types
+#      - execution_environments
+      - inventory
+#      - inventory_sources
+#      - job_templates
+#      - notification_templates
+#      - organizations
+#      - projects
+#      - schedules
+#      - teams
+#      - users
+#      - workflow_job_templates
+  
   environment:
     CONTROLLER_HOST: "https://{{ export_host }}"
     CONTROLLER_USERNAME: "{{ gen1_user }}"
     CONTROLLER_PASSWORD: "{{ gen1_pword }}"
     CONTROLLER_VERIFY_SSL: False
   tasks:
-  - name: Export all inventories
-    awx.awx.export:
-      inventory: 'all'
-      # inventory: 'Demo Inventory'
-    register: inventory_export
+  - name: Create temp file directory
+    ansible.builtin.file:
+      path: /tmp/export_files
+      state: directory
+      mode: '0755'
+ 
+  - name: Export objects loop.  Loop through list and export those categories.
+    ansible.builtin.include_tasks:
+      file: "export_{{ item }}.yml"
+    loop: "{{ export_objects }}"
+      
+#  - name: Export all inventories
+#    awx.awx.export:
+#      inventory: 'all'
+#      # inventory: 'Demo Inventory'
+#    register: inventory_export
 
-  - name: Debug inventory_export
-    ansible.builtin.debug:
-      # var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
-      var: inventory_export
+#  - name: Debug inventory_export
+#    ansible.builtin.debug:
+#      # var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
+#      var: inventory_export
