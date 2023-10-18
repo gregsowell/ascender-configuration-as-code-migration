@@ -1,6 +1,6 @@
 ---
 - name: Export config as code info from AWX, AAP, or Ascender
-  hosts: localhost
+  hosts: save-files
   gather_facts: false
   vars:
     export_objects: 
