@@ -13,7 +13,7 @@
 #      - job_templates
 #      - notification_templates
 #      - organizations
-#      - projects
+      - projects
 #      - schedules
 #      - teams
 #      - users
