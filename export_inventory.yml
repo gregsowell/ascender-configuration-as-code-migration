@@ -9,3 +9,8 @@
   ansible.builtin.debug:
     # var: inventory_export | to_nice_yaml( width=50, explicit_start=True, explicit_end=True)
     var: exported_info
+
+- name: Export data to file
+  ansible.builtin.copy:
+    content: "{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"
+    dest: "{{ item }}.yaml"
