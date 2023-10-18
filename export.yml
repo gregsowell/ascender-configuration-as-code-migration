@@ -11,11 +11,8 @@
   tasks:
   - name: Export all inventories
     awx.awx.export:
-  #    controller_host: "{{ export_host }}"
-  #    controller_username: "{{ gen1_user }}"
-  #    controller_host: "{{ gen1_pword }}"
-  #    validate_certs: false
-      inventory: 'all'
+      # inventory: 'all'
+      inventory: 'Demo Inventory'
     register: inventory_export
 
   - name: Debug inventory_export
