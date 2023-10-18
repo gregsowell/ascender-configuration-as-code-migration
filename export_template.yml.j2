@@ -10,6 +10,6 @@
     content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yaml"
 
-- name: Cat {{ item }} file
-  ansible.builtin.shell: "cat /tmp/export_files/{{ item }}.yaml"
-  delegate_to: localhost
+#- name: Cat {{ item }} file
+#  ansible.builtin.shell: "cat /tmp/export_files/{{ item }}.yaml"
+#  #delegate_to: localhost
