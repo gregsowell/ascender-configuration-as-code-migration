@@ -32,6 +32,12 @@
       mode: '0755'
     delegate_to: localhost
 
+  - name: Create temp file directory
+    ansible.builtin.file:
+      path: /tmp/export_files
+      state: directory
+      mode: '0755'
+
   - name: create all of the export files from template file
     ansible.builtin.template:
       src: export_template.yml.j2
