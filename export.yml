@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
   environment:
-    CONTROLLER_HOST: "http://{{ export_host }}"
+    CONTROLLER_HOST: "https://{{ export_host }}"
     CONTROLLER_USERNAME: "{{ gen1_user }}"
     CONTROLLER_PASSWORD: "{{ gen1_pword }}"
     CONTROLLER_VERIFY_SSL: False
