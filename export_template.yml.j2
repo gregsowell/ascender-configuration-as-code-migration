@@ -3,6 +3,7 @@
   awx.awx.export:
     {{ item }}: 'all'
   register: exported_info
+  delegate_to: localhost
 
 - name: Export data to file
   ansible.builtin.copy:
@@ -11,3 +12,4 @@
 
 - name: Cat {{ item }} file
   ansible.builtin.shell: "cat /tmp/export_files/{{ item }}.yaml"
+  delegate_to: localhost
