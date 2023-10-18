@@ -11,8 +11,8 @@
   tasks:
   - name: Export all inventories
     awx.awx.export:
-      # inventory: 'all'
-      inventory: 'Demo Inventory'
+      inventory: 'all'
+      # inventory: 'Demo Inventory'
     register: inventory_export
 
   - name: Debug inventory_export
