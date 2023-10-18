@@ -50,4 +50,3 @@
     ansible.builtin.include_tasks:
       file: "export_{{ item }}.yml"
     loop: "{{ export_objects }}"
-    delegate_to: localhost
