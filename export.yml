@@ -4,20 +4,20 @@
   gather_facts: false
   vars:
     export_objects: 
-#      - applications
-#      - credentials
-#      - credential_types
-#      - execution_environments
+      - applications
+      - credentials
+      - credential_types
+      - execution_environments
       - inventory
-#      - inventory_sources
-#      - job_templates
-#      - notification_templates
-#      - organizations
+      - inventory_sources
+      - job_templates
+      - notification_templates
+      - organizations
       - projects
-#      - schedules
-#      - teams
-#      - users
-#      - workflow_job_templates
+      - schedules
+      - teams
+      - users
+      - workflow_job_templates
   
   environment:
     CONTROLLER_HOST: "https://{{ export_host }}"
