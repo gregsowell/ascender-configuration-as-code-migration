@@ -1,0 +1,18 @@
+---
+- name: Export config as code info from AWX, AAP, or Ascender
+  hosts: ascender-primary
+  gather_facts: false
+  vars:
+  tasks:
+  - name: Export all inventories
+    awx.awx.export:
+      controller_host: "{{ export_host }}"
+      controller_username: "{{ gen1_user }}"
+      controller_host: "{{ gen1_pword }}"
+      validate_certs: false
+      inventory: 'all'
+    register: inventory_export
+
+  - name: Debug inventory_export
+    ansible.builtin.debug:
+      var: inventory_export
