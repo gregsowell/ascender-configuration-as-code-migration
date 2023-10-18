@@ -11,7 +11,7 @@
 
 - name: Export data to file
   ansible.builtin.copy:
-    content: {% raw %}"{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"{% endraw %}
+    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yaml"
 
 - name: Cat file
