@@ -30,7 +30,20 @@
       path: /tmp/export_files
       state: directory
       mode: '0755'
- 
+
+#  - name: Create export file directory
+#    ansible.builtin.file:
+#      path: /tmp/export_templates
+#      state: directory
+#      mode: '0755'
+
+  - name: create all of the export files from template file
+    ansible.builtin.template:
+      src: export_template.yml.j2
+      #dest: "/tmp/export_templates/export_{{ item }}.yml"
+      dest: "{{ playbook_dir }}/export_{{ item }}.yml"
+    loop: "{{ export_objects }}"
+    
   - name: Export objects loop.  Loop through list and export those categories.
     ansible.builtin.include_tasks:
       file: "export_{{ item }}.yml"
