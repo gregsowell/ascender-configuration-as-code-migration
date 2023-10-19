@@ -68,8 +68,7 @@
 #      - workflow_job_templates
   
   environment:
-    #CONTROLLER_HOST: "https://{{ import_host }}"
-    CONTROLLER_HOST: "{{ import_host }}"
+    CONTROLLER_HOST: "https://{{ import_host }}"
     CONTROLLER_USERNAME: "{{ gen2_user }}"
     CONTROLLER_PASSWORD: "{{ gen2_pword }}"
     CONTROLLER_VERIFY_SSL: False
