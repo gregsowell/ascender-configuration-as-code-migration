@@ -8,7 +8,8 @@
 - name: Export data to file
   ansible.builtin.copy:
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
-    content: "{% raw %}{{ exported_info | regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
+    #content: "{% raw %}{{ exported_info | regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
+    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yml"
 
 #- name: Cat {{ item }} file
