@@ -4,6 +4,8 @@
   hosts: localhost
   gather_facts: false
   vars:
+    controller_configuration_inventories_enforce_defaults: true
+  
     inventory:
     -   description: ''
         host_filter: null
