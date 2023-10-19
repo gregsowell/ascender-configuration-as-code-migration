@@ -1,0 +1,100 @@
+---
+- name: Export config as code info from AWX, AAP, or Ascender
+  #hosts: save-files
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+    -   description: ''
+        host_filter: null
+        kind: ''
+        name: Ascender migration
+        natural_key:
+            name: Ascender migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        organization:
+            name: Default
+            type: organization
+        prevent_instance_group_fallback: false
+        related:
+            groups: []
+            hosts:
+            -   description: ''
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Ascender migration
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: save-files
+                natural_key:
+                    inventory:
+                        name: Ascender migration
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: save-files
+                    type: host
+                related:
+                    groups: []
+                variables: '---
+
+                    ansible_host: 10.0.50.20'
+            labels: []
+        variables: '---'
+
+    export_objects: 
+#      - applications
+#      - credentials
+#      - credential_types
+#      - execution_environments
+      - inventory
+#      - inventory_sources
+#      - job_templates
+#      - notification_templates
+#      - organizations
+#      - projects
+#      - schedules
+#      - teams
+#      - users
+#      - workflow_job_templates
+  
+  environment:
+    CONTROLLER_HOST: "https://{{ import_host }}"
+    CONTROLLER_USERNAME: "{{ gen2_user }}"
+    CONTROLLER_PASSWORD: "{{ gen2_pword }}"
+    CONTROLLER_VERIFY_SSL: False
+
+  tasks:
+  - name: Add inventory
+    awx.awx.inventory:
+      name:                               "{{ __controller_inventory_item.name | mandatory }}"
+      new_name:                           "{{ __controller_inventory_item.new_name | default(omit, true) }}"
+      copy_from:                          "{{ __controller_inventory_item.copy_from | default(omit, true) }}"
+      description:                        "{{ __controller_inventory_item.description | default(( '' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      organization:                       "{{ __controller_inventory_item.organization.name | default(__controller_inventory_item.organization) | mandatory }}"
+      instance_groups:                    "{{ __controller_inventory_item.instance_groups | default(( [] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      input_inventories:                  "{{ __controller_inventory_item.input_inventories | default(( [] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      variables:                          "{{ __controller_inventory_item.variables | default(( {} if controller_configuration_inventories_enforce_defaults else omit), true) | regex_replace('[ ]{2,}', '') }}"
+      kind:                               "{{ __controller_inventory_item.kind | default(( '' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      host_filter:                        "{{ __controller_inventory_item.host_filter | default(( '' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      prevent_instance_group_fallback:    "{{ __controller_inventory_item.prevent_instance_group_fallback | default(( false if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+      state:                              "{{ __controller_inventory_item.state | default(controller_state | default('present')) }}"
+
+#    # Role Standard Options
+#    controller_config_file:     "{{ controller_config_file | default(omit, true) }}"
+#    controller_host:            "{{ controller_hostname | default(omit, true) }}"
+#    controller_username:        "{{ controller_username | default(omit, true) }}"
+#    controller_password:        "{{ controller_password | default(omit, true) }}"
+#    request_timeout:            "{{ controller_request_timeout | default(omit, true) }}"
+#    controller_oauthtoken:      "{{ controller_oauthtoken | default(omit, true) }}"
+#    validate_certs:             "{{ controller_validate_certs | default(omit) }}"
+    loop: "{{ inventory if inventory is defined else controller_inventories }}"
+    loop_control:
+      loop_var: __controller_inventory_item
