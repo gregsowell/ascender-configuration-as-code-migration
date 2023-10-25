@@ -19,7 +19,7 @@
   ansible.builtin.replace:
     path: "/tmp/export_files/{{ item }}.yml"
     # regexp: "(?<=\s)'---'(?=\s)"
-    regexp: '(?<=\\s)\'---\'(?=\\s)'
+    regexp: "(?<=\\s)\'---\'(?=\\s)"
     # regexp: "('.*?') '---'"
     replace: ""
     
