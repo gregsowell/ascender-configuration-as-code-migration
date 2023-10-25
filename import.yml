@@ -31,13 +31,14 @@
   tasks:
   - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
     ansible.builtin.include_vars:
-      file: inventory.yml
+      # file: inventory.yml
+      dir: configs
       
   - name: debug inventory
     ansible.builtin.debug:
       # var: inventory.variables
-      # var: inventory
-      dir: configs
+      var: inventory
+      
       
   - name: Add inventory
     awx.awx.inventory:
