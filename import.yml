@@ -48,8 +48,8 @@
                 variables: '---
 
                     ansible_host: 10.0.50.20'
-            labels: []
-        variables: '---'
+                labels: []
+                variables: '---'
 
     export_objects: 
 #      - applications
