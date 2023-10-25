@@ -36,7 +36,8 @@
   - name: debug inventory
     ansible.builtin.debug:
       # var: inventory.variables
-      var: inventory
+      # var: inventory
+      dir: configs
       
   - name: Add inventory
     awx.awx.inventory:
