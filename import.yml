@@ -76,7 +76,8 @@
   tasks:
   - name: debug inventory
     ansible.builtin.debug:
-      var: inventory.variables
+      # var: inventory.variables
+      var: inventory
       
   - name: Add inventory
     awx.awx.inventory:
