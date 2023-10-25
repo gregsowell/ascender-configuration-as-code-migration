@@ -6,51 +6,6 @@
   vars:
     controller_configuration_inventories_enforce_defaults: true
   
-    inventory:
-    -   description: ''
-        host_filter: null
-        kind: ''
-        name: Ascender migration
-        natural_key:
-            name: Ascender migration
-            organization:
-                name: Default
-                type: organization
-            type: inventory
-        organization:
-            name: Default
-            type: organization
-        prevent_instance_group_fallback: false
-        related:
-            groups: []
-            hosts:
-            -   description: ''
-                enabled: true
-                instance_id: ''
-                inventory:
-                    name: Ascender migration
-                    organization:
-                        name: Default
-                        type: organization
-                    type: inventory
-                name: save-files
-                natural_key:
-                    inventory:
-                        name: Ascender migration
-                        organization:
-                            name: Default
-                            type: organization
-                        type: inventory
-                    name: save-files
-                    type: host
-                related:
-                    groups: []
-                variables: '
-
-                    ansible_host: 10.0.50.20'
-            labels: []
-        variables: ''
-
     export_objects: 
 #      - applications
 #      - credentials
@@ -74,6 +29,10 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
+  - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
+    ansible.builtin.include_vars:
+      file: inventory.yml
+      
   - name: debug inventory
     ansible.builtin.debug:
       # var: inventory.variables
