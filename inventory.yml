@@ -1,4 +1,4 @@
----
+
 
     inventory:
     -   description: ''
@@ -39,11 +39,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.20'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: Inventory for CIQ basics
         host_filter: null
         kind: ''
@@ -82,11 +82,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '---
+                variables: '
 
                     ansible_host: 192.168.1.10'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -125,7 +125,7 @@
                     type: host
                 related:
                     groups: []
-                variables: '---
+                variables: '
 
                     ansible_host: 1.2.3.4'
             -   description: ''
@@ -149,11 +149,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.33'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -196,6 +196,284 @@
 
                     ansible_python_interpreter: ''{{
                     ansible_playbook_python }}'''
+            labels: []
+        variables: ''
+    -   description: ''
+        host_filter: null
+        kind: ''
+        name: Dynamic custom inventory demo
+        natural_key:
+            name: Dynamic custom inventory demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        organization:
+            name: Default
+            type: organization
+        prevent_instance_group_fallback: false
+        related:
+            groups:
+            -   description: imported
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: Linux
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: Linux
+                    type: group
+                related:
+                    children: []
+                    hosts:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: host1.example.com
+                        type: host
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: host3.example.com
+                        type: host
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: host5.example.com
+                        type: host
+                variables: '{}'
+            -   description: imported
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: Windows
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: Windows
+                    type: group
+                related:
+                    children: []
+                    hosts:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: host2.example.com
+                        type: host
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: host4.example.com
+                        type: host
+                variables: '{}'
+            hosts:
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: host1.example.com
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: host1.example.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: Linux
+                        type: group
+                variables: '{"ansible_host": "192.168.1.101",
+                    "os": "Linux", "owner": "Admin User",
+                    "status": "active"}'
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: host2.example.com
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: host2.example.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: Windows
+                        type: group
+                variables: '{"ansible_host": "192.168.1.102",
+                    "os": "Windows", "owner": "User
+                    1", "status": "inactive"}'
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: host3.example.com
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: host3.example.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: Linux
+                        type: group
+                variables: '{"ansible_host": "192.168.1.103",
+                    "os": "Linux", "owner": "User 2",
+                    "status": "active"}'
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: host4.example.com
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: host4.example.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: Windows
+                        type: group
+                variables: '{"ansible_host": "192.168.1.104",
+                    "os": "Windows", "owner": "User
+                    3", "status": "active"}'
+            -   description: imported
+                enabled: true
+                instance_id: ''
+                inventory:
+                    name: Dynamic custom inventory demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: inventory
+                name: host5.example.com
+                natural_key:
+                    inventory:
+                        name: Dynamic custom inventory
+                            demo
+                        organization:
+                            name: Default
+                            type: organization
+                        type: inventory
+                    name: host5.example.com
+                    type: host
+                related:
+                    groups:
+                    -   inventory:
+                            name: Dynamic custom inventory
+                                demo
+                            organization:
+                                name: Default
+                                type: organization
+                            type: inventory
+                        name: Linux
+                        type: group
+                variables: '{"ansible_host": "192.168.1.105",
+                    "os": "Linux", "owner": "User 4",
+                    "status": "inactive"}'
             labels: []
         variables: ''
     -   description: ''
@@ -258,7 +536,7 @@
                             type: inventory
                         name: nexus9k3
                         type: host
-                variables: '---
+                variables: '
 
                     ansible_connection: ansible.netcommon.network_cli
 
@@ -295,7 +573,7 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.27'
             -   description: ''
@@ -327,7 +605,7 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.28'
             -   description: ''
@@ -359,11 +637,11 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.29'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -416,7 +694,7 @@
                             type: inventory
                         name: greg-rocky86nonlts
                         type: host
-                variables: '---'
+                variables: ''
             hosts:
             -   description: ''
                 enabled: true
@@ -447,7 +725,7 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.21
 
@@ -481,11 +759,11 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.23'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -530,7 +808,7 @@
                             type: inventory
                         name: rocky-8.6-lts-snow-demo
                         type: host
-                variables: '---'
+                variables: ''
             hosts:
             -   description: ''
                 enabled: true
@@ -561,13 +839,13 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.24
 
                     lts_version: lts-8.6'
             labels: []
-        variables: '---'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -620,7 +898,7 @@
                             type: inventory
                         name: Greg-Win-IIS1
                         type: host
-                variables: '---
+                variables: '
 
                     ansible_connection: winrm
 
@@ -661,7 +939,7 @@
                             type: inventory
                         name: Windows
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.30'
             -   description: ''
@@ -693,11 +971,11 @@
                             type: inventory
                         name: Windows
                         type: group
-                variables: '---
+                variables: '
 
                     ansible_host: 10.0.50.31'
             labels: []
-        variables: '---'
+        variables: ''
 
 
 ...
