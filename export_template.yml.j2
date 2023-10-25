@@ -7,7 +7,8 @@
 
 - name: Export data to file
   ansible.builtin.copy:
-    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
+    #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
+    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '')  | regex_replace('(?<=\\s)\'---\'(?=\\s)', '') }}{% endraw %}"
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('---', '') }}{% endraw %}"
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('(?<=\s)'---'(?=\s)', '') }}{% endraw %}"
     #content: "{% raw %}{{ exported_info | regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') }}{% endraw %}"
@@ -15,13 +16,13 @@
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('variables: '---'', '') }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yml"
 
-- name: clear out the varaibles files of ---
-  ansible.builtin.replace:
-    path: "/tmp/export_files/{{ item }}.yml"
-    # regexp: "(?<=\s)'---'(?=\s)"
-    regexp: "(?<=\\s)\'---\'(?=\\s)"
-    # regexp: "('.*?') '---'"
-    replace: ""
+#- name: clear out the varaibles files of ---
+#  ansible.builtin.replace:
+#    path: "/tmp/export_files/{{ item }}.yml"
+#    # regexp: "(?<=\s)'---'(?=\s)"
+#    regexp: "(?<=\\s)\'---\'(?=\\s)"
+#    # regexp: "('.*?') '---'"
+#    replace: ""
     
 #- name: Cat {{ item }} file
 #  ansible.builtin.shell: "cat /tmp/export_files/{{ item }}.yml"
