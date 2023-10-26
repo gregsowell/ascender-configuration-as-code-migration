@@ -12,7 +12,7 @@
 #      - credential_types
 #      - execution_environments
       - inventory
-#      - inventory_sources
+      - inventory_sources
 #      - job_templates
 #      - notification_templates
 #      - organizations
@@ -45,3 +45,10 @@
       # name: infra.controller_configuration.inventories
       name: inventories
     loop: "{{ export_objects }}"
+
+  - name: Add invnetory sources
+    when: item == "inventory_sources"
+    ansible.builtin.include_role:
+      name: inventory_sources
+    loop: "{{ export_objects }}"
+
