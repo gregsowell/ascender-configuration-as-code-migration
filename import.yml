@@ -11,8 +11,8 @@
 #      - credentials #some work some fail
 #      - credential_types #works
       - execution_environments
-      - inventory
-      - inventory_sources
+#      - inventory #works
+#      - inventory_sources #fails
       - job_templates
       - notification_templates
 #      - organizations #fails
