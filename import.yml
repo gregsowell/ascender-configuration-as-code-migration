@@ -9,7 +9,7 @@
     export_objects: 
       - applications
       - credentials
-      - credential_types
+#      - credential_types #works
       - execution_environments
       - inventory
       - inventory_sources
