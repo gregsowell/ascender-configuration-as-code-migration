@@ -42,5 +42,6 @@
   - name: Add invnetory
     when: item == "inventory"
     ansible.builtin.include_role:
-      name: infra.controller_configuration.inventories
+      # name: infra.controller_configuration.inventories
+      name: inventories
     loop: "{{ export_objects }}"
