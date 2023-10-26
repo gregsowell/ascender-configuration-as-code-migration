@@ -7,7 +7,7 @@
     controller_configuration_inventories_enforce_defaults: true
   
     export_objects: 
-      - applications
+#      - applications #failed
 #      - credentials #some work some fail
 #      - credential_types #works
       - execution_environments
@@ -86,5 +86,11 @@
     when: item == "applications"
     ansible.builtin.include_role:
       name: applications
+    loop: "{{ export_objects }}"
+
+  - name: Add execution_environments
+    when: item == "execution_environments"
+    ansible.builtin.include_role:
+      name: execution_environments
     loop: "{{ export_objects }}"
 
