@@ -8,18 +8,18 @@
   
     export_objects: 
 #      - applications
-#      - credentials
-#      - credential_types
+      - credentials
+      - credential_types
 #      - execution_environments
       - inventory
       - inventory_sources
 #      - job_templates
 #      - notification_templates
-#      - organizations
+      - organizations
 #      - projects
 #      - schedules
-#      - teams
-#      - users
+      - teams
+      - users
 #      - workflow_job_templates
   
   environment:
@@ -29,7 +29,7 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
-  - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
+  - name: Include vars from config folder
     ansible.builtin.include_vars:
       # file: inventory.yml
       dir: configs
@@ -39,14 +39,44 @@
 #      # var: inventory.variables
 #      var: inventory
 
-  - name: Add invnetory
+  - name: Add organizations
+    when: item == "organizations"
+    ansible.builtin.include_role:
+      name: organizations
+    loop: "{{ export_objects }}"
+
+  - name: Add teams
+    when: item == "teams"
+    ansible.builtin.include_role:
+      name: teams
+    loop: "{{ export_objects }}"
+
+  - name: Add users
+    when: item == "users"
+    ansible.builtin.include_role:
+      name: users
+    loop: "{{ export_objects }}"
+
+  - name: Add credential types
+    when: item == "credential_types"
+    ansible.builtin.include_role:
+      name: credential_types
+    loop: "{{ export_objects }}"
+
+  - name: Add credentials
+    when: item == "credentials"
+    ansible.builtin.include_role:
+      name: credentials
+    loop: "{{ export_objects }}"
+
+  - name: Add inventory
     when: item == "inventory"
     ansible.builtin.include_role:
       # name: infra.controller_configuration.inventories
       name: inventories
     loop: "{{ export_objects }}"
 
-  - name: Add invnetory sources
+  - name: Add inventory sources
     when: item == "inventory_sources"
     ansible.builtin.include_role:
       name: inventory_sources
