@@ -15,7 +15,7 @@
       - inventory_sources
 #      - job_templates
 #      - notification_templates
-      - organizations
+#      - organizations
 #      - projects
 #      - schedules
       - teams
