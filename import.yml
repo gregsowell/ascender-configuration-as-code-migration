@@ -7,20 +7,20 @@
     controller_configuration_inventories_enforce_defaults: true
   
     export_objects: 
-#      - applications
+      - applications
       - credentials
       - credential_types
-#      - execution_environments
+      - execution_environments
       - inventory
       - inventory_sources
-#      - job_templates
-#      - notification_templates
-#      - organizations
-#      - projects
-#      - schedules
-      - teams
-      - users
-#      - workflow_job_templates
+      - job_templates
+      - notification_templates
+#      - organizations #fails
+      - projects
+      - schedules
+#      - teams #works
+#      - users #fails
+      - workflow_job_templates
   
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
