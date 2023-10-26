@@ -82,3 +82,9 @@
       name: inventory_sources
     loop: "{{ export_objects }}"
 
+  - name: Add applications
+    when: item == "applications"
+    ansible.builtin.include_role:
+      name: applications
+    loop: "{{ export_objects }}"
+
