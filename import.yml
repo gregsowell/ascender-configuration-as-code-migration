@@ -10,7 +10,7 @@
 #      - applications #failed
 #      - credentials #some work some fail
 #      - credential_types #works
-      - execution_environments
+#      - execution_environments #failed conditional
 #      - inventory #works
 #      - inventory_sources #fails
       - job_templates
@@ -92,5 +92,11 @@
     when: item == "execution_environments"
     ansible.builtin.include_role:
       name: execution_environments
+    loop: "{{ export_objects }}"
+
+  - name: Add projects
+    when: item == "projects"
+    ansible.builtin.include_role:
+      name: projects
     loop: "{{ export_objects }}"
 
