@@ -8,7 +8,7 @@
   
     export_objects: 
       - applications
-      - credentials
+#      - credentials #some work some fail
 #      - credential_types #works
       - execution_environments
       - inventory
