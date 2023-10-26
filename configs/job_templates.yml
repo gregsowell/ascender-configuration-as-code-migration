@@ -1,0 +1,2139 @@
+
+
+    job_templates:
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: aaa-basics
+        natural_key:
+            name: aaa-basics
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: basic1.1-write_to_file.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ansible Misc
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials: []
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: aaa-test
+        natural_key:
+            name: aaa-test
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: ini-parse.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials: []
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            # export_host: 10.0.50.20
+
+            export_host: ascender.gregsowell.com'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Ascender migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Ascender CAC Migration Export
+        natural_key:
+            name: Ascender CAC Migration Export
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: export.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ascender CAC Migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: Ascender Primary
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            # export_host: 10.0.50.20
+
+            import_host: ascendertest9.com'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Ascender migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Ascender CAC Migration Import
+        natural_key:
+            name: Ascender CAC Migration Import
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: import.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ascender CAC Migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 2
+                    type: credential_type
+                name: Ascender Secondary
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus ACL
+        natural_key:
+            name: CAC Nexus ACL
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-acl.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus DNS
+        natural_key:
+            name: CAC Nexus DNS
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-dns.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus Interface
+        natural_key:
+            name: CAC Nexus Interface
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-interface.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus NTP Servers
+        natural_key:
+            name: CAC Nexus NTP Servers
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-ntp.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: check
+        limit: ''
+        name: CAC Nexus Password
+        natural_key:
+            name: CAC Nexus Password
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-password.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus SNMP Server Settings
+        natural_key:
+            name: CAC Nexus SNMP Server Settings
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-snmp.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: CAC Nexus Testing
+        natural_key:
+            name: CAC Nexus Testing
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: cac-nexus-testing.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network CAC
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: centos to rocky migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: Greg-centos7
+        name: Centos7 migration
+        natural_key:
+            name: Centos7 migration
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: centos7-to-rocky-elevate.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell centos7 migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: create'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: centos to rocky migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: Greg-centos7
+        name: Centos7 migration VM snapshot create
+        natural_key:
+            name: Centos7 migration VM snapshot create
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: vm-snapshot-control.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell centos7 migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: VMWare Server
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: remove'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: centos to rocky migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: Greg-centos7
+        name: Centos7 migration VM snapshot remove
+        natural_key:
+            name: Centos7 migration VM snapshot remove
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: vm-snapshot-control.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell centos7 migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: VMWare Server
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: restore'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: centos to rocky migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: Greg-centos7
+        name: Centos7 migration VM snapshot restore
+        natural_key:
+            name: Centos7 migration VM snapshot restore
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: vm-snapshot-control.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell centos7 migration
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: VMWare Server
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Demo Inventory
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Centos7 migration webserver test
+        natural_key:
+            name: Centos7 migration webserver test
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: hello_world.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Demo Project
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Demo Credential
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Demo Inventory
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Demo Job Template
+        natural_key:
+            name: Demo Job Template
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: hello_world.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Demo Project
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Demo Credential
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: greg-rocky86lts
+        name: Mountain v2 upgrade
+        natural_key:
+            name: Mountain v2 upgrade
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: rocky-mtn-v2.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: Mountain Access Key
+                    type: credential_type
+                name: Mountain V2 Migration Key
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment:
+            name: network_ee
+            type: execution_environment
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Network Backup Git
+        natural_key:
+            name: Network Backup Git
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: network_backup_git_playbook.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Network Backup Git
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: SSH Certificate Key
+                    type: credential_type
+                name: Greg SSH Private Key
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Network Lab
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Rocky LTS Mixed Demo
+        natural_key:
+            name: Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: rocky-update-mixed-lts.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: Mountain Access Key
+                    type: credential_type
+                name: Rocky LTS Mixed Demo Mnt Key
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: set_stats test
+        natural_key:
+            name: set_stats test
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: set-stats-test.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ansible Misc
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: ''
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Rocky LTS Demo
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: set_stats test2
+        natural_key:
+            name: set_stats test2
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: set-stats-test2.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ansible Misc
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: true
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            # variables
+
+            # specific
+
+            # to
+
+            # this
+
+            # template
+
+            vcenter_hostname: 10.0.2.10'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: SNOW Provision VM
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: SNOW Provision VM
+        natural_key:
+            name: SNOW Provision VM
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: snow-vcenter-create-vm.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Ascender VMWare
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: VMWare Server
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec:
+                description: ''
+                name: ''
+                spec:
+                -   choices: ''
+                    default: NewVM1
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Name of new VM
+                    required: true
+                    type: text
+                    variable: vm_name
+                -   choices:
+                    - Rocky8
+                    - Rocky9
+                    - Rocky8.6
+                    - Windows2016
+                    default: Rocky8.6
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Choose an OS template
+                        to build from
+                    required: true
+                    type: multiplechoice
+                    variable: vm_template
+                -   choices:
+                    - '25'
+                    - '40'
+                    default: '40'
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Hard drive size in
+                        GB
+                    required: true
+                    type: multiplechoice
+                    variable: vm_disksize
+                -   choices:
+                    - '12288'
+                    - '8192'
+                    - '4096'
+                    default: '4096'
+                    max: 1024
+                    min: 0
+                    new_question: false
+                    question_description: ''
+                    question_name: Amount of RAM
+                    required: true
+                    type: multiplechoice
+                    variable: vm_memory
+                -   choices:
+                    - '6'
+                    - '4'
+                    default: '4'
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Number of CPUs
+                    required: true
+                    type: multiplechoice
+                    variable: vm_cpus
+                -   choices: ''
+                    default: 10.0.50.24
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: IP address
+                    required: true
+                    type: text
+                    variable: vm_ip
+                -   choices: ''
+                    default: 255.255.255.0
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Network subnet mask
+                    required: true
+                    type: text
+                    variable: vm_netmask
+                -   choices: ''
+                    default: 10.0.50.1
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Network default gateway
+                    required: true
+                    type: text
+                    variable: vm_gateway
+                -   choices: ''
+                    default: /Greg/ciq
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: Folder to save VM
+                        to
+                    required: true
+                    type: text
+                    variable: vm_folder
+                -   choices:
+                    - MNS
+                    default: MNS
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: ''
+                    question_name: VMWare datacenter
+                        to use
+                    required: true
+                    type: multiplechoice
+                    variable: vm_datacenter
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: true
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            #hosts: rocky-8.6-lts-snow-demo'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: SNOW Provision VM
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: SNOW Rocky LTS Mixed Demo
+        natural_key:
+            name: SNOW Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: rocky-update-mixed-lts.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: Rocky LTS Mixed Demo
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Lab Servers Root
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: cloud
+                    name: Mountain Access Key
+                    type: credential_type
+                name: Rocky LTS Mixed Demo Mnt Key
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_credential_on_launch: false
+        ask_diff_mode_on_launch: false
+        ask_execution_environment_on_launch: false
+        ask_forks_on_launch: false
+        ask_instance_groups_on_launch: false
+        ask_inventory_on_launch: false
+        ask_job_slice_count_on_launch: false
+        ask_job_type_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_timeout_on_launch: false
+        ask_variables_on_launch: false
+        ask_verbosity_on_launch: false
+        become_enabled: false
+        description: ''
+        diff_mode: false
+        execution_environment: null
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10'
+        force_handlers: false
+        forks: 0
+        host_config_key: ''
+        inventory:
+            name: Windows lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_slice_count: 1
+        job_tags: ''
+        job_type: run
+        limit: ''
+        name: Windows Update With Snapshots
+        natural_key:
+            name: Windows Update With Snapshots
+            organization:
+                name: Default
+                type: organization
+            type: job_template
+        playbook: win-updates.yml
+        prevent_instance_group_fallback: false
+        project:
+            name: GregSowell Windows
+            organization:
+                name: Default
+                type: organization
+            type: project
+        related:
+            credentials:
+            -   credential_type:
+                    kind: cloud
+                    name: generic credential 1
+                    type: credential_type
+                name: VMWare Server
+                organization: null
+                type: credential
+            -   credential_type:
+                    kind: ssh
+                    name: Machine
+                    type: credential_type
+                name: Windows administrator
+                organization: null
+                type: credential
+            labels: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+        scm_branch: ''
+        skip_tags: ''
+        start_at_task: ''
+        survey_enabled: false
+        timeout: 0
+        use_fact_cache: false
+        verbosity: 0
+        webhook_credential: null
+        webhook_service: ''
+
+
+...

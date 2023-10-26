@@ -1,0 +1,121 @@
+
+
+    schedules:
+    -   description: Automatically Generated Schedule
+        diff_mode: null
+        enabled: true
+        execution_environment: null
+        extra_data:
+            days: '120'
+        forks: null
+        inventory: null
+        job_slice_count: null
+        job_tags: null
+        job_type: null
+        limit: null
+        name: Cleanup Job Schedule
+        natural_key:
+            name: Cleanup Job Schedule
+            type: schedule
+            unified_job_template:
+                name: Cleanup Job Details
+                type: system_job_template
+        related:
+            credentials: []
+        rrule: DTSTART:20230616T205427Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU
+        scm_branch: null
+        skip_tags: null
+        timeout: null
+        unified_job_template:
+            name: Cleanup Job Details
+            type: system_job_template
+        verbosity: null
+    -   description: Automatically Generated Schedule
+        diff_mode: null
+        enabled: true
+        execution_environment: null
+        extra_data:
+            days: '355'
+        forks: null
+        inventory: null
+        job_slice_count: null
+        job_tags: null
+        job_type: null
+        limit: null
+        name: Cleanup Activity Schedule
+        natural_key:
+            name: Cleanup Activity Schedule
+            type: schedule
+            unified_job_template:
+                name: Cleanup Activity Stream
+                type: system_job_template
+        related:
+            credentials: []
+        rrule: DTSTART:20230616T205427Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=TU
+        scm_branch: null
+        skip_tags: null
+        timeout: null
+        unified_job_template:
+            name: Cleanup Activity Stream
+            type: system_job_template
+        verbosity: null
+    -   description: Cleans out expired browser sessions
+        diff_mode: null
+        enabled: true
+        execution_environment: null
+        extra_data: {}
+        forks: null
+        inventory: null
+        job_slice_count: null
+        job_tags: null
+        job_type: null
+        limit: null
+        name: Cleanup Expired Sessions
+        natural_key:
+            name: Cleanup Expired Sessions
+            type: schedule
+            unified_job_template:
+                name: Cleanup Expired Sessions
+                type: system_job_template
+        related:
+            credentials: []
+        rrule: DTSTART:20230616T205559Z RRULE:FREQ=WEEKLY;INTERVAL=1
+        scm_branch: null
+        skip_tags: null
+        timeout: null
+        unified_job_template:
+            name: Cleanup Expired Sessions
+            type: system_job_template
+        verbosity: null
+    -   description: Removes expired OAuth 2 access
+            and refresh tokens
+        diff_mode: null
+        enabled: true
+        execution_environment: null
+        extra_data: {}
+        forks: null
+        inventory: null
+        job_slice_count: null
+        job_tags: null
+        job_type: null
+        limit: null
+        name: Cleanup Expired OAuth 2 Tokens
+        natural_key:
+            name: Cleanup Expired OAuth 2 Tokens
+            type: schedule
+            unified_job_template:
+                name: Cleanup Expired OAuth 2 Tokens
+                type: system_job_template
+        related:
+            credentials: []
+        rrule: DTSTART:20230616T205600Z RRULE:FREQ=WEEKLY;INTERVAL=1
+        scm_branch: null
+        skip_tags: null
+        timeout: null
+        unified_job_template:
+            name: Cleanup Expired OAuth 2 Tokens
+            type: system_job_template
+        verbosity: null
+
+
+...

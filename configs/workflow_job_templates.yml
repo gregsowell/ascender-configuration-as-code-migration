@@ -1,0 +1,1396 @@
+
+
+    workflow_job_templates:
+    -   allow_simultaneous: false
+        ask_inventory_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_variables_on_launch: false
+        description: ''
+        extra_vars: '
+
+            backup_with_tags: true'
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_tags: null
+        limit: null
+        name: CAC Nexus Config
+        natural_key:
+            name: CAC Nexus Config
+            organization: null
+            type: workflow_job_template
+        organization: null
+        related:
+            labels: []
+            notification_templates_approvals: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec:
+                description: ''
+                name: ''
+                spec:
+                -   choices: ''
+                    default: git@github.com:gregsowell/cac-nexus
+                    max: 1024
+                    min: 0
+                    new_question: true
+                    question_description: The repository
+                        that holds the network change
+                        configs
+                    question_name: Config Repo
+                    required: true
+                    type: text
+                    variable: config_repo
+            workflow_nodes:
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: a908ae9b-b5f6-4989-85a7-43a60cfcfd0a
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: a908ae9b-b5f6-4989-85a7-43a60cfcfd0a
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Password
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: f93b460e-0901-4ac9-9c7e-31fd0f4162a9
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: f93b460e-0901-4ac9-9c7e-31fd0f4162a9
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus DNS
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 592aff73-03eb-499c-8eb8-1637a2510e6d
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 592aff73-03eb-499c-8eb8-1637a2510e6d
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus SNMP Server Settings
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 859ac07d-db52-47ab-932c-cc5d00030e19
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 859ac07d-db52-47ab-932c-cc5d00030e19
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus NTP Servers
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: true
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: f111999b-03de-4081-873a-14a3a1e15565
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: f111999b-03de-4081-873a-14a3a1e15565
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Testing
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: cfd4d602-ff6c-4c2c-89aa-be966d9c52b2
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: cfd4d602-ff6c-4c2c-89aa-be966d9c52b2
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Interface
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 30be36f7-66c3-4270-b825-c8c3341837b7
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 30be36f7-66c3-4270-b825-c8c3341837b7
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus ACL
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 8f45598a-9ef1-46a6-85f7-f47bf1a8e0e1
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 8f45598a-9ef1-46a6-85f7-f47bf1a8e0e1
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: a908ae9b-b5f6-4989-85a7-43a60cfcfd0a
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                    -   identifier: f93b460e-0901-4ac9-9c7e-31fd0f4162a9
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                    -   identifier: 592aff73-03eb-499c-8eb8-1637a2510e6d
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                    -   identifier: 859ac07d-db52-47ab-932c-cc5d00030e19
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                    -   identifier: cfd4d602-ff6c-4c2c-89aa-be966d9c52b2
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                    -   identifier: 30be36f7-66c3-4270-b825-c8c3341837b7
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Network Backup Git
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config
+                    organization: null
+                    type: workflow_job_template
+        scm_branch: null
+        skip_tags: null
+        survey_enabled: true
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_inventory_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_variables_on_launch: false
+        description: ''
+        extra_vars: ''
+        inventory:
+            name: Network Lab
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_tags: null
+        limit: null
+        name: CAC Nexus Config Rollback
+        natural_key:
+            name: CAC Nexus Config Rollback
+            organization: null
+            type: workflow_job_template
+        organization: null
+        related:
+            labels: []
+            notification_templates_approvals: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec:
+                description: ''
+                name: ''
+                spec:
+                -   choices: ''
+                    default: 2023-05-09-20-16
+                    max: 1024
+                    min: 0
+                    new_question: false
+                    question_description: The tag from
+                        the backup to restore from
+                    question_name: Repo Tag
+                    required: true
+                    type: text
+                    variable: repo_tag
+            workflow_nodes:
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: a908ae9b-b5f6-4989-85a7-43a60cfcfd0a
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: a908ae9b-b5f6-4989-85a7-43a60cfcfd0a
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Password
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: f93b460e-0901-4ac9-9c7e-31fd0f4162a9
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: f93b460e-0901-4ac9-9c7e-31fd0f4162a9
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus DNS
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 592aff73-03eb-499c-8eb8-1637a2510e6d
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 592aff73-03eb-499c-8eb8-1637a2510e6d
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus SNMP Server Settings
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 859ac07d-db52-47ab-932c-cc5d00030e19
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 859ac07d-db52-47ab-932c-cc5d00030e19
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus NTP Servers
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: true
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: f111999b-03de-4081-873a-14a3a1e15565
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: f111999b-03de-4081-873a-14a3a1e15565
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Testing
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: cfd4d602-ff6c-4c2c-89aa-be966d9c52b2
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: cfd4d602-ff6c-4c2c-89aa-be966d9c52b2
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus Interface
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 30be36f7-66c3-4270-b825-c8c3341837b7
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 30be36f7-66c3-4270-b825-c8c3341837b7
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: CAC Nexus Config Rollback
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: f111999b-03de-4081-873a-14a3a1e15565
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: CAC Nexus Config Rollback
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: CAC Nexus ACL
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+        scm_branch: null
+        skip_tags: null
+        survey_enabled: true
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_inventory_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_variables_on_launch: false
+        description: ''
+        extra_vars: ''
+        inventory:
+            name: centos to rocky migration
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_tags: null
+        limit: Greg-centos7
+        name: Centos7 migration workflow
+        natural_key:
+            name: Centos7 migration workflow
+            organization: null
+            type: workflow_job_template
+        organization: null
+        related:
+            labels: []
+            notification_templates_approvals: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+            workflow_nodes:
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: b1d22a4b-17e5-492c-817d-27a4f7d70eb0
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: b1d22a4b-17e5-492c-817d-27a4f7d70eb0
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes:
+                    -   identifier: Restore snapshot
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: Centos7 migration
+                                workflow
+                            organization: null
+                            type: workflow_job_template
+                    success_nodes:
+                    -   identifier: Webserver test
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: Centos7 migration
+                                workflow
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: VM Snapshot Create
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: VM Snapshot Create
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: b1d22a4b-17e5-492c-817d-27a4f7d70eb0
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: Centos7 migration
+                                workflow
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration VM snapshot
+                        create
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: Webserver test
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: Webserver test
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes:
+                    -   identifier: Restore snapshot2
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: Centos7 migration
+                                workflow
+                            organization: null
+                            type: workflow_job_template
+                    success_nodes:
+                    -   identifier: Remove snapshot
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: Centos7 migration
+                                workflow
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration webserver
+                        test
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: Restore snapshot
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: Restore snapshot
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration VM snapshot
+                        restore
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: Restore snapshot2
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: Restore snapshot2
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration VM snapshot
+                        restore
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: Remove snapshot
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: Remove snapshot
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: Centos7 migration workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Centos7 migration VM snapshot
+                        remove
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: Centos7 migration workflow
+                    organization: null
+                    type: workflow_job_template
+        scm_branch: null
+        skip_tags: null
+        survey_enabled: false
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_inventory_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_variables_on_launch: false
+        description: ''
+        extra_vars: ''
+        inventory: null
+        job_tags: null
+        limit: null
+        name: set_stats test workflow
+        natural_key:
+            name: set_stats test workflow
+            organization: null
+            type: workflow_job_template
+        organization: null
+        related:
+            labels: []
+            notification_templates_approvals: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+            workflow_nodes:
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: d38b6566-e427-4bc1-b064-9634c12f93c7
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: d38b6566-e427-4bc1-b064-9634c12f93c7
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: set_stats test workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes:
+                    -   identifier: 37ba9d48-f77a-43ed-ba95-82db675e7eaa
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: set_stats test workflow
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: set_stats test
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: set_stats test workflow
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: 37ba9d48-f77a-43ed-ba95-82db675e7eaa
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: 37ba9d48-f77a-43ed-ba95-82db675e7eaa
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: set_stats test workflow
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: set_stats test2
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: set_stats test workflow
+                    organization: null
+                    type: workflow_job_template
+        scm_branch: null
+        skip_tags: null
+        survey_enabled: false
+        webhook_credential: null
+        webhook_service: ''
+    -   allow_simultaneous: false
+        ask_inventory_on_launch: false
+        ask_labels_on_launch: false
+        ask_limit_on_launch: false
+        ask_scm_branch_on_launch: false
+        ask_skip_tags_on_launch: false
+        ask_tags_on_launch: false
+        ask_variables_on_launch: true
+        description: ''
+        extra_vars: ''
+        inventory:
+            name: SNOW Provision VM
+            organization:
+                name: Default
+                type: organization
+            type: inventory
+        job_tags: null
+        limit: null
+        name: SNOW VM Deploy With LTS
+        natural_key:
+            name: SNOW VM Deploy With LTS
+            organization: null
+            type: workflow_job_template
+        organization: null
+        related:
+            labels: []
+            notification_templates_approvals: []
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+            schedules: []
+            survey_spec: {}
+            workflow_nodes:
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: d4524850-547d-4ad9-8e04-e0f4cc126689
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: d4524850-547d-4ad9-8e04-e0f4cc126689
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: SNOW VM Deploy With LTS
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes:
+                    -   identifier: LTS Updates Failure
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: SNOW VM Deploy With
+                                LTS
+                            organization: null
+                            type: workflow_job_template
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: SNOW Rocky LTS Mixed Demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: SNOW VM Deploy With LTS
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: LTS Updates Failure
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: LTS Updates Failure
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: SNOW VM Deploy With LTS
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Demo Job Template
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: SNOW VM Deploy With LTS
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: VMDeploy Failure
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: VMDeploy Failure
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: SNOW VM Deploy With LTS
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes: []
+                    success_nodes: []
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: Demo Job Template
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: SNOW VM Deploy With LTS
+                    organization: null
+                    type: workflow_job_template
+            -   all_parents_must_converge: false
+                diff_mode: null
+                execution_environment: null
+                extra_data: {}
+                forks: null
+                identifier: d18611b6-ae4b-4964-aee2-756f59da1474
+                inventory: null
+                job_slice_count: null
+                job_tags: null
+                job_type: null
+                limit: null
+                natural_key:
+                    identifier: d18611b6-ae4b-4964-aee2-756f59da1474
+                    type: workflow_job_template_node
+                    workflow_job_template:
+                        name: SNOW VM Deploy With LTS
+                        organization: null
+                        type: workflow_job_template
+                related:
+                    always_nodes: []
+                    credentials: []
+                    failure_nodes:
+                    -   identifier: VMDeploy Failure
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: SNOW VM Deploy With
+                                LTS
+                            organization: null
+                            type: workflow_job_template
+                    success_nodes:
+                    -   identifier: d4524850-547d-4ad9-8e04-e0f4cc126689
+                        type: workflow_job_template_node
+                        workflow_job_template:
+                            name: SNOW VM Deploy With
+                                LTS
+                            organization: null
+                            type: workflow_job_template
+                scm_branch: null
+                skip_tags: null
+                timeout: null
+                unified_job_template:
+                    name: SNOW Provision VM
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                verbosity: null
+                workflow_job_template:
+                    name: SNOW VM Deploy With LTS
+                    organization: null
+                    type: workflow_job_template
+        scm_branch: null
+        skip_tags: null
+        survey_enabled: false
+        webhook_credential: null
+        webhook_service: ''
+
+
+...

@@ -1,0 +1,31 @@
+
+
+    execution_environments:
+    -   credential:
+            credential_type:
+                kind: registry
+                name: Container Registry
+                type: credential_type
+            name: registry.mnslab.io
+            organization: null
+            type: credential
+        description: ''
+        image: registry.labs.io:5000/network_ee:1.0.2
+        name: network_ee
+        natural_key:
+            name: network_ee
+            type: execution_environment
+        organization: null
+        pull: missing
+    -   credential: null
+        description: ''
+        image: quay.io/ansible/awx-ee:latest
+        name: AWX EE (latest)
+        natural_key:
+            name: AWX EE (latest)
+            type: execution_environment
+        organization: null
+        pull: ''
+
+
+...

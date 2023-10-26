@@ -1,0 +1,21 @@
+
+
+    applications:
+    -   authorization_grant_type: authorization-code
+        client_type: confidential
+        description: ''
+        name: SNOW
+        natural_key:
+            name: SNOW
+            organization:
+                name: Default
+                type: organization
+            type: o_auth2_application
+        organization:
+            name: Default
+            type: organization
+        redirect_uris: https://ppp.service-now.com/oauth_redirect.do
+        skip_authorization: false
+
+
+...

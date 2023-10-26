@@ -1,0 +1,342 @@
+
+
+    users:
+    -   email: test@example.com
+        first_name: ''
+        is_superuser: true
+        is_system_auditor: false
+        last_name: ''
+        natural_key:
+            type: user
+            username: admin
+        password: ''
+        related:
+            roles:
+            -   content_object:
+                    name: Rocky LTS Mixed Demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: SNOW Provision VM
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: SNOW Rocky LTS Mixed Demo
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus ACL
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus DNS
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus Interface
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus NTP Servers
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus Password
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus SNMP Server Settings
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus Testing
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Network Backup Git
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Windows Update With Snapshots
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: aaa-test
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: aaa-basics
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Centos7 migration
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Centos7 migration webserver
+                        test
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Centos7 migration VM snapshot
+                        create
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Centos7 migration VM snapshot
+                        remove
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Centos7 migration VM snapshot
+                        restore
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: set_stats test
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: set_stats test2
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Ascender CAC Migration Export
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Ascender CAC Migration Import
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: Mountain v2 upgrade
+                    organization:
+                        name: Default
+                        type: organization
+                    type: job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    name: CAC Nexus Config Rollback
+                    organization: null
+                    type: workflow_job_template
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: ssh
+                        name: Machine
+                        type: credential_type
+                    name: Demo Credential
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: ssh
+                        name: Machine
+                        type: credential_type
+                    name: Lab Servers Root
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: Mountain Access Key
+                        type: credential_type
+                    name: Rocky LTS Mixed Demo Mnt Key
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: generic credential 1
+                        type: credential_type
+                    name: VMWare Server
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: ssh
+                        name: Machine
+                        type: credential_type
+                    name: Network Lab
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: SSH Certificate Key
+                        type: credential_type
+                    name: Greg SSH Private Key
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: registry
+                        name: Container Registry
+                        type: credential_type
+                    name: registry.mnslab.io
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: ssh
+                        name: Machine
+                        type: credential_type
+                    name: Windows administrator
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: ssh
+                        name: Machine
+                        type: credential_type
+                    name: basics-credential
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: generic credential 1
+                        type: credential_type
+                    name: Ascender Primary
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: generic credential 2
+                        type: credential_type
+                    name: Ascender Secondary
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   content_object:
+                    credential_type:
+                        kind: cloud
+                        name: Mountain Access Key
+                        type: credential_type
+                    name: Mountain V2 Migration Key
+                    organization: null
+                    type: credential
+                name: Admin
+                type: role
+            -   name: System Administrator
+                type: role
+        username: admin
+
+
+...
