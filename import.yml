@@ -16,7 +16,7 @@
       - job_templates
       - notification_templates
 #      - organizations #fails
-      - projects
+#      - projects #fails
       - schedules
 #      - teams #works
 #      - users #fails
@@ -98,5 +98,11 @@
     when: item == "projects"
     ansible.builtin.include_role:
       name: projects
+    loop: "{{ export_objects }}"
+
+  - name: Add schedules
+    when: item == "schedules"
+    ansible.builtin.include_role:
+      name: schedules
     loop: "{{ export_objects }}"
 
