@@ -14,7 +14,7 @@
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('variables: ''---''', '') }}{% endraw %}"
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('variables: '---'', '') }}{% endraw %}"
     #content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('---', '') }}{% endraw %}"
-    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('---', '') | regex_replace('password: \'\'' , '') }}{% endraw %}"
+    content: "{% raw %}{{ exported_info | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) |  regex_replace('assets:', '') | regex_replace('changed: false', '') | regex_replace('failed: false', '') | regex_replace('---', '') | regex_replace('password: \\'\\'' , '') }}{% endraw %}"
     dest: "/tmp/export_files/{{ item }}.yml"
 
 #- name: clear out the varaibles files of ---
