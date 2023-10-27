@@ -9,7 +9,7 @@
         natural_key:
             type: user
             username: admin
-        password: ''
+        
         related:
             roles:
             -   content_object:
@@ -345,7 +345,7 @@
         natural_key:
             type: user
             username: testuser
-        password: ''
+        
         related:
             roles:
             -   content_object:
