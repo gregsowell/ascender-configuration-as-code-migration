@@ -64,6 +64,7 @@
     changed_when: not __controller_user_accounts_job_async.changed
     vars:
       # ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_users_enforce_defaults: false
       
   - name: Add organizations
     when: item == "organizations"
