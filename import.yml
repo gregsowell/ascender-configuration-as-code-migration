@@ -20,7 +20,7 @@
 #      - projects #fails
 #      - schedules #fails
 #      - teams #works
-      - users #fails
+#      - users #works
 #      - workflow_job_templates
   
   environment:
@@ -46,33 +46,32 @@
       # var: inventory.variables
       var: export_objects
 
-  - name: Add controller user  # noqa fqcn[action-core]
-    awx.awx.user:
-      username:                 "{{ __controller_user_accounts_item.user | default(__controller_user_accounts_item.username) | mandatory }}"
-      new_username:             "{{ __controller_user_accounts_item.new_username | default(omit, true) }}"
-      # the 'true' in the second default leads to no password being set if the default password is empty
-      password:                 "{{ __controller_user_accounts_item.password | default(controller_user_default_password | default(omit, true)) }}"
-      email:                    "{{ __controller_user_accounts_item.email | default(omit, true) }}"
-      first_name:               "{{ __controller_user_accounts_item.firstname | default(__controller_user_accounts_item.first_name | default(omit, true)) }}"
-      last_name:                "{{ __controller_user_accounts_item.lastname | default(__controller_user_accounts_item.last_name | default(omit, true)) }}"
-      is_superuser:             "{{ __controller_user_accounts_item.is_superuser | default(__controller_user_accounts_item.superuser | default(( false if controller_configuration_users_enforce_defaults else omit))) }}"
-      is_system_auditor:        "{{ __controller_user_accounts_item.is_auditor | default(__controller_user_accounts_item.is_system_auditor | default(( false if controller_configuration_users_enforce_defaults else omit))) }}"
-      update_secrets:           "{{ __controller_user_accounts_item.update_secrets | default(( false if controller_configuration_users_enforce_defaults else omit)) }}"
-      organization:             "{{ __controller_user_accounts_item.organization | default(omit) }}"
-      state:                    "{{ __controller_user_accounts_item.state | default(controller_state | default(omit, true)) }}"
+  - name: Add Credentials
+    credential:
+      name:                           "{{ __controller_credentials_item.name | mandatory }}"
+      new_name:                       "{{ __controller_credentials_item.new_name | default(omit, true) }}"
+      copy_from:                      "{{ __controller_credentials_item.copy_from | default(omit, true) }}"
+      description:                    "{{ __controller_credentials_item.description | default(('' if controller_configuration_credentials_enforce_defaults else omit), true) }}"
+      organization:                   "{{ __controller_credentials_item.organization.name | default(__controller_credentials_item.organization | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
+      credential_type:                "{{ __controller_credentials_item.credential_type.name | default(__controller_credentials_item.credential_type | mandatory ) }}"
+      inputs:                         "{{ __controller_credentials_item.inputs | default(({} if controller_configuration_credentials_enforce_defaults else omit), true) }}"
+      user:                           "{{ __controller_credentials_item.user.username | default(__controller_credentials_item.user | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
+      team:                           "{{ __controller_credentials_item.team.name | default(__controller_credentials_item.team | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
+      update_secrets:                 "{{ __controller_credentials_item.update_secrets | default(true if controller_configuration_credentials_enforce_defaults else omit) }}"
+      state:                          "{{ __controller_credentials_item.state | default(controller_state | default('present')) }}"
 
-    loop: "{{ users if users is defined else controller_user_accounts }}"
+    loop: "{{ credentials if credentials is defined else controller_credentials }}"
     loop_control:
-      loop_var: __controller_user_accounts_item
-#    no_log: "{{ controller_configuration_users_secure_logging }}"
+      loop_var: __controller_credentials_item
+      label: "{{ __controller_credentials_item.name | mandatory }}"
+    no_log: "{{ controller_configuration_credentials_secure_logging }}"
 #    async: 1000
-#    poll: 0
-    register: __controller_user_accounts_job_async
-    changed_when: not __controller_user_accounts_job_async.changed
+ #   poll: 0
+    register: __credentials_job_async
+    changed_when: not __credentials_job_async.changed
     vars:
-      # ansible_async_dir: '{{ controller_configuration_async_dir }}'
-      controller_configuration_users_enforce_defaults: false
-      controller_user_default_password: "change_me"
+#    ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_credentials_enforce_defaults: false
       
   - name: Add organizations
     when: item == "organizations"
