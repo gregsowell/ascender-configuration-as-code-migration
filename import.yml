@@ -47,7 +47,7 @@
       var: export_objects
 
   - name: Add Credentials
-    credential:
+    awx.awx.credential:
       name:                           "{{ __controller_credentials_item.name | mandatory }}"
       new_name:                       "{{ __controller_credentials_item.new_name | default(omit, true) }}"
       copy_from:                      "{{ __controller_credentials_item.copy_from | default(omit, true) }}"
