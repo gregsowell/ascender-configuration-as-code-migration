@@ -45,6 +45,23 @@
     ansible.builtin.debug:
       # var: inventory.variables
       var: export_objects
+  - name: Add Credential Types
+    awx.awx.credential_type:
+      name:                           "{{ __controller_credential_type_item.name | mandatory }}"
+      new_name:                       "{{ __controller_credential_type_item.new_name | default(omit, true) }}"
+      description:                    "{{ __controller_credential_type_item.description | default(('' if controller_configuration_credential_types_enforce_defaults else omit), true) }}"
+      injectors:                      "{{ __controller_credential_type_item.injectors | default(({} if controller_configuration_credential_types_enforce_defaults else omit), true) | regex_replace('[ ]{2,}', '') }}"
+      inputs:                         "{{ __controller_credential_type_item.inputs | default(({} if controller_configuration_credential_types_enforce_defaults else omit), true) }}"
+      kind:                           "{{ __controller_credential_type_item.kind | default('cloud') }}"
+      state:                          "{{ __controller_credential_type_item.state | default(controller_state | default('present')) }}"
+    loop: "{{ credential_types if credential_types is defined else controller_credential_types }}"
+    loop_control:
+      loop_var: __controller_credential_type_item
+    register: __credentialtypes_job_async
+    changed_when: not __credentialtypes_job_async.changed
+    vars:
+#      ansible_async_dir: '{{ controller_configuration_async_dir }}'
+
 
   - name: Add Credentials
     awx.awx.credential:
