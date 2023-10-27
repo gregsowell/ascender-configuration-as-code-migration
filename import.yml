@@ -37,7 +37,7 @@
   - name: debug data
     ansible.builtin.debug:
       # var: inventory.variables
-      var: organizations
+      var: organizations | list
 
   - name: Add organizations
     awx.awx.organization:
