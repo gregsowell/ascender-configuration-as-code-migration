@@ -42,7 +42,7 @@
   - name: debug data
     ansible.builtin.debug:
       # var: inventory.variables
-      var: users
+      var: filtered_users
 
   - name: Add controller user  # noqa fqcn[action-core]
     awx.awx.user:
