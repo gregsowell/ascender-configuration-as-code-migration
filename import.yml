@@ -72,7 +72,7 @@
     vars:
 #    ansible_async_dir: '{{ controller_configuration_async_dir }}'
       controller_configuration_credentials_enforce_defaults: false
-#    ignore_erros: true
+    ignore_errors: true
     
   - name: Add organizations
     when: item == "organizations"
