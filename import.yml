@@ -35,6 +35,7 @@
       dir: configs
 
   - name: Filter out users we don't want imported
+    when: users is defined
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
  
@@ -42,7 +43,7 @@
   - name: debug data
     ansible.builtin.debug:
       # var: inventory.variables
-      var: users
+      var: export_objects
 
   - name: Add controller user  # noqa fqcn[action-core]
     awx.awx.user:
