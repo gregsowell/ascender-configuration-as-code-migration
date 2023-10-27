@@ -59,6 +59,7 @@
     changed_when: not __organizations_job_async.changed
     vars:
       ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_organizations_enforce_defaults: false
       
 #  - name: debug inventory
 #    ansible.builtin.debug:
