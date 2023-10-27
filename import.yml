@@ -64,7 +64,7 @@
     loop_control:
       loop_var: __controller_credentials_item
       label: "{{ __controller_credentials_item.name | mandatory }}"
-    no_log: "{{ controller_configuration_credentials_secure_logging }}"
+    #no_log: "{{ controller_configuration_credentials_secure_logging }}"
 #    async: 1000
  #   poll: 0
     register: __credentials_job_async
