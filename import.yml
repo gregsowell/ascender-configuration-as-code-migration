@@ -20,7 +20,7 @@
 #      - projects #fails
 #      - schedules #fails
 #      - teams #works
-#      - users #fails
+      - users #fails
 #      - workflow_job_templates
   
   environment:
