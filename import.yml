@@ -70,6 +70,7 @@
     vars:
       # ansible_async_dir: '{{ controller_configuration_async_dir }}'
       controller_configuration_users_enforce_defaults: false
+      controller_user_default_password: "change_me"
       
   - name: Add organizations
     when: item == "organizations"
