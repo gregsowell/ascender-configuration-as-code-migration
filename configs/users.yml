@@ -337,6 +337,23 @@
             -   name: System Administrator
                 type: role
         username: admin
+    -   email: test@gregsowell.com
+        first_name: fname
+        is_superuser: false
+        is_system_auditor: false
+        last_name: lname
+        natural_key:
+            type: user
+            username: testuser
+        password: ''
+        related:
+            roles:
+            -   content_object:
+                    name: Default
+                    type: organization
+                name: Member
+                type: role
+        username: testuser
 
 
 ...
