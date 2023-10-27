@@ -34,10 +34,15 @@
       # file: inventory.yml
       dir: configs
 
+  - name: Filter out users we don't want imported
+    set_fact:
+      filtered_users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
+ 
+
   - name: debug data
     ansible.builtin.debug:
       # var: inventory.variables
-      var: organizations
+      var: users
 
   - name: Add controller user  # noqa fqcn[action-core]
     awx.awx.user:
