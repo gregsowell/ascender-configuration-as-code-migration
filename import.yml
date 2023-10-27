@@ -54,7 +54,7 @@
       inputs:                         "{{ __controller_credential_type_item.inputs | default(({} if controller_configuration_credential_types_enforce_defaults else omit), true) }}"
       kind:                           "{{ __controller_credential_type_item.kind | default('cloud') }}"
       state:                          "{{ __controller_credential_type_item.state | default(controller_state | default('present')) }}"
-    loop: "{{ credential_types if credential_types is defined }}"
+    loop: "{{ credential_types }}"
     loop_control:
       loop_var: __controller_credential_type_item
     register: __credentialtypes_job_async
