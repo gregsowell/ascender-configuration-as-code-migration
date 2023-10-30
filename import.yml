@@ -36,7 +36,9 @@
       regexp: "'\\{\\{"
       replace: "{{ replacement_str }}"
     vars: 
-      replacement_str: '"{{ \'{{\' }}"'
+      #replacement_str: '"{{ \'{{\' }}"'
+      replacement_str: "\"{{ '{{' }}"
+        
       
 
   - name: Include vars from config folder
