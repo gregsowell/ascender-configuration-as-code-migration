@@ -30,6 +30,12 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
+  - name: do cleanup on credeial type data - escape out double curly braces
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/credential_types.yml"
+      regexp: "'\\{\\{"
+      replace: '{{ "{{" }} {{ "{{" }}'
+
   - name: Include vars from config folder
     ansible.builtin.include_vars:
       # file: inventory.yml
@@ -40,11 +46,11 @@
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
-  - name: Credential types data cleanup - escape double curly braces
-#    when: credential_types is defined
-    set_fact:
-      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
-      credential_types: "{{ credential_types | regex_replace('^\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}$', ' {{ \"}}\" }}\"') }}"
+#  - name: Credential types data cleanup - escape double curly braces
+##    when: credential_types is defined
+#    set_fact:
+#      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
+#      credential_types: "{{ credential_types | regex_replace('^\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}$', ' {{ \"}}\" }}\"') }}"
 
 
   - name: debug data
