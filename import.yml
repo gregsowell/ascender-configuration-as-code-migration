@@ -46,7 +46,14 @@
       replace: "{{ replacement_str }}"
     vars: 
       replacement_str: "{{ '}}' }}\""
-      
+
+  - name: read file contents
+    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/credential_types.yml"
+    register: cred_read
+
+  - name: debug cred_read
+    ansible.builtin.debug:
+      var: cred_read  
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
