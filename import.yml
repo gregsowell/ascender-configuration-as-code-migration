@@ -34,7 +34,7 @@
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/credential_types.yml"
       regexp: "'\\{\\{"
-      replace: '{{ "{{" }} {{ "{{" }}'
+      replace: '"{{ \'{{\' }}"'
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
