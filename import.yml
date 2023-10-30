@@ -70,7 +70,7 @@
 ##    when: credential_types is defined
     set_fact:
 #      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
-      credential_types: "{{ credential_types | regex_replace('\'\\{\\{', '\"{{ \'{{\' }}') }}"
+      credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ \'{{\' }}') }}"
 
 
   - name: debug data
