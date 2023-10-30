@@ -47,9 +47,14 @@
   #     replace: "{{ replacement_str }}"
   #   vars: 
   #     replacement_str: "{{ '}}' }}\""
+  - name: Change file ownership, group and permissions
+    ansible.builtin.file:
+      path: "{{ playbook_dir }}/credential-types-fix.sh"
+      mode: '0777'
 
   - name: use shell command to modify credentail types file
-    ansible.builtin.shell: "{% raw %}sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml {% raw %}&& sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml"
+    #ansible.builtin.shell: "{% raw %}sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml {% raw %}&& sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml"
+    ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
   - name: read file contents
     ansible.builtin.shell: "cat {{ playbook_dir }}/configs/credential_types.yml"
