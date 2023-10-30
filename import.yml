@@ -48,6 +48,9 @@
   #   vars: 
   #     replacement_str: "{{ '}}' }}\""
 
+  - name: use shell command to modify credentail types file
+    ansible.builtin.shell: "sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {{ playbook_dir }}/configs/credential_types.yml && sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {{ playbook_dir }}/configs/credential_types.yml"
+
   - name: read file contents
     ansible.builtin.shell: "cat {{ playbook_dir }}/configs/credential_types.yml"
     register: cred_read
@@ -66,13 +69,13 @@
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
-  - name: Credential types data cleanup - escape double curly braces
-##    when: credential_types is defined
-    set_fact:
-##      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
-      #credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ ''{{'' }}') | regex_replace('\\}\\}''', '\"{{ ''}}'' }}') }}"
-      #credential_types: "{{ credential_types | regex_replace('\\{\\{ (.*?) \\}\\}', '\"{{ \'{{\' }} \\1 {{ \'}}\' }}\"') }}"
-      credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ \'{{\' }}') }}"
+#   - name: Credential types data cleanup - escape double curly braces
+# ##    when: credential_types is defined
+#     set_fact:
+# ##      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
+#       #credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ ''{{'' }}') | regex_replace('\\}\\}''', '\"{{ ''}}'' }}') }}"
+#       #credential_types: "{{ credential_types | regex_replace('\\{\\{ (.*?) \\}\\}', '\"{{ \'{{\' }} \\1 {{ \'}}\' }}\"') }}"
+#       credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ \'{{\' }}') }}"
 
 
   - name: debug data
