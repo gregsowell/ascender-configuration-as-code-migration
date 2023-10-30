@@ -49,7 +49,7 @@
   #     replacement_str: "{{ '}}' }}\""
 
   - name: use shell command to modify credentail types file
-    ansible.builtin.shell: "sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {{ playbook_dir }}/configs/credential_types.yml && sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {{ playbook_dir }}/configs/credential_types.yml"
+    ansible.builtin.shell: "{% raw %}sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml {% raw %}&& sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml"
 
   - name: read file contents
     ansible.builtin.shell: "cat {{ playbook_dir }}/configs/credential_types.yml"
