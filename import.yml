@@ -39,6 +39,13 @@
       #replacement_str: '"{{ \'{{\' }}"'
       replacement_str: "\"{{ '{{' }}"
         
+  - name: do cleanup on credeial type data - escape out double curly braces 2
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/credential_types.yml"
+      regexp: "\\}\\}'"
+      replace: "{{ replacement_str }}"
+    vars: 
+      replacement_str: "{{ '}}' }}\""
       
 
   - name: Include vars from config folder
