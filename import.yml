@@ -35,16 +35,22 @@
       # file: inventory.yml
       dir: configs
 
-  - name: Filter out users we don't want imported
+  - name: Filter out users we don't want imported - user import fix
     when: users is defined
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
- 
+
+#   - name: Credential types data cleanup - escape double curly braces
+#    when: credential_types is defined
+#    set_fact:
+#      credential_types: "{{ credential_types |  }}"
+
 
   - name: debug data
     ansible.builtin.debug:
       # var: inventory.variables
-      var: export_objects
+      var: credential_types
+      
   - name: Add Credential Types
     awx.awx.credential_type:
       name:                           "{{ __controller_credential_type_item.name | mandatory }}"
