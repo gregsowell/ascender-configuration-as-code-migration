@@ -66,11 +66,11 @@
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
-#  - name: Credential types data cleanup - escape double curly braces
+  - name: Credential types data cleanup - escape double curly braces
 ##    when: credential_types is defined
-#    set_fact:
+    set_fact:
 #      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
-#      credential_types: "{{ credential_types | regex_replace('^\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}$', ' {{ \"}}\" }}\"') }}"
+      credential_types: "{{ credential_types | regex_replace('\'\\{\\{', '\"{{ \'{{\' }}') }}"
 
 
   - name: debug data
