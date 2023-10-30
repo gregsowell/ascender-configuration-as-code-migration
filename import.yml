@@ -69,7 +69,7 @@
     ansible.builtin.debug:
       # var: inventory.variables
       #var: credential_types
-      msg: "{{ credential_types }}"
+      msg: "{{ credential_types | string }}"
       
   - name: Add Credential Types
     awx.awx.credential_type:
