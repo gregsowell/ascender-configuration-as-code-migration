@@ -62,7 +62,7 @@
 
   - name: debug cred_read
     ansible.builtin.debug:
-      var: cred_read | to_nice_yaml
+      var: cred_read 
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
