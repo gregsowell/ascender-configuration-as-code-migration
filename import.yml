@@ -105,6 +105,7 @@
     changed_when: not __credentialtypes_job_async.changed
     vars:
 #      ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_credential_types_enforce_defaults: false
 
 
   - name: Add Credentials
