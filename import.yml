@@ -30,39 +30,21 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
-#  - name: do cleanup on credeial type data - escape out double curly braces
-#    ansible.builtin.replace:
-#      path: "{{ playbook_dir }}/configs/credential_types.yml"
-#      regexp: "'\\{\\{"
-#      #replace: "{{ replacement_str }}"
-#      replace: "\"{{ '{{' }}"
-#    vars: 
-#      #replacement_str: '"{{ \'{{\' }}"'
-#      replacement_str: "\"{{ '{{' }}"
-        
-  # - name: do cleanup on credeial type data - escape out double curly braces 2
-  #   ansible.builtin.replace:
-  #     path: "{{ playbook_dir }}/configs/credential_types.yml"
-  #     regexp: "\\}\\}'"
-  #     replace: "{{ replacement_str }}"
-  #   vars: 
-  #     replacement_str: "{{ '}}' }}\""
-  - name: Change file ownership, group and permissions
-    ansible.builtin.file:
+  - name: check if credential-types file exists
+    ansible.builtin.stat:
       path: "{{ playbook_dir }}/credential-types-fix.sh"
-      mode: '0777'
+    register: cred_type_check
 
-  - name: use shell command to modify credentail types file
-    #ansible.builtin.shell: "{% raw %}sed -i 's/'\''{{/\x22{{ '\''{{'\'' }}/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml {% raw %}&& sed -i 's/}}'\''/{{ '\''}}'\'' }}\x22/g' {% endraw %}{{ playbook_dir }}/configs/credential_types.yml"
-    ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
+  - name: fix credential-types file block
+    when: cred_type_check.stat.exists
+    block:
+    - name: Change file permissions on credential-type shell script
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/credential-types-fix.sh"
+        mode: '0777'
 
-  - name: read file contents
-    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/credential_types.yml"
-    register: cred_read
-
-  - name: debug cred_read
-    ansible.builtin.debug:
-      var: cred_read 
+    - name: use shell script to modify credentail types file
+      ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
@@ -74,14 +56,6 @@
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
-#   - name: Credential types data cleanup - escape double curly braces
-# ##    when: credential_types is defined
-#     set_fact:
-# ##      #credential_types: "{{ credential_types | regex_replace('^\\'\\{\\{', '\"{{ \"{{\" }} ') | regex_replace('\\}\\}'\\'', ' {{ \"}}\" }}\"') }}"
-#       #credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ ''{{'' }}') | regex_replace('\\}\\}''', '\"{{ ''}}'' }}') }}"
-#       #credential_types: "{{ credential_types | regex_replace('\\{\\{ (.*?) \\}\\}', '\"{{ \'{{\' }} \\1 {{ \'}}\' }}\"') }}"
-#       credential_types: "{{ credential_types | regex_replace('''\\{\\{', '\"{{ \'{{\' }}') }}"
-
 
   - name: debug data
     ansible.builtin.debug:
@@ -89,52 +63,6 @@
       var: credential_types
       #msg: "{{ credential_types }}"
       
-  - name: Add Credential Types
-    awx.awx.credential_type:
-      name:                           "{{ __controller_credential_type_item.name | mandatory }}"
-      new_name:                       "{{ __controller_credential_type_item.new_name | default(omit, true) }}"
-      description:                    "{{ __controller_credential_type_item.description | default(('' if controller_configuration_credential_types_enforce_defaults else omit), true) }}"
-      injectors:                      "{{ __controller_credential_type_item.injectors | default(({} if controller_configuration_credential_types_enforce_defaults else omit), true) | regex_replace('[ ]{2,}', '') }}"
-      inputs:                         "{{ __controller_credential_type_item.inputs | default(({} if controller_configuration_credential_types_enforce_defaults else omit), true) }}"
-      kind:                           "{{ __controller_credential_type_item.kind | default('cloud') }}"
-      state:                          "{{ __controller_credential_type_item.state | default(controller_state | default('present')) }}"
-    loop: "{{ credential_types }}"
-    loop_control:
-      loop_var: __controller_credential_type_item
-    register: __credentialtypes_job_async
-    changed_when: not __credentialtypes_job_async.changed
-    vars:
-#      ansible_async_dir: '{{ controller_configuration_async_dir }}'
-      controller_configuration_credential_types_enforce_defaults: false
-
-
-  - name: Add Credentials
-    awx.awx.credential:
-      name:                           "{{ __controller_credentials_item.name | mandatory }}"
-      new_name:                       "{{ __controller_credentials_item.new_name | default(omit, true) }}"
-      copy_from:                      "{{ __controller_credentials_item.copy_from | default(omit, true) }}"
-      description:                    "{{ __controller_credentials_item.description | default(('' if controller_configuration_credentials_enforce_defaults else omit), true) }}"
-      organization:                   "{{ __controller_credentials_item.organization.name | default(__controller_credentials_item.organization | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
-      credential_type:                "{{ __controller_credentials_item.credential_type.name | default(__controller_credentials_item.credential_type | mandatory ) }}"
-      inputs:                         "{{ __controller_credentials_item.inputs | default(({} if controller_configuration_credentials_enforce_defaults else omit), true) }}"
-      user:                           "{{ __controller_credentials_item.user.username | default(__controller_credentials_item.user | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
-      team:                           "{{ __controller_credentials_item.team.name | default(__controller_credentials_item.team | default(('' if controller_configuration_credentials_enforce_defaults else omit), true)) }}"
-      update_secrets:                 "{{ __controller_credentials_item.update_secrets | default(true if controller_configuration_credentials_enforce_defaults else omit) }}"
-      state:                          "{{ __controller_credentials_item.state | default(controller_state | default('present')) }}"
-
-    loop: "{{ credentials if credentials is defined else controller_credentials }}"
-    loop_control:
-      loop_var: __controller_credentials_item
-      label: "{{ __controller_credentials_item.name | mandatory }}"
-    #no_log: "{{ controller_configuration_credentials_secure_logging }}"
-#    async: 1000
- #   poll: 0
-    register: __credentials_job_async
-    changed_when: not __credentials_job_async.changed
-    vars:
-#    ansible_async_dir: '{{ controller_configuration_async_dir }}'
-      controller_configuration_credentials_enforce_defaults: false
-    ignore_errors: true
     
   - name: Add organizations
     when: item == "organizations"
