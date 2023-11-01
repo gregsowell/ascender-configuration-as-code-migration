@@ -108,6 +108,7 @@
     vars:
 #      ansible_async_dir: '{{ controller_configuration_async_dir }}'
       controller_configuration_projects_enforce_defaults: false
+      controller_configuration_projects_async_delay: 1
 
 #   - name: Add an inventory source
 #     awx.awx.inventory_source:
