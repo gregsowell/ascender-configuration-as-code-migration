@@ -14,14 +14,14 @@
 #      - execution_environments #failed conditional
 #      - projects #works
 #      - inventory #works
-      - inventory_sources #fails Needs Projects first
+#      - inventory_sources #works
 #      - job_templates
 #      - notification_templates
 #      - organizations #fails
-#      - schedules #fails
 #      - teams #works
 #      - users #works
 #      - workflow_job_templates
+#      - schedules #fails
   
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
@@ -74,7 +74,27 @@
 #       var: projects
 #       #msg: "{{ credential_types }}"
 
+  - name: Add organizations
+    awx.awx.organization:
+      name:                               "{{ __controller_organizations_item.name | mandatory }}"
+      description:                        "{{ __controller_organizations_item.description | default(( '' if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      custom_virtualenv:                  "{{ __controller_organizations_item.custom_virtualenv | default(omit, true) }}"
+      max_hosts:                          "{{ __controller_organizations_item.max_hosts | default(omit, true) }}"
+      instance_groups:                    "{{ __controller_organizations_item.instance_groups | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      default_environment:                "{{ (__controller_organizations_item.default_environment.name | default(__controller_organizations_item.default_environment | default(__controller_organizations_item.execution_environment | default(omit)))) if (assign_default_ee_to_org is defined and assign_default_ee_to_org) else omit }}"
+      galaxy_credentials:                 "{{ (__controller_organizations_item.galaxy_credentials | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true)) if (assign_galaxy_credentials_to_org is defined and assign_galaxy_credentials_to_org) else omit }}"
+      notification_templates_approvals:    "{{ (__controller_organizations_item.related.notification_templates_approvals | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_approvals is defined) | default(__controller_organizations_item.notification_templates_approvals) | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      notification_templates_started:     "{{ (__controller_organizations_item.related.notification_templates_started | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_started is defined) | default(__controller_organizations_item.notification_templates_started) | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      notification_templates_success:     "{{ (__controller_organizations_item.related.notification_templates_success | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_success is defined) | default(__controller_organizations_item.notification_templates_success) | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      notification_templates_error:       "{{ (__controller_organizations_item.related.notification_templates_error | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_error is defined) | default(__controller_organizations_item.notification_templates_error) | default(( [] if controller_configuration_organizations_enforce_defaults else omit), true) }}"
+      state:                              "{{ __controller_organizations_item.state | default(controller_state | default('present')) }}"
 
+    loop: "{{ organizations if organizations is defined else controller_organizations }}"
+    loop_control:
+      loop_var: __controller_organizations_item
+    vars:
+#      ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_organizations_enforce_defaults: false
 
   - name: Add organizations
     when: item == "organizations"
