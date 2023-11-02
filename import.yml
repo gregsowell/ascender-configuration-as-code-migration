@@ -153,6 +153,8 @@
     ansible.builtin.include_role:
       name: execution_environments
     loop: "{{ export_objects }}"
+    vars:
+      controller_execution_environments: tacos #weird conditional
 
   - name: Add projects
     when: item == "projects"
