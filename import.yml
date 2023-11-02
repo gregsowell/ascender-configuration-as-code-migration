@@ -9,12 +9,12 @@
     export_objects: 
       - testing_value
 #      - applications #failed
-      - credentials #works
-      - credential_types #works
-      - execution_environments #failed conditional
-#      - projects #works
-#      - inventory #works
-#      - inventory_sources #works
+#      - credentials #works
+#      - credential_types #works
+#      - execution_environments #failed if requires conditional
+      - projects #works
+      - inventory #works
+      - inventory_sources #works
 #      - job_templates
 #      - notification_templates
 #      - organizations #works direct, fails with role?
