@@ -52,6 +52,10 @@
       regexp: 'credential: null'
       replace: ''
 
+  - name: grab file contents
+    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/projects.yml"
+    register: file_grab
+
   - name: Include vars from config folder
     ansible.builtin.include_vars:
       # file: inventory.yml
