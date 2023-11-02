@@ -68,11 +68,11 @@
 
 
 
-#   - name: debug data
-#     ansible.builtin.debug:
-#       # var: inventory.variables
-#       var: projects
-#       #msg: "{{ credential_types }}"
+  - name: debug data
+    ansible.builtin.debug:
+      # var: inventory.variables
+      var: execution_environments
+      #msg: "{{ credential_types }}"
 
 #   - name: Add organizations
 #     awx.awx.organization:
@@ -154,7 +154,7 @@
       name: execution_environments
     loop: "{{ export_objects }}"
     vars:
-      controller_execution_environments: tacos #weird conditional
+#      controller_execution_environments: tacos #weird conditional
 
   - name: Add projects
     when: item == "projects"
