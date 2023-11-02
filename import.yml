@@ -46,13 +46,31 @@
     - name: use shell script to modify credentail types file
       ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
-  - name: Fix job templates file remove empty extra vars
+  # - name: Fix job templates file remove empty extra vars
+  #   ansible.builtin.replace:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     # regexp: " +extra_vars: ''"
+  #     # replace: ''
+  #     regexp: "extra_vars: '"
+  #     replace: "extra_vars: !unsafe '"
+
+  - name: Remove commented lines
+    ansible.builtin.lineinfile:
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      regexp: '^#'
+      state: absent
+
+  - name: Remove unnecessary empty lines
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/job_templates.yml"
-      # regexp: " +extra_vars: ''"
-      # replace: ''
-      regexp: "extra_vars: '"
-      replace: "extra_vars: !unsafe '"
+      regexp: '^\s*$'
+      replace: ''
+
+  - name: Ensure any key:value pair is present
+    ansible.builtin.lineinfile:
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      regexp: '^(?P<key>\S+):\s*(?P<value>.+)$'
+      line: '\g<key>: \g<value>'
 
   - name: Fix project file by removing null credentials
     ansible.builtin.replace:
