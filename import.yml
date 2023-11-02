@@ -81,7 +81,7 @@
   #     #msg: "{{ credential_types }}"
 
   - name: Add Controller Execution Environments
-    execution_environment:
+    awx.awx.execution_environment:
       name:                           "{{ __execution_environments_item.name | mandatory }}"
       new_name:                       "{{ __execution_environments_item.new_name | default(omit, true) }}"
       description:                    "{{ __execution_environments_item.description | default(( '' if controller_configuration_execution_environments_enforce_defaults else omit), true) }}"
@@ -98,7 +98,7 @@
     vars:
 #      ansible_async_dir: '{{ controller_configuration_async_dir }}'
       controller_configuration_execution_environments_enforce_defaults: false
-      
+
 #   - name: Add organizations
 #     awx.awx.organization:
 #       name:                               "{{ __controller_organizations_item.name | mandatory }}"
