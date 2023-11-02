@@ -9,8 +9,8 @@
     export_objects: 
       - testing_value
 #      - applications #failed
-#      - credentials #works
-#      - credential_types #works
+      - credentials #works
+      - credential_types #works
       - execution_environments #failed conditional
 #      - projects #works
 #      - inventory #works
