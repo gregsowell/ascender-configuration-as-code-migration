@@ -12,7 +12,7 @@
 #      - credentials #works
 #      - credential_types #works
 #      - execution_environments #failed conditional
-      - projects #works
+#      - projects #works
 #      - inventory #works
 #      - inventory_sources #fails Needs Projects first
 #      - job_templates
