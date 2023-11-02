@@ -154,7 +154,9 @@
       name: execution_environments
     loop: "{{ export_objects }}"
     vars:
-#      controller_execution_environments: tacos #weird conditional
+      controller_execution_environments: 
+        - food: tacos #weird conditional
+          day: tuesday
 
   - name: Add projects
     when: item == "projects"
