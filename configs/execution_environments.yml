@@ -6,7 +6,7 @@
                 kind: registry
                 name: Container Registry
                 type: credential_type
-            name: registry.mnslab.io
+            name: registry.lab.io
             organization: null
             type: credential
         description: ''
