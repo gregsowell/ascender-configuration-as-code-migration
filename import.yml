@@ -49,7 +49,7 @@
   - name: Fix job templates file remove empty extra vars
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/job_templates.yml"
-      regexp: ' +extra_vars: \'\''
+      regexp: " +extra_vars: ''"
       replace: ''
 
   - name: Fix project file by removing null credentials
