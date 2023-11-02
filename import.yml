@@ -49,7 +49,7 @@
   - name: Fix project file by removing null credentials
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/projects.yml"
-      regexp: 'credential: null'
+      regexp: ' +credential: null'
       replace: ''
 
   - name: grab file contents
