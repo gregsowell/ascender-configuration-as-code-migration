@@ -11,13 +11,13 @@
 #      - applications #failed
 #      - credentials #works
 #      - credential_types #works
-#      - execution_environments #failed conditional
+      - execution_environments #failed conditional
 #      - projects #works
 #      - inventory #works
 #      - inventory_sources #works
 #      - job_templates
 #      - notification_templates
-      - organizations #fails
+#      - organizations #works direct, fails with role?
 #      - teams #works
 #      - users #works
 #      - workflow_job_templates
