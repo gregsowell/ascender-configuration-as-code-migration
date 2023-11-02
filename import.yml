@@ -46,10 +46,10 @@
     - name: use shell script to modify credentail types file
       ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
-  - name: Fix ee file remove null org **test**
+  - name: Fix job templates file remove empty extra vars
     ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/execution_environments.yml"
-      regexp: ' +organization: null'
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      regexp: ' +extra_vars: \'\''
       replace: ''
 
   - name: Fix project file by removing null credentials
