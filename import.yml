@@ -72,6 +72,22 @@
   #     regexp: '^(?P<key>\S+):\s*(?P<value>.+)$'
   #     line: '\g<key>: \g<value>'
 
+
+  - name: Fix project file by removing null credentials
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/projects.yml"
+      regexp: ' +credential: null'
+      replace: ''
+
+  # - name: grab file contents
+  #   ansible.builtin.shell: "cat {{ playbook_dir }}/configs/projects.yml"
+  #   register: file_grab
+
+  - name: Include vars from config folder
+    ansible.builtin.include_vars:
+      # file: inventory.yml
+      dir: configs
+
   - name: Modify extra_vars in job_templates
     set_fact:
       job_templates: >-
@@ -92,20 +108,6 @@
     debug:
       var: job_templates
 
-  - name: Fix project file by removing null credentials
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/projects.yml"
-      regexp: ' +credential: null'
-      replace: ''
-
-  # - name: grab file contents
-  #   ansible.builtin.shell: "cat {{ playbook_dir }}/configs/projects.yml"
-  #   register: file_grab
-
-  - name: Include vars from config folder
-    ansible.builtin.include_vars:
-      # file: inventory.yml
-      dir: configs
 
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
