@@ -172,6 +172,12 @@
       name: credentials
     loop: "{{ export_objects }}"
 
+  - name: Add projects
+    when: item == "projects"
+    ansible.builtin.include_role:
+      name: projects
+    loop: "{{ export_objects }}"
+
   - name: Add inventory
     when: item == "inventory"
     ansible.builtin.include_role:
@@ -200,12 +206,6 @@
       controller_execution_environments: 
         - food: tacos #weird conditional
           day: tuesday
-
-  - name: Add projects
-    when: item == "projects"
-    ansible.builtin.include_role:
-      name: projects
-    loop: "{{ export_objects }}"
 
   - name: Add schedules
     when: item == "schedules"
