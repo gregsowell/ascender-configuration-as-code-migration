@@ -12,12 +12,12 @@
 #      - credentials #works
 #      - credential_types #works
 #      - execution_environments #failed conditional
+#      - projects #fails
 #      - inventory #works
 #      - inventory_sources #fails Needs Projects first
 #      - job_templates
 #      - notification_templates
 #      - organizations #fails
-#      - projects #fails
 #      - schedules #fails
 #      - teams #works
 #      - users #works
@@ -46,6 +46,12 @@
     - name: use shell script to modify credentail types file
       ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
+  - name: Fix project file by removing null credentials
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/projects.yml"
+      regexp: 'credential: null'
+      replace: ''
+
   - name: Include vars from config folder
     ansible.builtin.include_vars:
       # file: inventory.yml
@@ -57,11 +63,12 @@
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
 
-  # - name: debug data
-  #   ansible.builtin.debug:
-  #     # var: inventory.variables
-  #     var: credential_types
-  #     #msg: "{{ credential_types }}"
+
+  - name: debug data
+    ansible.builtin.debug:
+      # var: inventory.variables
+      var: projects
+      #msg: "{{ credential_types }}"
 
   - name: Add Projects
     awx.awx.project:
