@@ -68,6 +68,12 @@
       regexp: '^\s*$'
       replace: ''
 
+  - name: Compact the contents of extra_vars
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      regexp: 'extra_vars:.*\n(\s*[^#\s].*\n)'
+      replace: "extra_vars: '\\1'"
+
   # - name: Ensure any key:value pair is present
   #   ansible.builtin.lineinfile:
   #     path: "{{ playbook_dir }}/configs/job_templates.yml"
