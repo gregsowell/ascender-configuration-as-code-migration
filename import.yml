@@ -156,24 +156,42 @@
   #   loop_control:
   #     label: "{{ item.name }}"
 
+  # - name: Remove comments and extra whitespace from each job template's extra_vars
+  #   set_fact:
+  #     job_templates: "{{ job_templates_updated }}"
+  #   vars:
+  #     job_templates_updated: >-
+  #       {% set result = [] %}
+  #       {% for jt in job_templates %}
+  #         {% set ev_lines = jt.extra_vars.split('\n') %}
+  #         {% set ev_cleaned_lines = [] %}
+  #         {% for line in ev_lines %}
+  #           {% if not line.startswith('#') %}
+  #             {% set ev_cleaned_lines = ev_cleaned_lines + [line.strip()] %}
+  #           {% endif %}
+  #         {% endfor %}
+  #         {% set cleaned_extra_vars = ev_cleaned_lines | join(' ') %}
+  #         {% set result = result + [jt | combine({'extra_vars': cleaned_extra_vars})] %}
+  #       {% endfor %}
+  #       {{ result }}
+
+
   - name: Remove comments and extra whitespace from each job template's extra_vars
-    set_fact:
-      job_templates: "{{ job_templates_updated }}"
     vars:
-      job_templates_updated: >-
-        {% set result = [] %}
-        {% for jt in job_templates %}
-          {% set ev_lines = jt.extra_vars.split('\n') %}
-          {% set ev_cleaned_lines = [] %}
-          {% for line in ev_lines %}
-            {% if not line.startswith('#') %}
-              {% set ev_cleaned_lines = ev_cleaned_lines + [line.strip()] %}
-            {% endif %}
-          {% endfor %}
-          {% set cleaned_extra_vars = ev_cleaned_lines | join(' ') %}
-          {% set result = result + [jt | combine({'extra_vars': cleaned_extra_vars})] %}
-        {% endfor %}
-        {{ result }}
+      cleaned_extra_vars: >-
+        {{
+          item.extra_vars | regex_replace('(^|\\n)\\s*#.*?(\\n|$)', '\\2') |
+          regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') |
+          regex_replace('\\n+', ' ') | trim
+        }}
+    set_fact:
+      job_templates: >-
+        {{
+          job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list
+        }}
+    loop: "{{ job_templates }}"
+    loop_control:
+      label: "{{ item.name }}"
 
   - name: Debug the modified job_templates
     debug:
