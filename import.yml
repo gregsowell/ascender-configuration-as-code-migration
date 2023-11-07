@@ -54,13 +54,13 @@
   #     regexp: "extra_vars: '"
   #     replace: "extra_vars: !unsafe '"
 
-  - name: Remove commented lines
-    ansible.builtin.lineinfile:
-      path: "{{ playbook_dir }}/configs/job_templates.yml"
-      #regexp: '^#'
-      #regexp: '^\s*#.*$'
-      regexp: '^\s*#.*(?<!'')$'
-      state: absent
+  # - name: Remove commented lines
+  #   ansible.builtin.lineinfile:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     #regexp: '^#'
+  #     #regexp: '^\s*#.*$'
+  #     regexp: '^\s*#.*(?<!'')$'
+  #     state: absent
 
   # - name: Remove unnecessary empty lines
   #   ansible.builtin.replace:
@@ -76,19 +76,19 @@
   #     regexp: '^(\s*extra_vars:\s*)''.*'''
   #     backrefs: yes
   #     line: '\1|'
-  - name: Remove commented lines within extra_vars
-    ansible.builtin.lineinfile:
-      path: "{{ playbook_dir }}/configs/job_templates.yml"
-      state: absent
-      regexp: '^\s*#.*$'
+  # - name: Remove commented lines within extra_vars
+  #   ansible.builtin.lineinfile:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     state: absent
+  #     regexp: '^\s*#.*$'
 
-  # Correct the 'extra_vars' formatting
-  - name: Correct extra_vars formatting
-    ansible.builtin.lineinfile:
-      path: "{{ playbook_dir }}/configs/job_templates.yml"
-      regexp: '^(\s*extra_vars:\s*)''.*'''
-      backrefs: yes
-      line: '\1|'
+  # # Correct the 'extra_vars' formatting
+  # - name: Correct extra_vars formatting
+  #   ansible.builtin.lineinfile:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     regexp: '^(\s*extra_vars:\s*)''.*'''
+  #     backrefs: yes
+  #     line: '\1|'
   # - name: Ensure any key:value pair is present
   #   ansible.builtin.lineinfile:
   #     path: "{{ playbook_dir }}/configs/job_templates.yml"
@@ -102,14 +102,20 @@
       regexp: ' +credential: null'
       replace: ''
 
-  - name: grab file contents
-    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/job_templates.yml"
-    register: file_grab
+  # - name: grab file contents
+  #   ansible.builtin.shell: "cat {{ playbook_dir }}/configs/job_templates.yml"
+  #   register: file_grab
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
       # file: inventory.yml
       dir: configs
+
+  - name: Clean up extra_vars in job_templates
+    set_fact:
+      job_templates: "{{ job_templates | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') }}"
+    vars:
+      multiline: True
 
   # - name: Modify extra_vars in job_templates
   #   set_fact:
@@ -127,9 +133,9 @@
   #     index_var: index
   #     loop_var: item
 
-  # - name: Debug the modified job_templates
-  #   debug:
-  #     var: job_templates
+  - name: Debug the modified job_templates
+    debug:
+      var: job_templates
 
 
   - name: Filter out users we don't want imported - user import fix
