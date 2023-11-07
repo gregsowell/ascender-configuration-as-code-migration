@@ -111,11 +111,18 @@
       # file: inventory.yml
       dir: configs
 
-  - name: Clean up extra_vars in job_templates
-    set_fact:
-      job_templates: "{{ job_templates | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') }}"
+  # - name: Clean up extra_vars in job_templates
+  #   set_fact:
+  #     job_templates: "{{ job_templates | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') }}"
+  #   vars:
+  #     multiline: True
+
+  - name: Clean up extra_vars in each job template
     vars:
-      multiline: True
+      cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | trim }}"
+    set_fact:
+      job_templates: "{{ job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list }}"
+    with_items: "{{ job_templates }}"
 
   # - name: Modify extra_vars in job_templates
   #   set_fact:
