@@ -117,12 +117,12 @@
   #   vars:
   #     multiline: True
 
-  - name: Clean up extra_vars in each job template
-    vars:
-      cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | trim }}"
-    set_fact:
-      job_templates: "{{ job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list }}"
-    with_items: "{{ job_templates }}"
+  # - name: Clean up extra_vars in each job template
+  #   vars:
+  #     cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | trim }}"
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list }}"
+  #   with_items: "{{ job_templates }}"
 
   # - name: Modify extra_vars in job_templates
   #   set_fact:
@@ -139,6 +139,13 @@
   #     label: "{{ item.name }}"
   #     index_var: index
   #     loop_var: item
+
+  - name: Remove comments and extra whitespace from extra_vars
+    set_fact:
+      job_templates: "{{ job_templates | json_query(query) }}"
+    vars:
+      query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
+      multiline: True
 
   - name: Debug the modified job_templates
     debug:
