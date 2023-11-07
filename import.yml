@@ -140,12 +140,21 @@
   #     index_var: index
   #     loop_var: item
 
+  # - name: Remove comments and extra whitespace from extra_vars
+  #   set_fact:
+  #     job_templates: "{{ job_templates | json_query(query) }}"
+  #   vars:
+  #     query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
+  #     multiline: True
+
   - name: Remove comments and extra whitespace from extra_vars
-    set_fact:
-      job_templates: "{{ job_templates | json_query(query) }}"
     vars:
-      query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
-      multiline: True
+      cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\s+', ' ') | trim }}"
+    set_fact:
+      job_templates: "{{ job_templates | replace(item.extra_vars, cleaned_extra_vars) }}"
+    loop: "{{ job_templates }}"
+    loop_control:
+      label: "{{ item.name }}"
 
   - name: Debug the modified job_templates
     debug:
