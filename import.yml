@@ -247,6 +247,14 @@
     loop_control:
       label: "{{ item.name }}"
 
+  - name: Convert extra_vars from string to dictionary
+    vars:
+      extra_vars_dict: "{{ item.extra_vars | from_yaml }}"
+    set_fact:
+      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': extra_vars_dict}) ] }}"
+    loop: "{{ processed_job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0
+
   - name: Display the processed job templates
     debug:
       var: processed_job_templates
