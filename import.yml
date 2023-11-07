@@ -193,15 +193,40 @@
   #   loop_control:
   #     label: "{{ item.name }}"
 
+  # - name: Process each job template's extra_vars ** this is very close***
+  #   vars:
+  #     processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | regex_replace('\\n+', ' ') | trim }}"
+  #   set_fact:
+  #     processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars}) ] }}"
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
+
   - name: Process each job template's extra_vars
     vars:
-      processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | regex_replace('\\n+', ' ') | trim }}"
+      # This assumes extra_vars is a string that is YAML compliant without the comments
+      processed_extra_vars: >-
+        {{
+          item.extra_vars
+          | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True)  # Remove comment lines
+          | regex_replace('\\n\\s+', '\n')  # Remove trailing spaces before new lines
+          | regex_replace('\\s+\\n', '\n')  # Remove leading spaces after new lines
+        }}
     set_fact:
-      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars}) ] }}"
+      processed_job_templates: >-
+        {{
+          processed_job_templates | default([]) + 
+          [
+            item | combine(
+              {
+                'extra_vars': (processed_extra_vars | from_yaml | to_nice_yaml(indent=2)).strip()
+              }
+            )
+          ]
+        }}
     loop: "{{ job_templates }}"
     loop_control:
       label: "{{ item.name }}"
-
 
   - name: Debug the modified job_templates
     debug:
