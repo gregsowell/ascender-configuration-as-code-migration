@@ -62,11 +62,11 @@
       regexp: '^\s*#.*(?<!'')$'
       state: absent
 
-  # - name: Remove unnecessary empty lines
-  #   ansible.builtin.replace:
-  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
-  #     regexp: '^\s*$'
-  #     replace: ''
+  - name: Remove unnecessary empty lines
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      regexp: '^\s*$'
+      replace: ''
 
   # - name: Ensure any key:value pair is present
   #   ansible.builtin.lineinfile:
