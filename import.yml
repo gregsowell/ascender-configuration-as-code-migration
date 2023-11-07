@@ -81,9 +81,9 @@
       regexp: ' +credential: null'
       replace: ''
 
-  #  - name: grab file contents
-  #    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/job_templates.yml"
-  #    register: file_grab
+  - name: grab file contents
+    ansible.builtin.shell: "cat {{ playbook_dir }}/configs/job_templates.yml"
+    register: file_grab
 
   - name: Include vars from config folder
     ansible.builtin.include_vars:
