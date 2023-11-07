@@ -176,26 +176,36 @@
   #       {{ result }}
 
 
-  - name: Remove comments and extra whitespace from each job template's extra_vars
+  # - name: Remove comments and extra whitespace from each job template's extra_vars
+  #   vars:
+  #     cleaned_extra_vars: >-
+  #       {{
+  #         item.extra_vars | regex_replace('(^|\\n)\\s*#.*?(\\n|$)', '\\2') |
+  #         regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') |
+  #         regex_replace('\\n+', ' ') | trim
+  #       }}
+  #   set_fact:
+  #     job_templates: >-
+  #       {{
+  #         job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list
+  #       }}
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
+
+  - name: Process each job template's extra_vars
     vars:
-      cleaned_extra_vars: >-
-        {{
-          item.extra_vars | regex_replace('(^|\\n)\\s*#.*?(\\n|$)', '\\2') |
-          regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') |
-          regex_replace('\\n+', ' ') | trim
-        }}
+      processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True) | regex_replace('\\n\\s+', ' ') | regex_replace('\\s+\\n', ' ') | regex_replace('\\n+', ' ') | trim }}"
     set_fact:
-      job_templates: >-
-        {{
-          job_templates | map('combine', {'extra_vars': cleaned_extra_vars}) | list
-        }}
+      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars}) ] }}"
     loop: "{{ job_templates }}"
     loop_control:
       label: "{{ item.name }}"
 
+
   - name: Debug the modified job_templates
     debug:
-      var: job_templates
+      var: processed_job_templates
 
 
   - name: Filter out users we don't want imported - user import fix
