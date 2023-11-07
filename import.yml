@@ -147,14 +147,33 @@
   #     query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
   #     multiline: True
 
-  - name: Remove comments and extra whitespace from extra_vars
-    vars:
-      cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\s+', ' ') | trim }}"
+  # - name: Remove comments and extra whitespace from extra_vars
+  #   vars:
+  #     cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\s+', ' ') | trim }}"
+  #   set_fact:
+  #     job_templates: "{{ job_templates | replace(item.extra_vars, cleaned_extra_vars) }}"
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
+
+  - name: Remove comments and extra whitespace from each job template's extra_vars
     set_fact:
-      job_templates: "{{ job_templates | replace(item.extra_vars, cleaned_extra_vars) }}"
-    loop: "{{ job_templates }}"
-    loop_control:
-      label: "{{ item.name }}"
+      job_templates: "{{ job_templates_updated }}"
+    vars:
+      job_templates_updated: >-
+        {% set result = [] %}
+        {% for jt in job_templates %}
+          {% set ev_lines = jt.extra_vars.split('\n') %}
+          {% set ev_cleaned_lines = [] %}
+          {% for line in ev_lines %}
+            {% if not line.startswith('#') %}
+              {% set ev_cleaned_lines = ev_cleaned_lines + [line.strip()] %}
+            {% endif %}
+          {% endfor %}
+          {% set cleaned_extra_vars = ev_cleaned_lines | join(' ') %}
+          {% set result = result + [jt | combine({'extra_vars': cleaned_extra_vars})] %}
+        {% endfor %}
+        {{ result }}
 
   - name: Debug the modified job_templates
     debug:
