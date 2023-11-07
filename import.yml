@@ -78,14 +78,14 @@
   #     line: '\1|'
   - name: Remove commented lines within extra_vars
     ansible.builtin.lineinfile:
-      path: /path/to/your/file.yml
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
       state: absent
       regexp: '^\s*#.*$'
 
   # Correct the 'extra_vars' formatting
   - name: Correct extra_vars formatting
     ansible.builtin.lineinfile:
-      path: /path/to/your/file.yml
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
       regexp: '^(\s*extra_vars:\s*)''.*'''
       backrefs: yes
       line: '\1|'
