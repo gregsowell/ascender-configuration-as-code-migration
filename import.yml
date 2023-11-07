@@ -202,31 +202,45 @@
   #   loop_control:
   #     label: "{{ item.name }}"
 
+  # - name: Process each job template's extra_vars
+  #   vars:
+  #     # This assumes extra_vars is a string that is YAML compliant without the comments
+  #     processed_extra_vars: >-
+  #       {{
+  #         item.extra_vars
+  #         | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True)  # Remove comment lines
+  #         | regex_replace('\\n\\s+', '\n')  # Remove trailing spaces before new lines
+  #         | regex_replace('\\s+\\n', '\n')  # Remove leading spaces after new lines
+  #       }}
+  #   set_fact:
+  #     processed_job_templates: >-
+  #       {{
+  #         processed_job_templates | default([]) + 
+  #         [
+  #           item | combine(
+  #             {
+  #               'extra_vars': (processed_extra_vars | from_yaml | to_nice_yaml(indent=2)).strip()
+  #             }
+  #           )
+  #         ]
+  #       }}
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
+
   - name: Process each job template's extra_vars
     vars:
-      # This assumes extra_vars is a string that is YAML compliant without the comments
-      processed_extra_vars: >-
-        {{
-          item.extra_vars
-          | regex_replace('^\\s*#.*?(\\n|$)', '', multiline=True)  # Remove comment lines
-          | regex_replace('\\n\\s+', '\n')  # Remove trailing spaces before new lines
-          | regex_replace('\\s+\\n', '\n')  # Remove leading spaces after new lines
-        }}
+      # First, convert to a dictionary with from_yaml (removing comments and whitespace), then back to a YAML string
+      processed_extra_vars: "{{ item.extra_vars | from_yaml | to_nice_yaml(indent=2) }}"
     set_fact:
-      processed_job_templates: >-
-        {{
-          processed_job_templates | default([]) + 
-          [
-            item | combine(
-              {
-                'extra_vars': (processed_extra_vars | from_yaml | to_nice_yaml(indent=2)).strip()
-              }
-            )
-          ]
-        }}
+      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars.strip() }) ] }}"
     loop: "{{ job_templates }}"
     loop_control:
       label: "{{ item.name }}"
+
+  - name: Display the processed job templates
+    debug:
+      var: processed_job_templates
 
   - name: Debug the modified job_templates
     debug:
