@@ -206,7 +206,10 @@
   - name: Debug the modified job_templates
     debug:
       var: processed_job_templates
-
+      
+  - name: reset job_templates
+    set_fact: 
+      job_templates: "{{ processed_job_templates }}"
 
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
