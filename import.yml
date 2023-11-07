@@ -62,21 +62,33 @@
       regexp: '^\s*#.*(?<!'')$'
       state: absent
 
-  - name: Remove unnecessary empty lines
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/job_templates.yml"
-      regexp: '^\s*$'
-      replace: ''
+  # - name: Remove unnecessary empty lines
+  #   ansible.builtin.replace:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     regexp: '^\s*$'
+  #     replace: ''
 
-  - name: Compact the contents of extra_vars
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/job_templates.yml"
-      #regexp: 'extra_vars:.*\n(\s*[^#\s].*\n)'
-      #replace: "extra_vars: '\\1'"
+  # - name: Compact the contents of extra_vars
+  #   ansible.builtin.replace:
+  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
+  #     #regexp: 'extra_vars:.*\n(\s*[^#\s].*\n)'
+  #     #replace: "extra_vars: '\\1'"
+  #     regexp: '^(\s*extra_vars:\s*)''.*'''
+  #     backrefs: yes
+  #     line: '\1|'
+  - name: Remove commented lines within extra_vars
+    ansible.builtin.lineinfile:
+      path: /path/to/your/file.yml
+      state: absent
+      regexp: '^\s*#.*$'
+
+  # Correct the 'extra_vars' formatting
+  - name: Correct extra_vars formatting
+    ansible.builtin.lineinfile:
+      path: /path/to/your/file.yml
       regexp: '^(\s*extra_vars:\s*)''.*'''
       backrefs: yes
       line: '\1|'
-
   # - name: Ensure any key:value pair is present
   #   ansible.builtin.lineinfile:
   #     path: "{{ playbook_dir }}/configs/job_templates.yml"
