@@ -54,11 +54,12 @@
   #     regexp: "extra_vars: '"
   #     replace: "extra_vars: !unsafe '"
 
-  # - name: Remove commented lines
-  #   ansible.builtin.lineinfile:
-  #     path: "{{ playbook_dir }}/configs/job_templates.yml"
-  #     regexp: '^#'
-  #     state: absent
+  - name: Remove commented lines
+    ansible.builtin.lineinfile:
+      path: "{{ playbook_dir }}/configs/job_templates.yml"
+      #regexp: '^#'
+      regexp: '^\s*#.*$'
+      state: absent
 
   # - name: Remove unnecessary empty lines
   #   ansible.builtin.replace:
@@ -88,25 +89,25 @@
       # file: inventory.yml
       dir: configs
 
-  - name: Modify extra_vars in job_templates
-    set_fact:
-      job_templates: >-
-        {{
-          job_templates | map('combine', 
-            {
-              'extra_vars': (item.extra_vars | regex_replace('^\\s*#.*$', '') | regex_replace('\\n\\s+', '\n') | trim)
-            }
-          ) | list
-        }}
-    loop: "{{ job_templates }}"
-    loop_control:
-      label: "{{ item.name }}"
-      index_var: index
-      loop_var: item
+  # - name: Modify extra_vars in job_templates
+  #   set_fact:
+  #     job_templates: >-
+  #       {{
+  #         job_templates | map('combine', 
+  #           {
+  #             'extra_vars': (item.extra_vars | regex_replace('^\\s*#.*$', '') | regex_replace('\\n\\s+', '\n') | trim)
+  #           }
+  #         ) | list
+  #       }}
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
+  #     index_var: index
+  #     loop_var: item
 
-  - name: Debug the modified job_templates
-    debug:
-      var: job_templates
+  # - name: Debug the modified job_templates
+  #   debug:
+  #     var: job_templates
 
 
   - name: Filter out users we don't want imported - user import fix
