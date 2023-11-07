@@ -58,7 +58,8 @@
     ansible.builtin.lineinfile:
       path: "{{ playbook_dir }}/configs/job_templates.yml"
       #regexp: '^#'
-      regexp: '^\s*#.*$'
+      #regexp: '^\s*#.*$'
+      regexp: '^\s*#.*(?<!'')$'
       state: absent
 
   # - name: Remove unnecessary empty lines
