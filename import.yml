@@ -122,7 +122,7 @@
   - name: Fix organizations by removing empty EE entries
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/organizations.yml"
-      regexp: ' +execution_environments: []'
+      regexp: ' +execution_environments: \[\]'
       replace: ''
 
 
