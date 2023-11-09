@@ -150,6 +150,12 @@
     vars:
       query: "[].{authorization_grant_type: authorization_grant_type, client_type: client_type, description: description, name: name, natural_key: natural_key, organization: organization.name, redirect_uris: redirect_uris, skip_authorization: skip_authorization}"
 
+  - name: Set the workflow_job_template to just the name value to fix workflow job templates
+    set_fact:
+      workflow_job_templates: "{{ workflow_job_templates | map('combine') | list }}"
+    vars:
+      workflow_job_templates: "{{ workflow_job_templates | json_query('[].{name: name, workflow_job_template: name}') }}"
+
   # - name: Debug the modified job_templates
   #   debug:
   #     var: organizations
