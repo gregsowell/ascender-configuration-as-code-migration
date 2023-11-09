@@ -296,12 +296,19 @@
   #   set_fact:
   #     job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
 
-  - name: Clean extra_vars for each job template
+  # - name: Clean extra_vars for each job template
+  #   set_fact:
+  #     job_templates: >-
+  #       {{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '') | list }}
+  #   vars:
+  #     extra_vars_cleanup_pattern: '(?:^\\s*#.*\\n?|\\s+$)'
+
+  - name: Remove comments and extra whitespace from extra_vars
     set_fact:
-      job_templates: >-
-        {{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '') | list }}
+      job_templates: "{{ job_templates | json_query(query) }}"
     vars:
-      extra_vars_cleanup_pattern: '(?:^\\s*#.*\\n?|\\s+$)'
+      query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
+      multiline: True
 
 
   # - name: Display the processed job templates
