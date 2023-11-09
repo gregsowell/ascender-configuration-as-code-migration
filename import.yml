@@ -228,36 +228,49 @@
   #   loop_control:
   #     label: "{{ item.name }}"
 
-  - name: Process each job template's extra_vars
-    vars:
-      # First, convert to a dictionary with from_yaml (removing comments and whitespace), then back to a YAML string
-      processed_extra_vars: "{{ item.extra_vars | from_yaml | to_nice_yaml(indent=2) }}"
-    set_fact:
-      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars.strip() }) ] }}"
-    loop: "{{ job_templates }}"
-    loop_control:
-      label: "{{ item.name }}"
+  # - name: Process each job template's extra_vars
+  #   vars:
+  #     # First, convert to a dictionary with from_yaml (removing comments and whitespace), then back to a YAML string
+  #     processed_extra_vars: "{{ item.extra_vars | from_yaml | to_nice_yaml(indent=2) }}"
+  #   set_fact:
+  #     processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars.strip() }) ] }}"
+  #   loop: "{{ job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
 
-  - name: Convert extra_vars from string to dictionary
-    vars:
-      processed_extra_vars: "{{ item.extra_vars | from_yaml }}"
-    set_fact:
-      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars}) ] }}"
-    loop: "{{ processed_job_templates }}"
-    loop_control:
-      label: "{{ item.name }}"
+  # - name: Convert extra_vars from string to dictionary
+  #   vars:
+  #     processed_extra_vars: "{{ item.extra_vars | from_yaml }}"
+  #   set_fact:
+  #     processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': processed_extra_vars}) ] }}"
+  #   loop: "{{ processed_job_templates }}"
+  #   loop_control:
+  #     label: "{{ item.name }}"
 
-  - name: Convert extra_vars from string to dictionary
-    vars:
-      extra_vars_dict: "{{ item.extra_vars | from_yaml }}"
-    set_fact:
-      processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': extra_vars_dict}) ] }}"
-    loop: "{{ processed_job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0
+  # - name: Convert extra_vars from string to dictionary
+  #   vars:
+  #     extra_vars_dict: "{{ item.extra_vars | from_yaml }}"
+  #   set_fact:
+  #     processed_job_templates: "{{ processed_job_templates | default([]) + [ item | combine({'extra_vars': extra_vars_dict}) ] }}"
+  #   loop: "{{ processed_job_templates }}"
+  #   when: item.extra_vars is string and item.extra_vars | length > 0
 
-  - name: Display the processed job templates
-    debug:
-      var: processed_job_templates
+  - name: Ensure extra_vars is a dictionary and has no comments or blanks
+    set_fact:
+      job_templates: >-
+        {{
+          job_templates | json_query("[*].{
+            allow_simultaneous: allow_simultaneous,
+            ask_credential_on_launch: ask_credential_on_launch,
+            ... [other properties] ...
+            extra_vars: (extra_vars == '' | bool) | ternary({}, extra_vars | from_yaml | json_query('keys(@)')) 
+            ... [other properties] ...
+          }")
+        }}
+
+  # - name: Display the processed job templates
+  #   debug:
+  #     var: processed_job_templates
 
   - name: Debug the modified job_templates
     debug:
