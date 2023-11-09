@@ -58,6 +58,12 @@
       regexp: ' +execution_environments: \[\]'
       replace: ''
 
+  - name: Fix organizations by removing null default environment
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/organizations.yml"
+      regexp: ' +default_environment: null'
+      replace: ''
+
 ############# variable file imports
   - name: Include vars from config folder
     ansible.builtin.include_vars:
