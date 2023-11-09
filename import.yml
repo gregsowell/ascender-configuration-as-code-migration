@@ -16,11 +16,11 @@
 #      - inventory #works
 #      - inventory_sources #works
 #      - job_templates #works
-      - notification_templates
+#      - notification_templates #passed
 #      - organizations #works direct, fails with role?
 #      - teams #works
 #      - users #works
-#      - workflow_job_templates
+      - workflow_job_templates
 #      - schedules #fails
   
   environment:
@@ -86,6 +86,37 @@
           }) | list
         }}
     loop: "{{ job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0
+
+  - name: Workflow job templates fix - remove nulls and comments from extra_vars
+    set_fact:
+      workflow_job_templates: >-
+        {{
+          workflow_job_templates + [
+            {
+              'name': item.name,
+              'extra_vars': (
+                item.extra_vars
+                | regex_replace('^\\s*#.*?$', '', multiline=True)
+                | regex_replace('\\s+', ' ')
+                | trim
+                if item.extra_vars != 'null' else omit
+              )
+            }
+          ]
+        }}
+    loop: "{{ workflow_job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0
+
+  - name: Workflow job templates fix - convert extra_vars to dictionary
+    set_fact:
+      workflow_job_templates: >-
+        {{
+          workflow_job_templates | map('combine', {
+            'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
+          }) | list
+        }}
+    loop: "{{ workflow_job_templates }}"
     when: item.extra_vars is string and item.extra_vars | length > 0
 
 
