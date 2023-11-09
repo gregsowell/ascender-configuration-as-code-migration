@@ -119,6 +119,12 @@
     loop: "{{ workflow_job_templates }}"
     when: item.extra_vars is string and item.extra_vars | length > 0
 
+  - name: Fix organizations by removing empty EE entries
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/organizations.yml"
+      regexp: ' +execution_environments: []'
+      replace: ''
+
 
   # - name: Debug the modified job_templates
   #   debug:
