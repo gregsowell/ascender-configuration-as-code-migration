@@ -292,9 +292,16 @@
   #   set_fact:
   #     job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
 
-  - name: Iterate over each job template to clean extra_vars
+  # - name: Iterate over each job template to clean extra_vars
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
+
+  - name: Clean extra_vars for each job template
     set_fact:
-      job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
+      job_templates: >-
+        {{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '') | list }}
+    vars:
+      extra_vars_cleanup_pattern: '(?:^\\s*#.*\\n?|\\s+$)'
 
 
   # - name: Display the processed job templates
