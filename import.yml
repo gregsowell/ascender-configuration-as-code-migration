@@ -142,6 +142,25 @@
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
+  - name: Add Controller Applications
+    awx.awx.application:
+      name:                           "{{ __application_item.name | mandatory }}"
+      new_name:                       "{{ __application_item.new_name | default(omit, true) }}"
+      organization:                   "{{ __application_item.organization.name | mandatory }}"
+      description:                    "{{ __application_item.description | default(('' if controller_configuration_applications_enforce_defaults else omit), true) }}"
+      authorization_grant_type:       "{{ __application_item.authorization_grant_type | default('password') }}"
+      client_type:                    "{{ __application_item.client_type | default('public') }}"
+      redirect_uris:                  "{{ __application_item.redirect_uris | default([]) }}"
+      skip_authorization:             "{{ __application_item.skip_authorization | default((false if controller_configuration_applications_enforce_defaults else omit), true) }}"
+      state:                          "{{ __application_item.state | default(controller_state | default('present')) }}"
+
+    loop: "{{ applications if applications is defined else controller_applications }}"
+    loop_control:
+      loop_var: "__application_item"
+    vars:
+#      ansible_async_dir: '{{ controller_configuration_async_dir }}'
+      controller_configuration_applications_enforce_defaults: false
+
 #   - name: Manage Workflows
 #     awx.awx.workflow_job_template:
 #       name:                               "{{ __workflow_loop_item.name | mandatory }}"
