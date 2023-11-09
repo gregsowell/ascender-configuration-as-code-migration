@@ -257,16 +257,7 @@
 
   - name: Ensure extra_vars is a dictionary and has no comments or blanks
     set_fact:
-      job_templates: >-
-        {{
-          job_templates | json_query("[*].{
-            allow_simultaneous: allow_simultaneous,
-            ask_credential_on_launch: ask_credential_on_launch,
-            ... [other properties] ...
-            extra_vars: (extra_vars == '' | bool) | ternary({}, extra_vars | from_yaml | json_query('keys(@)')) 
-            ... [other properties] ...
-          }")
-        }}
+      job_templates: "{{ job_templates | map('combine', {'extra_vars': {} }) | list }}"
 
   # - name: Display the processed job templates
   #   debug:
