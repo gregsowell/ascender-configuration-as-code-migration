@@ -8,7 +8,7 @@
   
     export_objects: 
       - testing_value
-#      - applications #failed
+      - applications #failed
 #      - credentials #works
 #      - credential_types #works
 #      - execution_environments #failed if requires conditional
@@ -17,7 +17,7 @@
 #      - inventory_sources #works
 #      - job_templates #works
 #      - notification_templates #passed
-      - organizations #works direct, fails with role?
+#      - organizations #works
 #      - teams #works
 #      - users #works
 #      - workflow_job_templates #fails
@@ -133,9 +133,9 @@
     when: item.extra_vars is string and item.extra_vars | length > 0
 
 
-  - name: Debug the modified job_templates
-    debug:
-      var: organizations
+  # - name: Debug the modified job_templates
+  #   debug:
+  #     var: organizations
       
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
@@ -212,6 +212,29 @@
 # #      ansible_async_dir: '{{ controller_configuration_async_dir }}'
 #       controller_configuration_organizations_enforce_defaults: false
 
+
+  - name: Add credential types
+    when: item == "credential_types"
+    ansible.builtin.include_role:
+      name: credential_types
+    loop: "{{ export_objects }}"
+
+  - name: Add credentials
+    when: item == "credentials"
+    ansible.builtin.include_role:
+      name: credentials
+    loop: "{{ export_objects }}"
+
+  - name: Add execution_environments
+    when: item == "execution_environments"
+    ansible.builtin.include_role:
+      name: execution_environments
+    loop: "{{ export_objects }}"
+    vars:
+      controller_execution_environments: 
+        - food: tacos #weird conditional
+          day: tuesday
+
   - name: Add organizations
     when: item == "organizations"
     ansible.builtin.include_role:
@@ -231,18 +254,6 @@
     when: item == "users"
     ansible.builtin.include_role:
       name: users
-    loop: "{{ export_objects }}"
-
-  - name: Add credential types
-    when: item == "credential_types"
-    ansible.builtin.include_role:
-      name: credential_types
-    loop: "{{ export_objects }}"
-
-  - name: Add credentials
-    when: item == "credentials"
-    ansible.builtin.include_role:
-      name: credentials
     loop: "{{ export_objects }}"
 
   - name: Add projects
@@ -269,16 +280,6 @@
     ansible.builtin.include_role:
       name: applications
     loop: "{{ export_objects }}"
-
-  - name: Add execution_environments
-    when: item == "execution_environments"
-    ansible.builtin.include_role:
-      name: execution_environments
-    loop: "{{ export_objects }}"
-    vars:
-      controller_execution_environments: 
-        - food: tacos #weird conditional
-          day: tuesday
 
   - name: Add job_templates
     when: item == "job_templates"
