@@ -261,7 +261,7 @@
 
   - name: Debug the modified job_templates
     debug:
-      var: processed_job_templates
+      var: job_templates
       
   - name: reset job_templates
     set_fact: 
