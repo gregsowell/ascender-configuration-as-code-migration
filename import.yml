@@ -259,18 +259,28 @@
   #   set_fact:
   #     job_templates: "{{ job_templates | map('combine', {'extra_vars': {} }) | list }}"
 
-  - name: Convert extra_vars to YAML if it's a string and not empty
+  # - name: Convert extra_vars to YAML if it's a string and not empty
+  #   set_fact:
+  #     job_templates: "{{ job_templates | json_query(query) }}"
+  #   vars:
+  #     query: >-
+  #       [*].{
+  #         allow_simultaneous: allow_simultaneous,
+  #         ask_credential_on_launch: ask_credential_on_launch,
+  #         ask_diff_mode_on_launch: ask_diff_mode_on_launch,
+  #         ... [include all other properties here] ...
+  #         extra_vars: `extra_vars` | string | trim == '' | ternary({}, `extra_vars` | from_yaml | to_yaml | from_yaml)
+  #       }
+
+  - name: Clean up extra_vars for each job template
     set_fact:
-      job_templates: "{{ job_templates | json_query(query) }}"
+      job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
     vars:
-      query: >-
-        [*].{
-          allow_simultaneous: allow_simultaneous,
-          ask_credential_on_launch: ask_credential_on_launch,
-          ask_diff_mode_on_launch: ask_diff_mode_on_launch,
-          ... [include all other properties here] ...
-          extra_vars: `extra_vars` | string | trim == '' | ternary({}, `extra_vars` | from_yaml | to_yaml | from_yaml)
-        }
+      extra_vars_cleanup_pattern: "^(\s*[^#]*\S)\s*(?:#.*)?$"
+
+  - name: Set extra_vars to a dictionary if it's not already
+    set_fact:
+      job_templates: "{{ job_templates | json_query('[*].{..., extra_vars: extra_vars | length > 0 | ternary(extra_vars | from_yaml, {})}') }}"
 
 
   # - name: Display the processed job templates
