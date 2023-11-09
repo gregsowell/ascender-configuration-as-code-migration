@@ -303,13 +303,32 @@
   #   vars:
   #     extra_vars_cleanup_pattern: '(?:^\\s*#.*\\n?|\\s+$)'
 
-  - name: Remove comments and extra whitespace from extra_vars
-    set_fact:
-      job_templates: "{{ job_templates | json_query(query) }}"
-    vars:
-      query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
-      multiline: True
+  # - name: Remove comments and extra whitespace from extra_vars
+  #   set_fact:
+  #     job_templates: "{{ job_templates | json_query(query) }}"
+  #   vars:
+  #     query: "[].{name: name, extra_vars: extra_vars | regex_replace('^\\s*#.*$(\\r\\n|\\r|\\n)?', '', multiline=True) | trim}"
+  #     multiline: True
 
+  - name: Convert extra_vars from string to dictionary or null
+    set_fact:
+      job_templates: >-
+        {{
+          job_templates + [
+            {
+              'name': item.name,
+              'extra_vars': (
+                item.extra_vars
+                | regex_replace('^\\s*#.*?$', '', multiline=True)
+                | regex_replace('\\s+', ' ')
+                | trim
+                if item.extra_vars != 'null' else omit
+              )
+            }
+          ]
+        }}
+    loop: "{{ job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0
 
   # - name: Display the processed job templates
   #   debug:
