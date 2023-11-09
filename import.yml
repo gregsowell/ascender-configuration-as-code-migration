@@ -15,8 +15,8 @@
 #      - projects #works
 #      - inventory #works
 #      - inventory_sources #works
-      - job_templates
-#      - notification_templates
+#      - job_templates #works
+      - notification_templates
 #      - organizations #works direct, fails with role?
 #      - teams #works
 #      - users #works
