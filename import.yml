@@ -272,15 +272,25 @@
   #         extra_vars: `extra_vars` | string | trim == '' | ternary({}, `extra_vars` | from_yaml | to_yaml | from_yaml)
   #       }
 
+  # - name: Clean up extra_vars for each job template
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
+  #   vars:
+  #     extra_vars_cleanup_pattern: "^(\s*[^#]*\S)\s*(?:#.*)?$"
+
+  # - name: Set extra_vars to a dictionary if it's not already
+  #   set_fact:
+  #     job_templates: "{{ job_templates | json_query('[*].{..., extra_vars: extra_vars | length > 0 | ternary(extra_vars | from_yaml, {})}') }}"
+
   - name: Clean up extra_vars for each job template
     set_fact:
-      job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
+      job_templates: "{{ job_templates | json_query('[*].{..., extra_vars: extra_vars}') }}"
     vars:
-      extra_vars_cleanup_pattern: "^(\s*[^#]*\S)\s*(?:#.*)?$"
+      extra_vars_cleanup_pattern: '^(\s*[^#]*\S)\s*(?:#.*)?$'
 
   - name: Set extra_vars to a dictionary if it's not already
     set_fact:
-      job_templates: "{{ job_templates | json_query('[*].{..., extra_vars: extra_vars | length > 0 | ternary(extra_vars | from_yaml, {})}') }}"
+      job_templates: "{{ job_templates | map('regex_replace', extra_vars_cleanup_pattern, '\\1') | list }}"
 
 
   # - name: Display the processed job templates
