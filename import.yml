@@ -330,6 +330,18 @@
     loop: "{{ job_templates }}"
     when: item.extra_vars is string and item.extra_vars | length > 0
 
+  - name: Convert extra_vars from multi-line string to dictionary
+    set_fact:
+      job_templates: >-
+        {{
+          job_templates | map('combine', {
+            'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
+          }) | list
+        }}
+    loop: "{{ job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0
+
+
   # - name: Display the processed job templates
   #   debug:
   #     var: processed_job_templates
