@@ -17,10 +17,10 @@
 #      - inventory_sources #works
 #      - job_templates #works
 #      - notification_templates #passed
-#      - organizations #works direct, fails with role?
+      - organizations #works direct, fails with role?
 #      - teams #works
 #      - users #works
-      - workflow_job_templates
+#      - workflow_job_templates #fails
 #      - schedules #fails
   
   environment:
