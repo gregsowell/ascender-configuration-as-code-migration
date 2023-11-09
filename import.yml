@@ -57,7 +57,7 @@
       path: "{{ playbook_dir }}/configs/organizations.yml"
       regexp: ' +execution_environments: \[\]'
       replace: ''
-      
+
 ############# variable file imports
   - name: Include vars from config folder
     ansible.builtin.include_vars:
@@ -127,9 +127,9 @@
     when: item.extra_vars is string and item.extra_vars | length > 0
 
 
-  # - name: Debug the modified job_templates
-  #   debug:
-  #     var: job_templates
+  - name: Debug the modified job_templates
+    debug:
+      var: organizations
       
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
