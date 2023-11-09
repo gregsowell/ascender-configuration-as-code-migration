@@ -255,9 +255,23 @@
   #   loop: "{{ processed_job_templates }}"
   #   when: item.extra_vars is string and item.extra_vars | length > 0
 
-  - name: Ensure extra_vars is a dictionary and has no comments or blanks
+  # - name: Ensure extra_vars is a dictionary and has no comments or blanks
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('combine', {'extra_vars': {} }) | list }}"
+
+  - name: Convert extra_vars to YAML if it's a string and not empty
     set_fact:
-      job_templates: "{{ job_templates | map('combine', {'extra_vars': {} }) | list }}"
+      job_templates: "{{ job_templates | json_query(query) }}"
+    vars:
+      query: >-
+        [*].{
+          allow_simultaneous: allow_simultaneous,
+          ask_credential_on_launch: ask_credential_on_launch,
+          ask_diff_mode_on_launch: ask_diff_mode_on_launch,
+          ... [include all other properties here] ...
+          extra_vars: `extra_vars` | string | trim == '' | ternary({}, `extra_vars` | from_yaml | to_yaml | from_yaml)
+        }
+
 
   # - name: Display the processed job templates
   #   debug:
