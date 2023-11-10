@@ -8,20 +8,20 @@
   
     export_objects: 
       - testing_value
-#      - applications #works
+      - applications #works
       - credentials #works
       - credential_types #works
-      - execution_environments #failed if requires conditional.  error on cred lookup - may be role error
-#      - projects #works
-#      - inventory #works
-#      - inventory_sources #works
-#      - job_templates #works
-#      - notification_templates #passed
-#      - organizations #works
-#      - teams #works
-#      - users #works
-#      - workflow_job_templates #works
-#      - schedules #works
+      - execution_environments #works.  Had to fake a var for a conditional check
+     - projects #works
+     - inventory #works
+     - inventory_sources #works
+     - job_templates #works
+     - notification_templates #passed
+     - organizations #works
+     - teams #works
+     - users #works
+     - workflow_job_templates #works
+     - schedules #works
   
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
@@ -190,8 +190,6 @@
     set_fact:
       execution_environments: "{{ execution_environments | map('combine', {'credential': item.credential.name}) | list }}"
     loop: "{{ execution_environments }}"
-#    loop_control:
-#      loop_var: item
 
   - name: Debug the modified job_templates
     debug:
