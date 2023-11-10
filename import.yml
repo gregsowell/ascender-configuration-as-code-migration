@@ -6,8 +6,9 @@
   vars:
     controller_configuration_inventories_enforce_defaults: true
 
-    #add hosts when adding/updating inventories
+    #add hosts and or groups when adding/updating inventories
     add_hosts: true
+    add_groups: true
 
     export_objects: 
       - testing_value
@@ -297,6 +298,12 @@
     when: item == "inventory" and add_hosts
     ansible.builtin.include_role:
       name: hosts
+    loop: "{{ export_objects }}"
+
+  - name: Add groups
+    when: item == "inventory" and add_groups
+    ansible.builtin.include_role:
+      name: groups
     loop: "{{ export_objects }}"
 
   - name: Add applications
