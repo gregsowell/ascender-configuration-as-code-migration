@@ -10,5 +10,5 @@
       enabled: "{{ host.enabled }}"
       inventory: "{{ inventory_item.name }}"
       name: "{{ host.name }}"
-      variables: "{{ host.variables }}"
-      #variables: "{{ host.variables | regex_replace('\n', ' ') }}"
+      #variables: "{{ host.variables }}"
+      variables: "{{ host.variables | regex_replace('\\'\n', ' ') }}"
