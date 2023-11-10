@@ -269,20 +269,37 @@
   #       }}
   #   loop: "{{ controller_hosts }}"
 
-  - name: Controller hosts fix - clean up variables
+  # - name: Controller hosts fix - clean up variables
+  #   set_fact:
+  #     controller_hosts: >-
+  #       {{
+  #         controller_hosts | map('combine', {
+  #           'variables': (
+  #             item.variables
+  #             | regex_replace('\\s*\\n', '')  # Remove any newlines and preceding whitespaces
+  #             | trim
+  #             if item.variables is string and item.variables != 'null' else omit
+  #           )
+  #         }) | list
+  #       }}
+  #   loop: "{{ controller_hosts }}"
+
+  - name: Create controller hosts - remove nulls and comments from variables
     set_fact:
       controller_hosts: >-
         {{
           controller_hosts | map('combine', {
             'variables': (
               item.variables
-              | regex_replace('\\s*\\n', '')  # Remove any newlines and preceding whitespaces
-              | trim
-              if item.variables is string and item.variables != 'null' else omit
+              | regex_replace('^\\s*#.*?\\n?', '', multiline=True)  # Remove comments
+              | regex_replace('\\s+', ' ')  # Replace multiple spaces/newlines with a single space
+              | trim  # Remove leading/trailing whitespace
+              if item.variables != 'null' else omit
             )
           }) | list
         }}
     loop: "{{ controller_hosts }}"
+    when: item.variables is string and item.variables | length > 0
 
   - name: Debug the modified job_templates
     debug:
