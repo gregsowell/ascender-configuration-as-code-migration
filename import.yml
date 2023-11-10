@@ -21,7 +21,7 @@
 #      - teams #works
 #      - users #works
 #      - workflow_job_templates #fails
-#      - schedules #fails
+      - schedules #fails
   
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
@@ -121,6 +121,8 @@
         }}
     loop: "{{ job_templates }}"
     when: item.extra_vars is string and item.extra_vars | length > 0
+    #output his huge otherwise, so no log to keep it small
+    no_log: true 
 
   - name: Job templates fix - convert extra_vars to dictionary
     set_fact:
@@ -186,39 +188,6 @@
   #   debug:
   #     var: organizations
 
-  - name: Add Controller Schedule
-    awx.awx.schedule:
-      name:                           "{{ __controller_schedule_item.name | mandatory }}"
-      new_name:                       "{{ __controller_schedule_item.new_name | default(omit, true) }}"
-      description:                    "{{ __controller_schedule_item.description | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      rrule:                          "{{ __controller_schedule_item.rrule | default(omit, true) }}"
-      extra_data:                     "{{ __controller_schedule_item.extra_data | default(( {} if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      inventory:                      "{{ __controller_schedule_item.inventory | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      credentials:                    "{{ __controller_schedule_item.credentials | default(omit, true) }}"
-      scm_branch:                     "{{ __controller_schedule_item.scm_branch | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      execution_environment:          "{{ __controller_schedule_item.execution_environment.name | default(__controller_schedule_item.execution_environment | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true)) }}"
-      forks:                          "{{ __controller_schedule_item.forks | default(omit, true) }}"
-      instance_groups:                "{{ __controller_schedule_item.instance_groups | default(omit, true) }}"
-      job_slice_count:                "{{ __controller_schedule_item.job_slice_count | default(( 1 if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      labels:                         "{{ (__controller_schedule_item.related.labels | map(attribute='name') | list if __controller_schedule_item.related.labels is defined) | default(__controller_schedule_item.labels) | default(( [] if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      timeout:                        "{{ __controller_schedule_item.timeout | default(omit, true) }}"
-      job_type:                       "{{ __controller_schedule_item.job_type | default(omit, true) }}"
-      job_tags:                       "{{ __controller_schedule_item.job_tags | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      skip_tags:                      "{{ __controller_schedule_item.skip_tags | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      limit:                          "{{ __controller_schedule_item.limit | default(omit, true) }}"
-      diff_mode:                      "{{ __controller_schedule_item.diff_mode | default(( false if controller_configuration_schedules_enforce_defaults else omit)) }}"
-      verbosity:                      "{{ __controller_schedule_item.verbosity | default(omit, true) }}"
-      organization:                   "{{ __controller_schedule_item.organization | default(( '' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-      unified_job_template:           "{{ __controller_schedule_item.unified_job_template | default(omit, true) }}"
-      enabled:                        "{{ __controller_schedule_item.enabled | default(( true if controller_configuration_schedules_enforce_defaults else omit)) }}"
-      state:                          "{{ __controller_schedule_item.state | default(controller_state | default('present')) }}"
-
-    loop: "{{ schedules if schedules is defined else controller_schedules }}"
-    loop_control:
-      loop_var: "__controller_schedule_item"
-    vars:
-#      ansible_async_dir: '{{ controller_configuration_async_dir }}'
-      controller_configuration_schedules_enforce_defaults: false
 
 #   - name: Manage Workflows
 #     awx.awx.workflow_job_template:
