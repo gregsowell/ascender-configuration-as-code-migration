@@ -46,10 +46,16 @@
     - name: use shell script to modify credentail types file
       ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
 
-  - name: Fix schedules by removing null diff mode
+  # - name: Fix schedules by removing null diff mode
+  #   ansible.builtin.replace:
+  #     path: "{{ playbook_dir }}/configs/schedules.yml"
+  #     regexp: ' +diff_mode: null'
+  #     replace: ''
+
+  - name: Fix schedules by removing any lines with null
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/schedules.yml"
-      regexp: ' +diff_mode: null'
+      regexp: '.*null.*\n'
       replace: ''
 
   - name: Fix project file by removing null credentials
