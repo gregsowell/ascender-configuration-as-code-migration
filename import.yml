@@ -245,6 +245,17 @@
       controller_hosts: >-
         {{
           controller_hosts | map('combine', {
+            'variables': (item.variables | regex_replace(' ([^ ]+):', ', \\1:') | from_yaml if item.variables != 'null' else {})
+          }) | list
+        }}
+    loop: "{{ controller_hosts }}"
+    when: item.variables is string and item.variables | length > 0
+
+  - name: create controller hosts - convert variables to dictionary
+    set_fact:
+      controller_hosts: >-
+        {{
+          controller_hosts | map('combine', {
             'variables': (item.variables | from_yaml if item.variables != 'null' else {})
           }) | list
         }}
