@@ -1,0 +1,13 @@
+- name: Process each host in the inventory item
+  set_fact:
+    controller_hosts: "{{ controller_hosts + [formatted_host] }}"
+  loop: "{{ inventory_item.related.hosts }}"
+  loop_control:
+    loop_var: host
+  vars:
+    formatted_host:
+      description: "{{ host.description }}"
+      enabled: "{{ host.enabled }}"
+      inventory: "{{ inventory_item.name }}"
+      name: "{{ host.name }}"
+      variables: "{{ host.variables }}"
