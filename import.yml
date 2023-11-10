@@ -52,6 +52,12 @@
   #     regexp: ' +diff_mode: null'
   #     replace: ''
 
+  - name: Fix wokflow job templates by removing any lines with null **test to see if it works
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/workflow_job_templates.yml"
+      regexp: '.*null.*\n'
+      replace: ''
+
   - name: Fix schedules by removing any lines with null
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/schedules.yml"
