@@ -204,167 +204,23 @@
   #       variables:
   #         ansible_host: "{{ host.variables.ansible_host }}"
 
-  - name: Initialize controller_hosts
+  - name: Create controller_hosts variable - Initialize controller_hosts
     set_fact:
       controller_hosts: []
 
-  - name: Extract and format hosts from inventory
+  - name: Create controller_hosts variable - Extract and format hosts from inventory
     include_tasks: extract_hosts.yml
     loop: "{{ inventory }}"
     loop_control:
       loop_var: inventory_item
 
-  - name: Flatten controller_hosts list
+  - name: Create controller_hosts variable - Flatten controller_hosts list
     set_fact:
       controller_hosts: "{{ controller_hosts | flatten }}"
-# the one right below is what I was working with.
-  # - name: create controller hosts - convert variables to dictionary 2
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (item.variables | from_yaml if item.variables != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-  #   #output his huge otherwise, so no log to keep it small
-  #   #no_log: true 
 
-
-  # - name: create controller hosts -  remove nulls and comments from variables
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts + [
-  #           {
-  #             'name': item.name,
-  #             'variables': (
-  #               item.variables
-  #               | regex_replace('^\\s*#.*?$', '', multiline=True)
-  #               | regex_replace('\\s+', ' ')
-  #               | trim
-  #               if item.variables != 'null' else omit
-  #             )
-  #           }
-  #         ]
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-  #   #output his huge otherwise, so no log to keep it small
-  #   no_log: true 
-
-  # - name: create controller hosts - convert variables to dictionary 1
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (item.variables | regex_replace(' ([^ ]+):', ', \\1:') | from_yaml if item.variables != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-
-  # - name: create controller hosts - convert variables to dictionary
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (item.variables | trim | regex_replace(' ([^ ]+):', ', \\1:') | from_yaml if item.variables != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-
-  # - name: create controller hosts - convert variables to dictionary 2
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (item.variables | from_yaml if item.variables != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-  #   #output his huge otherwise, so no log to keep it small
-  #   #no_log: true 
-
-  # - name: create controller hosts - convert variables to dictionary
-  #   vars:
-  #     var_list: "{{ item.variables | trim | regex_replace(' ', '\n') | from_yaml }}"
-  #     var_dict: "{{ var_list | items2dict }}"
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': var_dict
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-
-  # - name: Controller hosts fix - remove comments and blank lines from variables
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (
-  #             item.variables
-  #             | regex_replace('^\\s*#.*?$\\n?', '', multiline=True)
-  #             | regex_replace('\\n\\s*\\n', '\\n')
-  #             | trim
-  #             if item.variables is string and item.variables != 'null' else omit
-  #           )
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-
-  # - name: Controller hosts fix - clean up variables
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (
-  #             item.variables
-  #             | regex_replace('\\s*\\n', '')  # Remove any newlines and preceding whitespaces
-  #             | trim
-  #             if item.variables is string and item.variables != 'null' else omit
-  #           )
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-
-  # - name: Create controller hosts - remove nulls and comments from variables
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (
-  #             item.variables
-  #             | regex_replace('^\\s*#.*?$', '', multiline=True)  # Remove comments
-  #             | regex_replace('\\s+', ' ')  # Replace multiple spaces/newlines with a single space
-  #             | trim  # Remove leading/trailing whitespace
-  #             if item.variables != 'null' else omit
-  #           )
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-
-  # - name: create controller hosts - convert variables to dictionary
-  #   set_fact:
-  #     controller_hosts: >-
-  #       {{
-  #         controller_hosts | map('combine', {
-  #           'variables': (item.variables | trim | regex_replace(' ([^ ]+):', ', \\1:') | from_yaml if item.variables != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ controller_hosts }}"
-  #   when: item.variables is string and item.variables | length > 0
-
-  - name: Debug the modified job_templates
-    debug:
-      var: controller_hosts
+  # - name: Debug the modified job_templates
+  #   debug:
+  #     var: controller_hosts
 
 ####### start importing
 
