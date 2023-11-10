@@ -208,9 +208,23 @@
     set_fact:
       controller_hosts: "{{ controller_hosts | flatten }}"
 
-  # - name: Debug the modified job_templates
-  #   debug:
-  #     var: controller_hosts
+  - name: Create controller_groups variable - Initialize controller_groups
+    set_fact:
+      controller_groups: []
+
+  - name: Create controller_groups variable - Extract and format hosts from inventory
+    include_tasks: extract_groups.yml
+    loop: "{{ inventory }}"
+    loop_control:
+      loop_var: inventory_item
+
+  - name: Create controller_groups variable - Flatten controller_groups list
+    set_fact:
+      controller_groups: "{{ controller_groups | flatten }}"
+
+  - name: Debug a var
+    debug:
+      var: controller_groups
 
 ####### start importing
 

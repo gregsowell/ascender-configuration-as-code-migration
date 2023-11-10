@@ -1,0 +1,14 @@
+- name: Process each group in the inventory item
+  set_fact:
+    controller_groups: "{{ controller_groups + [formatted_group] }}"
+  loop: "{{ inventory_item.related.groups }}"
+  loop_control:
+    loop_var: group
+  vars:
+    formatted_group:
+      description: "{{ group.description }}"
+      inventory: "{{ inventory_item.name }}"
+      name: "{{ group.name }}"
+      variables: "{{ group.variables | from_yaml }}"
+      children: "{{ group.related.children }}"
+      hosts: "{{ group.related.hosts | map(attribute='name') | list }}"
