@@ -232,27 +232,27 @@
     #no_log: true 
 
 
-  - name: create controller hosts -  remove nulls and comments from variables
-    set_fact:
-      controller_hosts: >-
-        {{
-          controller_hosts + [
-            {
-              'name': item.name,
-              'variables': (
-                item.variables
-                | regex_replace('^\\s*#.*?$', '', multiline=True)
-                | regex_replace('\\s+', ' ')
-                | trim
-                if item.variables != 'null' else omit
-              )
-            }
-          ]
-        }}
-    loop: "{{ controller_hosts }}"
-    when: item.variables is string and item.variables | length > 0
-    #output his huge otherwise, so no log to keep it small
-    no_log: true 
+  # - name: create controller hosts -  remove nulls and comments from variables
+  #   set_fact:
+  #     controller_hosts: >-
+  #       {{
+  #         controller_hosts + [
+  #           {
+  #             'name': item.name,
+  #             'variables': (
+  #               item.variables
+  #               | regex_replace('^\\s*#.*?$', '', multiline=True)
+  #               | regex_replace('\\s+', ' ')
+  #               | trim
+  #               if item.variables != 'null' else omit
+  #             )
+  #           }
+  #         ]
+  #       }}
+  #   loop: "{{ controller_hosts }}"
+  #   when: item.variables is string and item.variables | length > 0
+  #   #output his huge otherwise, so no log to keep it small
+  #   no_log: true 
 
   # - name: create controller hosts - convert variables to dictionary 1
   #   set_fact:
