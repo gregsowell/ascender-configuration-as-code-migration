@@ -253,22 +253,37 @@
   #   #output his huge otherwise, so no log to keep it small
   #   no_log: true 
 
-  - name: Controller hosts fix - remove comments and blank lines from variables
+  # - name: Controller hosts fix - remove comments and blank lines from variables
+  #   set_fact:
+  #     controller_hosts: >-
+  #       {{
+  #         controller_hosts | map('combine', {
+  #           'variables': (
+  #             item.variables
+  #             | regex_replace('^\\s*#.*?$\\n?', '', multiline=True)
+  #             | regex_replace('\\n\\s*\\n', '\\n')
+  #             | trim
+  #             if item.variables is string and item.variables != 'null' else omit
+  #           )
+  #         }) | list
+  #       }}
+  #   loop: "{{ controller_hosts }}"
+
+  - name: Controller hosts fix - clean up variables
     set_fact:
       controller_hosts: >-
         {{
           controller_hosts | map('combine', {
             'variables': (
               item.variables
-              | regex_replace('^\\s*#.*?$\\n?', '', multiline=True)
-              | regex_replace('\\n\\s*\\n', '\\n')
+              | regex_replace('\\s*\\n', '')  # Remove any newlines and preceding whitespaces
               | trim
               if item.variables is string and item.variables != 'null' else omit
             )
           }) | list
         }}
     loop: "{{ controller_hosts }}"
-    
+
   - name: Debug the modified job_templates
     debug:
       var: controller_hosts
