@@ -88,6 +88,17 @@
       # file: inventory.yml
       dir: configs
 
+  - name: Fix schedules variable - Filter out schedules based on provided names
+    set_fact:
+      schedules: "{{ schedules | selectattr('name', 'notin', schedules_to_remove) | list }}"
+    vars:
+      # List of schedule names to remove - all system default ones
+      schedules_to_remove: 
+        - 'Cleanup Job Schedule'
+        - 'Cleanup Activity Schedule'
+        - 'Cleanup Expired Sessions'
+        - 'Cleanup Expired OAuth 2 Tokens'
+
   - name: Job templates fix - remove nulls and comments from extra_vars
     set_fact:
       job_templates: >-
