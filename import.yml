@@ -251,7 +251,7 @@
     loop: "{{ controller_hosts }}"
     when: item.variables is string and item.variables | length > 0
     #output his huge otherwise, so no log to keep it small
-    no_log: true 
+    #no_log: true 
 
   # - name: Controller hosts fix - remove comments and blank lines from variables
   #   set_fact:
