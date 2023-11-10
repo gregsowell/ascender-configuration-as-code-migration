@@ -284,22 +284,22 @@
   #       }}
   #   loop: "{{ controller_hosts }}"
 
-  - name: Create controller hosts - remove nulls and comments from variables
-    set_fact:
-      controller_hosts: >-
-        {{
-          controller_hosts | map('combine', {
-            'variables': (
-              item.variables
-              | regex_replace('^\\s*#.*?$', '', multiline=True)  # Remove comments
-              | regex_replace('\\s+', ' ')  # Replace multiple spaces/newlines with a single space
-              | trim  # Remove leading/trailing whitespace
-              if item.variables != 'null' else omit
-            )
-          }) | list
-        }}
-    loop: "{{ controller_hosts }}"
-    when: item.variables is string and item.variables | length > 0
+  # - name: Create controller hosts - remove nulls and comments from variables
+  #   set_fact:
+  #     controller_hosts: >-
+  #       {{
+  #         controller_hosts | map('combine', {
+  #           'variables': (
+  #             item.variables
+  #             | regex_replace('^\\s*#.*?$', '', multiline=True)  # Remove comments
+  #             | regex_replace('\\s+', ' ')  # Replace multiple spaces/newlines with a single space
+  #             | trim  # Remove leading/trailing whitespace
+  #             if item.variables != 'null' else omit
+  #           )
+  #         }) | list
+  #       }}
+  #   loop: "{{ controller_hosts }}"
+  #   when: item.variables is string and item.variables | length > 0
 
   - name: Debug the modified job_templates
     debug:
