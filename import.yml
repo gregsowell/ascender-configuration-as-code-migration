@@ -9,9 +9,9 @@
     export_objects: 
       - testing_value
 #      - applications #works
-#      - credentials #works
-#      - credential_types #works
-#      - execution_environments #failed if requires conditional.  error on cred lookup - may be role error
+      - credentials #works
+      - credential_types #works
+      - execution_environments #failed if requires conditional.  error on cred lookup - may be role error
 #      - projects #works
 #      - inventory #works
 #      - inventory_sources #works
