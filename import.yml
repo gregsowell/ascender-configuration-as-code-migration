@@ -291,7 +291,7 @@
           controller_hosts | map('combine', {
             'variables': (
               item.variables
-              | regex_replace('^\\s*#.*?\\n?', '', multiline=True)  # Remove comments
+              | regex_replace('^\\s*#.*?$', '', multiline=True)  # Remove comments
               | regex_replace('\\s+', ' ')  # Replace multiple spaces/newlines with a single space
               | trim  # Remove leading/trailing whitespace
               if item.variables != 'null' else omit
