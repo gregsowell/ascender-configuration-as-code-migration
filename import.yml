@@ -12,16 +12,16 @@
       - credentials #works
       - credential_types #works
       - execution_environments #works.  Had to fake a var for a conditional check
-     - projects #works
-     - inventory #works
-     - inventory_sources #works
-     - job_templates #works
-     - notification_templates #passed
-     - organizations #works
-     - teams #works
-     - users #works
-     - workflow_job_templates #works
-     - schedules #works
+      - projects #works
+      - inventory #works
+      - inventory_sources #works
+      - job_templates #works
+      - notification_templates #passed
+      - organizations #works
+      - teams #works
+      - users #works
+      - workflow_job_templates #works
+      - schedules #works
   
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
