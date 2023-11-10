@@ -20,7 +20,7 @@
 #      - organizations #works
 #      - teams #works
 #      - users #works
-      - workflow_job_templates #works
+#      - workflow_job_templates #works
 #      - schedules #works
   
   environment:
