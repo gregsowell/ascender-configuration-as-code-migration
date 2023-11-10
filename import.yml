@@ -218,18 +218,18 @@
     set_fact:
       controller_hosts: "{{ controller_hosts | flatten }}"
 # the one right below is what I was working with.
-  - name: create controller hosts - convert variables to dictionary 2
-    set_fact:
-      controller_hosts: >-
-        {{
-          controller_hosts | map('combine', {
-            'variables': (item.variables | from_yaml if item.variables != 'null' else {})
-          }) | list
-        }}
-    loop: "{{ controller_hosts }}"
-    when: item.variables is string and item.variables | length > 0
-    #output his huge otherwise, so no log to keep it small
-    #no_log: true 
+  # - name: create controller hosts - convert variables to dictionary 2
+  #   set_fact:
+  #     controller_hosts: >-
+  #       {{
+  #         controller_hosts | map('combine', {
+  #           'variables': (item.variables | from_yaml if item.variables != 'null' else {})
+  #         }) | list
+  #       }}
+  #   loop: "{{ controller_hosts }}"
+  #   when: item.variables is string and item.variables | length > 0
+  #   #output his huge otherwise, so no log to keep it small
+  #   #no_log: true 
 
 
   # - name: create controller hosts -  remove nulls and comments from variables
