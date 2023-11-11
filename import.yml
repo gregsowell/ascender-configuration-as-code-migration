@@ -222,6 +222,8 @@
     loop: "{{ inventory }}"
     loop_control:
       loop_var: inventory_item
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Create controller_hosts variable - Flatten controller_hosts list
     when: inventory is defined
@@ -239,6 +241,8 @@
     loop: "{{ inventory }}"
     loop_control:
       loop_var: inventory_item
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Create controller_groups variable - Flatten controller_groups list
     when: inventory is defined
