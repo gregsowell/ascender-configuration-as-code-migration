@@ -15,7 +15,7 @@
       - applications #works
       - credentials #works
       - credential_types #works
-      - execution_environments #works.  Had to fake a var for a conditional check
+      - execution_environments #works
       - projects #works
       - inventory #works
       - inventory_sources #works
@@ -27,6 +27,7 @@
       - workflow_job_templates #works
       - schedules #works
   
+  # setting up some env variables for connecting to the automation server
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
     CONTROLLER_USERNAME: "{{ gen2_user }}"
@@ -34,57 +35,73 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
-  - name: check if credential-types file exists
-    ansible.builtin.stat:
+  - name: Change file permissions on credential-type shell script
+    when: item == "credential_types"
+    ansible.builtin.file:
       path: "{{ playbook_dir }}/credential-types-fix.sh"
-    register: cred_type_check
+      mode: '0777'
+    loop: "{{ export_objects }}"
 
-  - name: fix credential-types file block
-    when: cred_type_check.stat.exists
-    block:
-    - name: Change file permissions on credential-type shell script
-      ansible.builtin.file:
-        path: "{{ playbook_dir }}/credential-types-fix.sh"
-        mode: '0777'
+  - name: use shell script to modify credentail types file
+    when: item == "credential_types"
+    ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
+    loop: "{{ export_objects }}"
 
-    - name: use shell script to modify credentail types file
-      ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
+  - name: Fix credentials file by removing password fields
+    when: item == "credentials"
+    ansible.builtin.replace:
+      path: "{{ playbook_dir }}/configs/credentials.yml"
+      regexp: '.*password:.*'
+      replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix wokflow job templates by removing any lines with null
+    when: item == "workflow_job_templates"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/workflow_job_templates.yml"
       regexp: '.*null.*\n'
       replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix schedules by removing any lines with null
+    when: item == "schedules"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/schedules.yml"
       regexp: '.*null.*\n'
       replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix project file by removing null credentials
+    when: item == "credentials"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/projects.yml"
       regexp: ' +credential: null'
       replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix organizations by removing empty EE entries
+    when: item == "organizations"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/organizations.yml"
       regexp: ' +execution_environments: \[\]'
       replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix organizations by removing null default environment
+    when: item == "organizations"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/organizations.yml"
       regexp: ' +default_environment: null'
       replace: ''
+    loop: "{{ export_objects }}"
 
   - name: Fix execution environments file by removing null organizations
+    when: item == "execution_environments"
     ansible.builtin.replace:
       path: "{{ playbook_dir }}/configs/execution_environments.yml"
       regexp: ' +organization: null'
       replace: ''
+    loop: "{{ export_objects }}"
 
 ############# variable file imports
   - name: Include vars from config folder
@@ -93,10 +110,8 @@
       dir: configs
 ####################################
 
-  # - name: Fix schedules variable - Filter out schedules based on provided names
-  #   set_fact:
-  #     schedules: "{{ schedules | selectattr('name', 'notin', schedules_to_remove) | list }}"
-  - name: Filter out schedules based on provided names
+  - name: Fix schedules variable - Filter out schedules based on provided names
+    when: schedules is defined
     set_fact:
       schedules: "{{ schedules | rejectattr('name', 'in', schedules_to_remove) | list }}"
     vars:
@@ -125,7 +140,7 @@
           ]
         }}
     loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0
+    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
@@ -138,7 +153,7 @@
           }) | list
         }}
     loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0
+    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
@@ -160,7 +175,7 @@
           ]
         }}
     loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0
+    when: item.extra_vars is string and item.extra_vars | length > 0 and workflow_job_templates is defined
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
@@ -173,7 +188,7 @@
           }) | list
         }}
     loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0
+    when: item.extra_vars is string and item.extra_vars | length > 0 and workflow_job_templates is defined
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
@@ -184,48 +199,55 @@
       users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
 
   - name: Reformat the organization entry in applications variable to fix applications.  role formatting is old and needs fixing, but this is a workaround
+    when: applications is defined
     set_fact:
       applications: "{{ applications | json_query(query) }}"
     vars:
       query: "[].{authorization_grant_type: authorization_grant_type, client_type: client_type, description: description, name: name, natural_key: natural_key, organization: organization.name, redirect_uris: redirect_uris, skip_authorization: skip_authorization}"
 
   - name: Fix EEs by modifying the credential field in the execution_environments variable.  The module doesn't recognize the current format
-    when: item.credential.name is defined
+    when: item.credential.name is defined and execution_environments is defined
     set_fact:
       execution_environments: "{{ execution_environments | map('combine', {'credential': item.credential.name}) | list }}"
     loop: "{{ execution_environments }}"
 
   - name: Create controller_hosts variable - Initialize controller_hosts
+    when: inventory is defined
     set_fact:
       controller_hosts: []
 
   - name: Create controller_hosts variable - Extract and format hosts from inventory
+    when: inventory is defined
     include_tasks: extract_hosts.yml
     loop: "{{ inventory }}"
     loop_control:
       loop_var: inventory_item
 
   - name: Create controller_hosts variable - Flatten controller_hosts list
+    when: inventory is defined
     set_fact:
       controller_hosts: "{{ controller_hosts | flatten }}"
 
   - name: Create controller_groups variable - Initialize controller_groups
+    when: inventory is defined
     set_fact:
       controller_groups: []
 
   - name: Create controller_groups variable - Extract and format hosts from inventory
+    when: inventory is defined
     include_tasks: extract_groups.yml
     loop: "{{ inventory }}"
     loop_control:
       loop_var: inventory_item
 
   - name: Create controller_groups variable - Flatten controller_groups list
+    when: inventory is defined
     set_fact:
       controller_groups: "{{ controller_groups | flatten }}"
 
-  - name: Debug a var
-    debug:
-      var: controller_groups
+  # - name: Debug a var
+  #   debug:
+  #     var: controller_groups
 
 ####### start importing
 
