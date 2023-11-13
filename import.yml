@@ -267,11 +267,17 @@
 
 ####### start importing various information
 
-  - name: Add credential types
-    when: item == "credential_types"
-    ansible.builtin.include_role:
-      name: credential_types
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add credential types
+      when: item == "credential_types"
+      ansible.builtin.include_role:
+        name: credential_types
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add credential types - second attempt
+      ansible.builtin.include_role:
+        name: credential_types
 
   - name: Add credentials
     when: item == "credentials"
