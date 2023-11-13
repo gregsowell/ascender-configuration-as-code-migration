@@ -279,99 +279,191 @@
       ansible.builtin.include_role:
         name: credential_types
 
-  - name: Add credentials
-    when: item == "credentials"
-    ansible.builtin.include_role:
-      name: credentials
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add credentials
+      when: item == "credentials"
+      ansible.builtin.include_role:
+        name: credentials
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add credentials - second attempt
+      ansible.builtin.include_role:
+        name: credentials
 
-  - name: Add execution_environments
-    when: item == "execution_environments"
-    ansible.builtin.include_role:
-      name: execution_environments
-    loop: "{{ export_objects }}"
-    vars:
-      controller_execution_environments: 
-        - food: tacos #weird conditional they check for in the role(error in role)
-          day: tuesday
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add execution_environments
+      when: item == "execution_environments"
+      ansible.builtin.include_role:
+        name: execution_environments
+      loop: "{{ export_objects }}"
+      vars:
+        controller_execution_environments: 
+          - food: tacos #weird conditional they check for in the role(error in role)
+            day: tuesday
+    rescue:
+    - name: Add execution_environments - second attempt
+      ansible.builtin.include_role:
+        name: execution_environments
+      vars:
+        controller_execution_environments: 
+          - food: tacos #weird conditional they check for in the role(error in role)
+            day: tuesday
 
-  - name: Add organizations
-    when: item == "organizations"
-    ansible.builtin.include_role:
-      name: organizations
-    loop: "{{ export_objects }}"
-#    vars:
-#      controller_configuration_organizations_enforce_defaults: true
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add organizations
+      when: item == "organizations"
+      ansible.builtin.include_role:
+        name: organizations
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add organizations
+      ansible.builtin.include_role:
+        name: organizations
 
-  - name: Add teams
-    when: item == "teams"
-    ansible.builtin.include_role:
-      name: teams
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add teams
+      when: item == "teams"
+      ansible.builtin.include_role:
+        name: teams
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add teams - second attempt
+      ansible.builtin.include_role:
+        name: teams
 
-  - name: Add users
-    when: item == "users"
-    ansible.builtin.include_role:
-      name: users
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add users
+      when: item == "users"
+      ansible.builtin.include_role:
+        name: users
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add users - second attempt
+      ansible.builtin.include_role:
+        name: users
 
-  - name: Add projects
-    when: item == "projects"
-    ansible.builtin.include_role:
-      name: projects
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add projects
+      when: item == "projects"
+      ansible.builtin.include_role:
+        name: projects
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add projects - second attempt
+      ansible.builtin.include_role:
+        name: projects
 
-  - name: Add inventory
-    when: item == "inventory"
-    ansible.builtin.include_role:
-      name: inventories
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add inventory
+      when: item == "inventory"
+      ansible.builtin.include_role:
+        name: inventories
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add inventory - second attempt
+      ansible.builtin.include_role:
+        name: inventories
 
-  - name: Add inventory sources
-    when: item == "inventory_sources"
-    ansible.builtin.include_role:
-      name: inventory_sources
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add inventory sources
+      when: item == "inventory_sources"
+      ansible.builtin.include_role:
+        name: inventory_sources
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add inventory sources - second attempt
+      ansible.builtin.include_role:
+        name: inventory_sources
 
-  - name: Add hosts
-    when: item == "inventory" and add_hosts
-    ansible.builtin.include_role:
-      name: hosts
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add hosts
+      when: item == "inventory" and add_hosts
+      ansible.builtin.include_role:
+        name: hosts
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add hosts - second attempt
+      ansible.builtin.include_role:
+        name: hosts
 
-  - name: Add groups
-    when: item == "inventory" and add_groups
-    ansible.builtin.include_role:
-      name: groups
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add groups
+      when: item == "inventory" and add_groups
+      ansible.builtin.include_role:
+        name: groups
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add groups - second attempt
+      ansible.builtin.include_role:
+        name: groups
 
-  - name: Add applications
-    when: item == "applications"
-    ansible.builtin.include_role:
-      name: applications
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add applications
+      when: item == "applications"
+      ansible.builtin.include_role:
+        name: applications
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add applications - second attempt
+      ansible.builtin.include_role:
+        name: applications
 
-  - name: Add job_templates
-    when: item == "job_templates"
-    ansible.builtin.include_role:
-      name: job_templates
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add job_templates
+      when: item == "job_templates"
+      ansible.builtin.include_role:
+        name: job_templates
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add job_templates - second attempt
+      ansible.builtin.include_role:
+        name: job_templates
 
-  - name: Add workflow_job_templates
-    when: item == "workflow_job_templates"
-    ansible.builtin.include_role:
-      name: workflow_job_templates
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add workflow_job_templates
+      when: item == "workflow_job_templates"
+      ansible.builtin.include_role:
+        name: workflow_job_templates
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add workflow_job_templates - second attempt
+      ansible.builtin.include_role:
+        name: workflow_job_templates
 
-  - name: Add notification_templates
-    when: item == "notification_templates"
-    ansible.builtin.include_role:
-      name: notification_templates
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add notification_templates
+      when: item == "notification_templates"
+      ansible.builtin.include_role:
+        name: notification_templates
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add notification_templates - second attempt
+      ansible.builtin.include_role:
+        name: notification_templates
 
-  - name: Add schedules
-    when: item == "schedules"
-    ansible.builtin.include_role:
-      name: schedules
-    loop: "{{ export_objects }}"
+  - name: block and rescue for multiple attempts
+    block:
+    - name: Add schedules
+      when: item == "schedules"
+      ansible.builtin.include_role:
+        name: schedules
+      loop: "{{ export_objects }}"
+    rescue:
+    - name: Add schedules - second attempt
+      ansible.builtin.include_role:
+        name: schedules
 
