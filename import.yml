@@ -1,31 +1,36 @@
 ---
-- name: Export config as code info from AWX, AAP, or Ascender
-  #hosts: save-files
+- name: Import config as code info to AWX, AAP, or Ascender
   hosts: localhost
   gather_facts: false
   vars:
+    #import host is the server name for the host I'm placing the new configs ones
+    #I have it commented out because I'm supplying this via extra_vars
+    #import_host: new-server.gregsowell.com
+
     controller_configuration_inventories_enforce_defaults: true
 
     #add hosts and or groups when adding/updating inventories
+    #by default inventories won't import hosts/groups, so setting these variables will control that.
     add_hosts: true
     add_groups: true
 
+    #these are the objects you want to import into the server
     export_objects: 
       - testing_value
-      - applications #works
-      - credentials #works
-      - credential_types #works
-      - execution_environments #works
-      - projects #works
-      - inventory #works
-      - inventory_sources #works
-      - job_templates #works
-      - notification_templates #passed
-      - organizations #works
-      - teams #works
-      - users #works
-      - workflow_job_templates #works
-      - schedules #works
+      - applications 
+      - credentials 
+      - credential_types 
+      - execution_environments
+      - projects 
+      - inventory
+      - inventory_sources
+      - job_templates
+      - notification_templates 
+      - organizations 
+      - teams 
+      - users 
+      - workflow_job_templates
+      - schedules 
   
   # setting up some env variables for connecting to the automation server
   environment:
@@ -35,6 +40,9 @@
     CONTROLLER_VERIFY_SSL: False
 
   tasks:
+  # the following tasks are making modifications to the config as code(cac) yaml files.
+  # the existing modules and roles are using some old formatting of the default export
+  # so some modification is required.
   - name: Change file permissions on credential-type shell script
     when: item == "credential_types"
     ansible.builtin.file:
@@ -104,13 +112,15 @@
     loop: "{{ export_objects }}"
 
 ############# variable file imports
+  # this imports the variable files from the configs directory
   - name: Include vars from config folder
     ansible.builtin.include_vars:
-      # file: inventory.yml
       dir: configs
 ####################################
 
-  - name: Fix schedules variable - Filter out schedules based on provided names
+  # the following tasks are modifying the imported variables.
+  # some were easier to modify as files, and some were easier once they were variables.
+  - name: Fix schedules variable - Filter out schedules based on provided names - system default schedules
     when: schedules is defined
     set_fact:
       schedules: "{{ schedules | rejectattr('name', 'in', schedules_to_remove) | list }}"
@@ -196,7 +206,9 @@
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
     set_fact:
-      users: "{{ users | rejectattr('natural_key.username', 'equalto', 'admin') | list }}"
+      users: "{{ users | rejectattr('natural_key.username', 'equalto', item) | list }}"
+    loop:
+      - admin
 
   - name: Reformat the organization entry in applications variable to fix applications.  role formatting is old and needs fixing, but this is a workaround
     when: applications is defined
@@ -253,10 +265,7 @@
   #   debug:
   #     var: controller_groups
 
-####### start importing
-
-
-
+####### start importing various information
 
   - name: Add credential types
     when: item == "credential_types"
@@ -277,7 +286,7 @@
     loop: "{{ export_objects }}"
     vars:
       controller_execution_environments: 
-        - food: tacos #weird conditional
+        - food: tacos #weird conditional they check for in the role(error in role)
           day: tuesday
 
   - name: Add organizations
@@ -285,9 +294,8 @@
     ansible.builtin.include_role:
       name: organizations
     loop: "{{ export_objects }}"
-    vars:
-      controller_configuration_organizations_enforce_defaults: true
-
+#    vars:
+#      controller_configuration_organizations_enforce_defaults: true
 
   - name: Add teams
     when: item == "teams"
@@ -310,7 +318,6 @@
   - name: Add inventory
     when: item == "inventory"
     ansible.builtin.include_role:
-      # name: infra.controller_configuration.inventories
       name: inventories
     loop: "{{ export_objects }}"
 
