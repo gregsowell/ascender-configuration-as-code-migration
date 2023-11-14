@@ -261,9 +261,9 @@
     set_fact:
       controller_groups: "{{ controller_groups | flatten }}"
 
-  # - name: Debug a var
-  #   debug:
-  #     var: controller_groups
+  - name: Debug a var
+    debug:
+      var: job_templates
 
 ####### start importing various information
 
