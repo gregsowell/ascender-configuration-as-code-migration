@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     export_objects: 
-      - applications
+#      - applications
       - credentials
       - credential_types
       - execution_environments
