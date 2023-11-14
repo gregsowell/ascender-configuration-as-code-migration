@@ -25,23 +25,15 @@
             notification_templates_started: []
             notification_templates_success: []
     -   default_environment: null
-        description: 'test'
+        description: test
         max_hosts: 0
         name: test
         natural_key:
-            name: Default
+            name: test
             type: organization
         related:
             execution_environments: []
-            galaxy_credentials:
-            -   credential_type:
-                    kind: galaxy
-                    name: Ansible Galaxy/Automation
-                        Hub API Token
-                    type: credential_type
-                name: Ansible Galaxy
-                organization: null
-                type: credential
+            galaxy_credentials: []
             notification_templates: []
             notification_templates_approvals: []
             notification_templates_error: []

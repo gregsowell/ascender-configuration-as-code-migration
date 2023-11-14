@@ -27,6 +27,7 @@
         overwrite: false
         overwrite_vars: false
         related:
+            credentials: []
             notification_templates_error: []
             notification_templates_started: []
             notification_templates_success: []

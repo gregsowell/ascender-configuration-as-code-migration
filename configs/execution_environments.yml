@@ -10,6 +10,22 @@
             organization: null
             type: credential
         description: ''
+        image: quay.io/ansible/awx-ee:latest
+        name: AWX EE (latest)
+        natural_key:
+            name: AWX EE (latest)
+            type: execution_environment
+        organization: null
+        pull: missing
+    -   credential:
+            credential_type:
+                kind: registry
+                name: Container Registry
+                type: credential_type
+            name: registry.labs.io
+            organization: null
+            type: credential
+        description: ''
         image: registry.labs.io:5000/network_ee:1.0.2
         name: network_ee
         natural_key:
@@ -19,10 +35,19 @@
         pull: missing
     -   credential: null
         description: ''
-        image: quay.io/ansible/awx-ee:latest
-        name: AWX EE (latest)
+        image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest
+        name: Default execution environment
         natural_key:
-            name: AWX EE (latest)
+            name: Default execution environment
+            type: execution_environment
+        organization: null
+        pull: ''
+    -   credential: null
+        description: ''
+        image: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+        name: Minimal execution environment
+        natural_key:
+            name: Minimal execution environment
             type: execution_environment
         organization: null
         pull: ''

@@ -10,9 +10,7 @@
         ask_tags_on_launch: false
         ask_variables_on_launch: false
         description: ''
-        extra_vars: '
-
-            backup_with_tags: true'
+        extra_vars: '{"backup_with_tags": true}'
         inventory:
             name: Network Lab
             organization:
@@ -433,7 +431,7 @@
         ask_tags_on_launch: false
         ask_variables_on_launch: false
         description: ''
-        extra_vars: ''
+        extra_vars: '{"backup_with_tags": true}'
         inventory:
             name: Network Lab
             organization:
@@ -780,7 +778,7 @@
         ask_tags_on_launch: false
         ask_variables_on_launch: false
         description: ''
-        extra_vars: ''
+        extra_vars: '{"backup_with_tags": true}'
         inventory:
             name: centos to rocky migration
             organization:
@@ -1080,7 +1078,7 @@
         ask_tags_on_launch: false
         ask_variables_on_launch: false
         description: ''
-        extra_vars: ''
+        extra_vars: '{"backup_with_tags": true}'
         inventory: null
         job_tags: null
         limit: null
@@ -1193,7 +1191,7 @@
         ask_tags_on_launch: false
         ask_variables_on_launch: true
         description: ''
-        extra_vars: ''
+        extra_vars: '{"backup_with_tags": true}'
         inventory:
             name: SNOW Provision VM
             organization:
