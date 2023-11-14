@@ -167,12 +167,24 @@
   #   #output his huge otherwise, so no log to keep it small
   #   no_log: true 
 
+  # - name: Process each job template
+  #   vars:
+  #     processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '') | regex_replace('\\n\\s*\\n', '\\n') }}"
+  #     extra_vars_dict: "{{ dict(processed_extra_vars.splitlines() | map('regex_replace', '^(.*?):\\s*(.*?)$', '\\1=\\2') | map('split', '=')) }}"
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('combine', {'extra_vars': extra_vars_dict}) | list }}"
+  #   with_items: "{{ job_templates }}"
+
   - name: Process each job template
     vars:
-      processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '') | regex_replace('\\n\\s*\\n', '\\n') }}"
-      extra_vars_dict: "{{ dict(processed_extra_vars.splitlines() | map('regex_replace', '^(.*?):\\s*(.*?)$', '\\1=\\2') | map('split', '=')) }}"
+      cleaned_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '', multiline=True) | regex_replace('\\n\\s*\\n', '\\n', multiline=True) }}"
+      lines: "{{ cleaned_extra_vars.splitlines() }}"
+      extra_vars_pairs: "{{ lines | select('match', '^.+?:.+?$') | map('regex_replace', '^(.*?):\\s*(.*?)$', '\\1=\\2') | list }}"
+      extra_vars_dict: "{{ dict(extra_vars_pairs | map('split', '=')) }}"
     set_fact:
-      job_templates: "{{ job_templates | map('combine', {'extra_vars': extra_vars_dict}) | list }}"
+      job_templates: "{{ job_templates | json_query(query) }}"
+    vars:
+      query: "[].{name: name, extra_vars: extra_vars_dict}"
     with_items: "{{ job_templates }}"
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
