@@ -132,27 +132,27 @@
         - 'Cleanup Expired Sessions'
         - 'Cleanup Expired OAuth 2 Tokens'
 
-  # - name: Job templates fix - remove nulls and comments from extra_vars
-  #   set_fact:
-  #     job_templates: >-
-  #       {{
-  #         job_templates + [
-  #           {
-  #             'name': item.name,
-  #             'extra_vars': (
-  #               item.extra_vars
-  #               | regex_replace('^\\s*#.*?$', '', multiline=True)
-  #               | regex_replace('\\s+', ' ')
-  #               | trim
-  #               if item.extra_vars != 'null' else omit
-  #             )
-  #           }
-  #         ]
-  #       }}
-  #   loop: "{{ job_templates }}"
-  #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-  #   #output his huge otherwise, so no log to keep it small
-  #   no_log: true 
+  - name: Job templates fix - remove nulls and comments from extra_vars
+    set_fact:
+      job_templates: >-
+        {{
+          job_templates + [
+            {
+              'name': item.name,
+              'extra_vars': (
+                item.extra_vars
+                | regex_replace('^\\s*#.*?$', '', multiline=True)
+                | regex_replace('\\s+', ' ')
+                | trim
+                if item.extra_vars != 'null' else omit
+              )
+            }
+          ]
+        }}
+    loop: "{{ job_templates }}"
+    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+    #output his huge otherwise, so no log to keep it small
+    no_log: true 
 
   # - name: Job templates fix - convert extra_vars to dictionary
   #   set_fact:
@@ -188,25 +188,25 @@
   #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
   #   # no_log: true
 
-  - name: Job templates fix - remove nulls and comments from extra_vars
-    set_fact:
-      job_templates: >-
-        {{ job_templates | json_query('[*].{name: name, extra_vars: extra_vars}') }}
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-#    no_log: true
+#   - name: Job templates fix - remove nulls and comments from extra_vars
+#     set_fact:
+#       job_templates: >-
+#         {{ job_templates | json_query('[*].{name: name, extra_vars: extra_vars}') }}
+#     loop: "{{ job_templates }}"
+#     when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+# #    no_log: true
 
-  - name: Clean up extra_vars
-    set_fact:
-      item.extra_vars: >-
-        {{ item.extra_vars 
-        | regex_replace('^\\s*#.*?$', '', multiline=True) 
-        | regex_replace('\\s+', ' ') 
-        | trim 
-        if item.extra_vars != 'null' else omit }}
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-#    no_log: true
+#   - name: Clean up extra_vars
+#     set_fact:
+#       item.extra_vars: >-
+#         {{ item.extra_vars 
+#         | regex_replace('^\\s*#.*?$', '', multiline=True) 
+#         | regex_replace('\\s+', ' ') 
+#         | trim 
+#         if item.extra_vars != 'null' else omit }}
+#     loop: "{{ job_templates }}"
+#     when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+# #    no_log: true
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
