@@ -22,7 +22,7 @@
                 type: system_job_template
         related:
             credentials: []
-        rrule: DTSTART:20231113T174956Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU
+        rrule: DTSTART:20230616T205427Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU
         scm_branch: null
         skip_tags: null
         timeout: null
@@ -51,7 +51,7 @@
                 type: system_job_template
         related:
             credentials: []
-        rrule: DTSTART:20231113T174956Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=TU
+        rrule: DTSTART:20230616T205427Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=TU
         scm_branch: null
         skip_tags: null
         timeout: null
@@ -79,7 +79,7 @@
                 type: system_job_template
         related:
             credentials: []
-        rrule: DTSTART:20231113T175113Z RRULE:FREQ=WEEKLY;INTERVAL=1
+        rrule: DTSTART:20230616T205559Z RRULE:FREQ=WEEKLY;INTERVAL=1
         scm_branch: null
         skip_tags: null
         timeout: null
@@ -108,7 +108,7 @@
                 type: system_job_template
         related:
             credentials: []
-        rrule: DTSTART:20231113T175113Z RRULE:FREQ=WEEKLY;INTERVAL=1
+        rrule: DTSTART:20230616T205600Z RRULE:FREQ=WEEKLY;INTERVAL=1
         scm_branch: null
         skip_tags: null
         timeout: null

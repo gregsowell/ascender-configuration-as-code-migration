@@ -22,7 +22,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -89,7 +89,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -156,7 +156,11 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            # export_host: 10.0.50.20
+
+            export_host: ascender.gregsowell.com'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -237,7 +241,11 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            # export_host: 10.0.50.20
+
+            import_host: ascendertest9.com'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -320,7 +328,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -403,7 +411,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -486,7 +494,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -569,7 +577,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -652,7 +660,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -735,7 +743,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -818,7 +826,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -899,7 +907,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -973,7 +981,11 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: create'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1054,7 +1066,11 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: remove'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1135,7 +1151,11 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10
+
+            snapshot_action: restore'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1216,7 +1236,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1290,7 +1310,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1364,7 +1384,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1447,7 +1467,7 @@
         execution_environment:
             name: network_ee
             type: execution_environment
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1528,7 +1548,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1609,7 +1629,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1683,7 +1703,7 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: ''
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1757,7 +1777,19 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            # variables
+
+            # specific
+
+            # to
+
+            # this
+
+            # template
+
+            vcenter_hostname: 10.0.2.10'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -1957,7 +1989,9 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            #hosts: rocky-8.6-lts-snow-demo'
         force_handlers: false
         forks: 0
         host_config_key: ''
@@ -2038,7 +2072,9 @@
         description: ''
         diff_mode: false
         execution_environment: null
-        extra_vars: '{"vcenter_hostname": "10.0.2.10"}'
+        extra_vars: '
+
+            vcenter_hostname: 10.0.2.10'
         force_handlers: false
         forks: 0
         host_config_key: ''

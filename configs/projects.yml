@@ -65,7 +65,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _9__ascender_vmware
+        local_path: _10__ascender_vmware
         name: Ascender VMWare
         natural_key:
             name: Ascender VMWare
@@ -95,7 +95,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _10__gregsowell_network_backup_git
+        local_path: _16__gregsowell_network_backup_git
         name: GregSowell Network Backup Git
         natural_key:
             name: GregSowell Network Backup Git
@@ -125,7 +125,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _11__gregsowell_network_cac
+        local_path: _17__gregsowell_network_cac
         name: GregSowell Network CAC
         natural_key:
             name: GregSowell Network CAC
@@ -155,7 +155,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _12__gregsowell_windows
+        local_path: _29__gregsowell_windows
         name: GregSowell Windows
         natural_key:
             name: GregSowell Windows
@@ -184,8 +184,38 @@
     -   allow_override: false
         credential: null
         default_environment: null
+        description: ''
+        local_path: _31__ansible_misc
+        name: Ansible Misc
+        natural_key:
+            name: Ansible Misc
+            organization:
+                name: Default
+                type: organization
+            type: project
+        organization:
+            name: Default
+            type: organization
+        related:
+            notification_templates_error: []
+            notification_templates_started: []
+            notification_templates_success: []
+        scm_branch: ''
+        scm_clean: false
+        scm_delete_on_update: false
+        scm_refspec: ''
+        scm_track_submodules: false
+        scm_type: git
+        scm_update_cache_timeout: 0
+        scm_update_on_launch: false
+        scm_url: https://github.com/gregsowell/ansible-misc
+        signature_validation_credential: null
+        timeout: 0
+    -   allow_override: false
+        credential: null
+        default_environment: null
         description: CIQ basics repository
-        local_path: _13__basics_course
+        local_path: _34__basics_course
         name: basics-course
         natural_key:
             name: basics-course
@@ -215,37 +245,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _14__ansible_misc
-        name: Ansible Misc
-        natural_key:
-            name: Ansible Misc
-            organization:
-                name: Default
-                type: organization
-            type: project
-        organization:
-            name: Default
-            type: organization
-        related:
-            notification_templates_error: []
-            notification_templates_started: []
-            notification_templates_success: []
-        scm_branch: ''
-        scm_clean: false
-        scm_delete_on_update: false
-        scm_refspec: ''
-        scm_track_submodules: false
-        scm_type: git
-        scm_update_cache_timeout: 0
-        scm_update_on_launch: false
-        scm_url: https://github.com/gregsowell/ansible-misc
-        signature_validation_credential: null
-        timeout: 0
-    -   allow_override: false
-        credential: null
-        default_environment: null
-        description: ''
-        local_path: _15__gregsowell_centos7_migration
+        local_path: _35__greg_centos7_migration
         name: GregSowell centos7 migration
         natural_key:
             name: GregSowell centos7 migration
@@ -275,7 +275,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _16__ascender_cac_migration
+        local_path: _46__ascender_cac_migration
         name: Ascender CAC Migration
         natural_key:
             name: Ascender CAC Migration
@@ -305,7 +305,7 @@
         credential: null
         default_environment: null
         description: ''
-        local_path: _17__dynamic_custom_inventory_demo
+        local_path: _49__dynamic_custom_inventory_demo
         name: Dynamic custom inventory demo
         natural_key:
             name: Dynamic custom inventory demo

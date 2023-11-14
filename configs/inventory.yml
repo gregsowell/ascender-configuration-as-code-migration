@@ -39,9 +39,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '{"ansible_host": "10.0.50.20"}'
+                variables: '
+
+                    ansible_host: 10.0.50.20'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: Inventory for CIQ basics
         host_filter: null
         kind: ''
@@ -80,9 +82,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '{"ansible_host": "192.168.1.10"}'
+                variables: '
+
+                    ansible_host: 192.168.1.10'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -121,7 +125,9 @@
                     type: host
                 related:
                     groups: []
-                variables: '{"ansible_host": "1.2.3.4"}'
+                variables: '
+
+                    ansible_host: 1.2.3.4'
             -   description: ''
                 enabled: true
                 instance_id: ''
@@ -143,9 +149,11 @@
                     type: host
                 related:
                     groups: []
-                variables: '{"ansible_host": "10.0.50.33"}'
+                variables: '
+
+                    ansible_host: 10.0.50.33'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -184,10 +192,12 @@
                     type: host
                 related:
                     groups: []
-                variables: '{"ansible_connection": "local",
-                    "ansible_python_interpreter": "/usr/bin/python3"}'
+                variables: 'ansible_connection: local
+
+                    ansible_python_interpreter: ''{{
+                    ansible_playbook_python }}'''
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -252,7 +262,7 @@
                             type: inventory
                         name: host5.example.com
                         type: host
-                variables: ''
+                variables: '{}'
             -   description: imported
                 inventory:
                     name: Dynamic custom inventory demo
@@ -292,7 +302,7 @@
                             type: inventory
                         name: host4.example.com
                         type: host
-                variables: ''
+                variables: '{}'
             hosts:
             -   description: imported
                 enabled: true
@@ -465,7 +475,7 @@
                     "os": "Linux", "owner": "User 4",
                     "status": "inactive"}'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -526,8 +536,13 @@
                             type: inventory
                         name: nexus9k3
                         type: host
-                variables: '{"ansible_connection": "ansible.netcommon.network_cli",
-                    "ansible_network_os": "nxos"}'
+                variables: '
+
+                    ansible_connection: ansible.netcommon.network_cli
+
+                    #ansible_network_os: cisco.nxos.nxos
+
+                    ansible_network_os: nxos'
             hosts:
             -   description: ''
                 enabled: true
@@ -558,7 +573,9 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '{"ansible_host": "10.0.50.27"}'
+                variables: '
+
+                    ansible_host: 10.0.50.27'
             -   description: ''
                 enabled: true
                 instance_id: ''
@@ -588,7 +605,9 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '{"ansible_host": "10.0.50.28"}'
+                variables: '
+
+                    ansible_host: 10.0.50.28'
             -   description: ''
                 enabled: true
                 instance_id: ''
@@ -618,9 +637,11 @@
                             type: inventory
                         name: Nexus
                         type: group
-                variables: '{"ansible_host": "10.0.50.29"}'
+                variables: '
+
+                    ansible_host: 10.0.50.29'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -704,8 +725,11 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '{"ansible_host": "10.0.50.21",
-                    "lts_version": "lts-8.6"}'
+                variables: '
+
+                    ansible_host: 10.0.50.21
+
+                    lts_version: lts-8.6'
             -   description: ''
                 enabled: true
                 instance_id: ''
@@ -735,9 +759,11 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '{"ansible_host": "10.0.50.23"}'
+                variables: '
+
+                    ansible_host: 10.0.50.23'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -813,10 +839,13 @@
                             type: inventory
                         name: lts_demo
                         type: group
-                variables: '{"ansible_host": "10.0.50.24",
-                    "lts_version": "lts-8.6"}'
+                variables: '
+
+                    ansible_host: 10.0.50.24
+
+                    lts_version: lts-8.6'
             labels: []
-        variables: '{}'
+        variables: ''
     -   description: ''
         host_filter: null
         kind: ''
@@ -869,10 +898,17 @@
                             type: inventory
                         name: Greg-Win-IIS1
                         type: host
-                variables: '{"ansible_connection": "winrm",
-                    "ansible_winrm_scheme": "http",
-                    "ansible_port": 5985, "ansible_winrm_transport":
-                    "ntlm"}'
+                variables: '
+
+                    ansible_connection: winrm
+
+                    ansible_winrm_scheme: http
+
+                    ansible_port: 5985
+
+                    #ansible_winrm_transport: credssp
+
+                    ansible_winrm_transport: ntlm'
             hosts:
             -   description: ''
                 enabled: true
@@ -903,7 +939,9 @@
                             type: inventory
                         name: Windows
                         type: group
-                variables: '{"ansible_host": "10.0.50.30"}'
+                variables: '
+
+                    ansible_host: 10.0.50.30'
             -   description: ''
                 enabled: true
                 instance_id: ''
@@ -933,9 +971,11 @@
                             type: inventory
                         name: Windows
                         type: group
-                variables: '{"ansible_host": "10.0.50.31"}'
+                variables: '
+
+                    ansible_host: 10.0.50.31'
             labels: []
-        variables: '{}'
+        variables: ''
 
 
 ...
