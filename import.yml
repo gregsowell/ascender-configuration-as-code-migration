@@ -199,21 +199,21 @@
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
-  - name: Workflow job templates fix -  Initialize an empty list for updated job templates
-    set_fact:
-      updated_workflow_job_templates: []
-    when: workflow_job_templates is defined
+  # - name: Workflow job templates fix -  Initialize an empty list for updated job templates
+  #   set_fact:
+  #     updated_workflow_job_templates: []
+  #   when: workflow_job_templates is defined
 
-  - name: Workflow job templates fix -  Convert extra_vars in each job template to a dictionary
-    set_fact:
-      updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))})] }}"
-    loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is defined and item.extra_vars | length > 0 and updated_workflow_job_templates is defined
+  # - name: Workflow job templates fix -  Convert extra_vars in each job template to a dictionary
+  #   set_fact:
+  #     updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))})] }}"
+  #   loop: "{{ workflow_job_templates }}"
+  #   when: item.extra_vars is defined and item.extra_vars | length > 0 and updated_workflow_job_templates is defined
 
-  - name: Workflow job templates fix -  Overwrite job_templates with the updated list
-    set_fact:
-      workflow_job_templates: "{{ updated_workflow_job_templates }}"
-    when: updated_workflow_job_templates is defined
+  # - name: Workflow job templates fix -  Overwrite job_templates with the updated list
+  #   set_fact:
+  #     workflow_job_templates: "{{ updated_workflow_job_templates }}"
+  #   when: updated_workflow_job_templates is defined
 
 
   - name: Filter out users we don't want imported - user import fix
