@@ -164,7 +164,7 @@
   #       }}
   #   loop: "{{ job_templates }}"
   #   #when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-  #   when: item.extra_vars is string and job_templates is defined
+  #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
   #   #output his huge otherwise, so no log to keep it small
   #   no_log: true 
 
@@ -173,12 +173,12 @@
       job_templates: >-
         {{
           job_templates | map('combine', {
-            'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
+            'extra_vars': (item.extra_vars | from_yaml )
           }) 
         }}
     loop: "{{ job_templates }}"
     #when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-    when: item.extra_vars is string and job_templates is defined
+    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
