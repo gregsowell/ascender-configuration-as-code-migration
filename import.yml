@@ -481,6 +481,10 @@
         name: job_templates
       loop: "{{ export_objects }}"
     rescue:
+    - name: sleep for 20 seconds to let some previous jobs finish
+      ansible.builtin.pause:
+        seconds: 20
+
     - name: Add job_templates - second attempt
       ansible.builtin.include_role:
         name: job_templates
@@ -493,6 +497,10 @@
         name: workflow_job_templates
       loop: "{{ export_objects }}"
     rescue:
+    - name: sleep for 20 seconds to let some previous jobs finish
+      ansible.builtin.pause:
+        seconds: 20
+
     - name: Add workflow_job_templates - second attempt
       ansible.builtin.include_role:
         name: workflow_job_templates
