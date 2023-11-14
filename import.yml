@@ -154,25 +154,20 @@
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
-  # - name: Job templates fix - convert extra_vars to dictionary
-  #   set_fact:
-  #     job_templates: >-
-  #       {{
-  #         job_templates | map('combine', {
-  #           'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
-  #         }) | list
-  #       }}
-  #   loop: "{{ job_templates }}"
-  #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-  #   #output his huge otherwise, so no log to keep it small
-  #   no_log: true 
-
   - name: Job templates fix - convert extra_vars to dictionary
     set_fact:
-      job_templates: "{{ job_templates | map('regex_replace', extra_vars_pattern, extra_vars_replacement) | list }}"
-    vars:
-      extra_vars_pattern: "^extra_vars: '(.*)'$"
-      extra_vars_replacement: "extra_vars: {{ '\\1' | from_yaml }}"
+      job_templates: >-
+        {{
+          job_templates | map('combine', {
+            'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
+          }) | list
+        }}
+    loop: "{{ job_templates }}"
+    #when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+    when: item.extra_vars is string and job_templates is defined
+    #output his huge otherwise, so no log to keep it small
+    no_log: true 
+
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
