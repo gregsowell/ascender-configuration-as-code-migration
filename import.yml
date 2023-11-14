@@ -170,12 +170,32 @@
   #     job_templates: "{{ updated_job_templates }}"
   #   when: updated_job_templates is defined
 
-  - name: Convert extra_vars in each job template to a dictionary
-    vars:
-      updated_item: "{{ item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))}) }}"
+  # - name: Convert extra_vars in each job template to a dictionary
+  #   vars:
+  #     updated_item: "{{ item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))}) }}"
+  #   set_fact:
+  #     job_templates: "{{ job_templates | map('combine', updated_item) | list }}"
+  #   loop: "{{ job_templates }}"
+
+  - name: Initialize an empty list for the updated job templates
     set_fact:
-      job_templates: "{{ job_templates | map('combine', updated_item) | list }}"
+      updated_job_templates: []
+
+  - name: Convert extra_vars in each job template to a dictionary
+    set_fact:
+      updated_job_templates: "{{ updated_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
     loop: "{{ job_templates }}"
+    when: item.extra_vars is defined and item.extra_vars | length > 0
+
+  - name: Add job templates without extra_vars to the list
+    set_fact:
+      updated_job_templates: "{{ updated_job_templates + [item] }}"
+    loop: "{{ job_templates }}"
+    when: item.extra_vars is not defined or item.extra_vars | length == 0
+
+  - name: Overwrite job_templates with the updated list
+    set_fact:
+      job_templates: "{{ updated_job_templates }}"
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
