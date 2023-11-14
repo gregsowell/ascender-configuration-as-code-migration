@@ -215,6 +215,13 @@
   #     workflow_job_templates: "{{ updated_workflow_job_templates }}"
   #   when: updated_workflow_job_templates is defined
 
+  - name: Convert extra_vars in each workflow job template to a dictionary
+    vars:
+      updated_item: "{{ item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))}) }}"
+    set_fact:
+      workflow_job_templates: "{{ workflow_job_templates | map('combine', updated_item) | list }}"
+    loop: "{{ workflow_job_templates }}"
+
 
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
