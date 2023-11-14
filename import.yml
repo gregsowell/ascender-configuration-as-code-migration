@@ -167,7 +167,13 @@
   #   #output his huge otherwise, so no log to keep it small
   #   no_log: true 
 
-  
+  - name: Job templates fix - convert extra_vars to dictionary
+    set_fact:
+      job_templates: "{{ job_templates | map('regex_replace', extra_vars_pattern, extra_vars_replacement) | list }}"
+    vars:
+      extra_vars_pattern: "^extra_vars: '(.*)'$"
+      extra_vars_replacement: "extra_vars: {{ '\\1' | from_yaml }}"
+
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
       workflow_job_templates: >-
