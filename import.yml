@@ -201,7 +201,7 @@
     set_fact:
       updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | from_yaml | default({}, true))})] }}"
     loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is defined and item.extra_vars | length > 0 and workflow_job_templates is defined
+    when: item.extra_vars is defined and item.extra_vars | length > 0 and updated_workflow_job_templates is defined
 
   - name: Workflow job templates fix -  Overwrite job_templates with the updated list
     set_fact:
@@ -269,7 +269,7 @@
 
   - name: Debug a var
     debug:
-      var: job_templates
+      var: workflow_job_templates
 
 ####### start importing various information
 
