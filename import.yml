@@ -132,40 +132,48 @@
         - 'Cleanup Expired Sessions'
         - 'Cleanup Expired OAuth 2 Tokens'
 
-  - name: Job templates fix - remove nulls and comments from extra_vars
-    set_fact:
-      job_templates: >-
-        {{
-          job_templates + [
-            {
-              'name': item.name,
-              'extra_vars': (
-                item.extra_vars
-                | regex_replace('^\\s*#.*?$', '', multiline=True)
-                | regex_replace('\\s+', ' ')
-                | trim
-                if item.extra_vars != 'null' else omit
-              )
-            }
-          ]
-        }}
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-    #output his huge otherwise, so no log to keep it small
-    no_log: true 
+  # - name: Job templates fix - remove nulls and comments from extra_vars
+  #   set_fact:
+  #     job_templates: >-
+  #       {{
+  #         job_templates + [
+  #           {
+  #             'name': item.name,
+  #             'extra_vars': (
+  #               item.extra_vars
+  #               | regex_replace('^\\s*#.*?$', '', multiline=True)
+  #               | regex_replace('\\s+', ' ')
+  #               | trim
+  #               if item.extra_vars != 'null' else omit
+  #             )
+  #           }
+  #         ]
+  #       }}
+  #   loop: "{{ job_templates }}"
+  #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+  #   #output his huge otherwise, so no log to keep it small
+  #   no_log: true 
 
-  - name: Job templates fix - convert extra_vars to dictionary
+  # - name: Job templates fix - convert extra_vars to dictionary
+  #   set_fact:
+  #     job_templates: >-
+  #       {{
+  #         job_templates | map('combine', {
+  #           'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
+  #         }) | list
+  #       }}
+  #   loop: "{{ job_templates }}"
+  #   when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+  #   #output his huge otherwise, so no log to keep it small
+  #   no_log: true 
+
+  - name: Process each job template
+    vars:
+      processed_extra_vars: "{{ item.extra_vars | regex_replace('^\\s*#.*$', '') | regex_replace('\\n\\s*\\n', '\\n') }}"
+      extra_vars_dict: "{{ dict(processed_extra_vars.splitlines() | map('regex_replace', '^(.*?):\\s*(.*?)$', '\\1=\\2') | map('split', '=')) }}"
     set_fact:
-      job_templates: >-
-        {{
-          job_templates | map('combine', {
-            'extra_vars': (item.extra_vars | from_yaml if item.extra_vars != 'null' else {})
-          }) | list
-        }}
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-    #output his huge otherwise, so no log to keep it small
-    no_log: true 
+      job_templates: "{{ job_templates | map('combine', {'extra_vars': extra_vars_dict}) | list }}"
+    with_items: "{{ job_templates }}"
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
