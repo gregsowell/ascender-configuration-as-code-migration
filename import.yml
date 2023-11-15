@@ -31,6 +31,11 @@
       - users 
       - workflow_job_templates
       - schedules 
+
+    #these are the users that won't be imported.  Recall these users will have their passwords and keys wiped.
+    #I'm using the admin user for importing so I want to ignore it.
+    filter_user_import:
+      - admin
   
   # setting up some env variables for connecting to the automation server
   environment:
@@ -218,8 +223,7 @@
     when: users is defined
     set_fact:
       users: "{{ users | rejectattr('natural_key.username', 'equalto', item) | list }}"
-    loop:
-      - admin
+    loop: "{{ filter_user_import }}"
 
   - name: Reformat the organization entry in applications variable to fix applications.  role formatting is old and needs fixing, but this is a workaround
     when: applications is defined
