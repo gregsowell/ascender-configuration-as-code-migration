@@ -36,6 +36,15 @@
     #I'm using the admin user for importing so I want to ignore it.
     filter_user_import:
       - admin
+
+    #List of schedule names to remove when importing
+    #By default I'm removing all of the system defaults
+    schedules_to_remove: 
+      - 'Cleanup Job Schedule'
+      - 'Cleanup Activity Schedule'
+      - 'Cleanup Expired Sessions'
+      - 'Cleanup Expired OAuth 2 Tokens'
+
   
   # setting up some env variables for connecting to the automation server
   environment:
@@ -129,13 +138,6 @@
     when: schedules is defined
     set_fact:
       schedules: "{{ schedules | rejectattr('name', 'in', schedules_to_remove) | list }}"
-    vars:
-      # List of schedule names to remove - all system default ones
-      schedules_to_remove: 
-        - 'Cleanup Job Schedule'
-        - 'Cleanup Activity Schedule'
-        - 'Cleanup Expired Sessions'
-        - 'Cleanup Expired OAuth 2 Tokens'
 
   - name: Job templates fix - remove nulls and comments from extra_vars
     set_fact:
