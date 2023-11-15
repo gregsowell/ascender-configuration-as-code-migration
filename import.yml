@@ -292,7 +292,7 @@
 
   - name: Debug a var
     debug:
-      var: workflow_job_templates.name
+      var: workflow_job_templates
 
 ####### start importing various information
 
