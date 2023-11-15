@@ -274,9 +274,9 @@
     set_fact:
       controller_groups: "{{ controller_groups | flatten }}"
 
-  # - name: Debug a var
-  #   debug:
-  #     var: workflow_job_templates
+  - name: Debug a var
+    debug:
+      var: workflow_job_templates
 
 ####### start importing various information
 
