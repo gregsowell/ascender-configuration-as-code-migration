@@ -157,22 +157,30 @@
   - name: Job templates fix - Initialize an empty list for the updated job templates
     set_fact:
       updated_job_templates: []
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Job templates fix - Convert extra_vars in each job template to a dictionary
     set_fact:
       updated_job_templates: "{{ updated_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
     loop: "{{ job_templates }}"
     when: item.extra_vars is defined and item.extra_vars | length > 0
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Job templates fix - Add job templates without extra_vars to the list
     set_fact:
       updated_job_templates: "{{ updated_job_templates + [item] }}"
     loop: "{{ job_templates }}"
     when: item.extra_vars is not defined or item.extra_vars | length == 0
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Job templates fix - Overwrite job_templates with the updated list
     set_fact:
       job_templates: "{{ updated_job_templates }}"
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Workflow job templates fix - remove nulls and comments from extra_vars
     set_fact:
@@ -199,22 +207,30 @@
   - name: Workflow job templates fix -  Initialize an empty list for the updated workflow job templates
     set_fact:
       updated_workflow_job_templates: []
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Workflow job templates fix -  Convert extra_vars in each workflow job template to a dictionary
     set_fact:
       updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
     loop: "{{ workflow_job_templates }}"
     when: item.extra_vars is defined and item.extra_vars | length > 0
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Workflow job templates fix -  Add workflow job templates without extra_vars to the list
     set_fact:
       updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item] }}"
     loop: "{{ workflow_job_templates }}"
     when: item.extra_vars is not defined or item.extra_vars | length == 0
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Workflow job templates fix -  Overwrite workflow job_templates with the updated list
     set_fact:
       workflow_job_templates: "{{ updated_workflow_job_templates }}"
+    # really noisy, so use no_log to keep it quieter
+    no_log: true
 
   - name: Filter out users we don't want imported - user import fix
     when: users is defined
