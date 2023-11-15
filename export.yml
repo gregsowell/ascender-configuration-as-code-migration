@@ -3,6 +3,7 @@
   hosts: save-files
   gather_facts: false
   vars:
+    # These are the objects you wish to export.  Be sure to comment out any you don't want.
     export_objects: 
       - applications
       - credentials
@@ -19,20 +20,23 @@
       - users
       - workflow_job_templates
   
+  # This is setting up environment variables for use with the awx.awx collection.
+  # I'm passing these variables in, but you can hard code them if you choose.
   environment:
     CONTROLLER_HOST: "https://{{ export_host }}"
     CONTROLLER_USERNAME: "{{ gen1_user }}"
     CONTROLLER_PASSWORD: "{{ gen1_pword }}"
     CONTROLLER_VERIFY_SSL: False
+
   tasks:
-  - name: Create temp file directory
+  - name: Create temp file directory in the EE
     ansible.builtin.file:
       path: /tmp/export_files
       state: directory
       mode: '0755'
     delegate_to: localhost
 
-  - name: Create temp file directory
+  - name: Create temp file directory on the remote host
     ansible.builtin.file:
       path: /tmp/export_files
       state: directory
