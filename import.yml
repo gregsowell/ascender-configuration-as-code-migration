@@ -204,6 +204,10 @@
     #output his huge otherwise, so no log to keep it small
     no_log: true 
 
+  - name: Debug a var before
+    debug:
+      var: workflow_job_templates
+
   - name: Workflow job templates fix -  Initialize an empty list for the updated workflow job templates
     set_fact:
       updated_workflow_job_templates: []
