@@ -182,28 +182,6 @@
     # really noisy, so use no_log to keep it quieter
     no_log: true
 
-  # - name: Workflow job templates fix - remove nulls and comments from extra_vars
-  #   set_fact:
-  #     workflow_job_templates: >-
-  #       {{
-  #         workflow_job_templates + [
-  #           {
-  #             'name': item.name,
-  #             'extra_vars': (
-  #               item.extra_vars
-  #               | regex_replace('^\\s*#.*?$', '', multiline=True)
-  #               | regex_replace('\\s+', ' ')
-  #               | trim
-  #               if item.extra_vars != 'null' else omit
-  #             )
-  #           }
-  #         ]
-  #       }}
-  #   loop: "{{ workflow_job_templates }}"
-  #   when: item.extra_vars is string and item.extra_vars | length > 0 and workflow_job_templates is defined
-  #   #output his huge otherwise, so no log to keep it small
-  #   no_log: true 
-
   - name: Debug a var before
     debug:
       var: workflow_job_templates
