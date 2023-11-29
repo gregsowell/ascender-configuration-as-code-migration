@@ -5,7 +5,7 @@
   vars:
     # Var for setting repo destination for importing
     # Can be passed as extra_vars in job template
-    repo_dir: /path/to/repo/config # Change to path to your repo / fork 
+    # repo_dir: /path/to/repo/config # Change to path to your repo / fork 
     # These are the objects you wish to export.  Be sure to comment out any you don't want.
     export_objects: 
       - applications
