@@ -45,7 +45,7 @@
       - 'Cleanup Expired Sessions'
       - 'Cleanup Expired OAuth 2 Tokens'
 
-  # setting up some env variables for connecting to the automation server
+  # Setting up some env variables for connecting to the automation server
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
     CONTROLLER_USERNAME: "{{ gen2_user }}"
@@ -53,8 +53,8 @@
     CONTROLLER_VERIFY_SSL: false
 
   tasks:
-  # the following tasks are making modifications to the config as code(cac) yaml files.
-  # the existing modules and roles are using some old formatting of the default export
+  # The following tasks are making modifications to the config as code(cac) yaml files.
+  # The existing modules and roles are using some old formatting of the default export
   # so some modification is required.
     - name: Change file permissions on credential-type shell script
       when: item == "credential_types"
@@ -125,7 +125,7 @@
       loop: "{{ export_objects }}"
 
 ############# Variable file imports
-    # this imports the variable files from the configs directory
+    # This imports the variable files from the configs directory
     - name: Include vars from config folder
       ansible.builtin.include_vars:
         dir: configs
@@ -281,7 +281,7 @@
     #   debug:
     #     var: workflow_job_templates
 
-##  ##### start importing various information
+##  ##### Start importing various information
 
     - name: block and rescue for multiple attempts
       block:
