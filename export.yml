@@ -44,6 +44,7 @@
       path: /tmp/export_files
       state: directory
       mode: '0755'
+    when: repo_dir is undefined
 
   - name: create all of the export files from template file
     ansible.builtin.template:
