@@ -1,5 +1,5 @@
 - name: Process each group in the inventory item
-  set_fact:
+  ansible.builtin.set_fact:
     controller_groups: "{{ controller_groups + [formatted_group] }}"
   loop: "{{ inventory_item.related.groups }}"
   loop_control:
