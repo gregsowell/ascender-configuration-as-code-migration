@@ -63,7 +63,7 @@
         mode: '0777'
       loop: "{{ export_objects }}"
 
-    - name: Use shell script to modify credentail types file
+    - name: Use shell script to modify credential types file
       when: item == "credential_types"
       ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
       loop: "{{ export_objects }}"
