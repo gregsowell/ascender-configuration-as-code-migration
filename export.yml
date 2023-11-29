@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     # These are the objects you wish to export.  Be sure to comment out any you don't want.
-    export_objects: 
+    export_objects:
       - applications
       - credentials
       - credential_types
@@ -19,37 +19,38 @@
       - teams
       - users
       - workflow_job_templates
-  
+
   # This is setting up environment variables for use with the awx.awx collection.
   # I'm passing these variables in, but you can hard code them if you choose.
   environment:
     CONTROLLER_HOST: "https://{{ export_host }}"
     CONTROLLER_USERNAME: "{{ gen1_user }}"
     CONTROLLER_PASSWORD: "{{ gen1_pword }}"
-    CONTROLLER_VERIFY_SSL: False
+    CONTROLLER_VERIFY_SSL: false
 
   tasks:
-  - name: Create temp file directory in the EE
-    ansible.builtin.file:
-      path: /tmp/export_files
-      state: directory
-      mode: '0755'
-    delegate_to: localhost
+    - name: Create temp file directory in the EE
+      ansible.builtin.file:
+        path: /tmp/export_files
+        state: directory
+        mode: '0755'
+      delegate_to: localhost
 
-  - name: Create temp file directory on the remote host
-    ansible.builtin.file:
-      path: /tmp/export_files
-      state: directory
-      mode: '0755'
+    - name: Create temp file directory on the remote host
+      ansible.builtin.file:
+        path: /tmp/export_files
+        state: directory
+        mode: '0755'
 
-  - name: create all of the export files from template file
-    ansible.builtin.template:
-      src: export_template.yml.j2
-      dest: "{{ playbook_dir }}/export_{{ item }}.yml"
-    loop: "{{ export_objects }}"
-    delegate_to: localhost
-    
-  - name: Export objects loop.  Loop through list and export those categories.
-    ansible.builtin.include_tasks:
-      file: "export_{{ item }}.yml"
-    loop: "{{ export_objects }}"
+    - name: Create all of the export files from template file
+      ansible.builtin.template:
+        src: export_template.yml.j2
+        dest: "{{ playbook_dir }}/export_{{ item }}.yml"
+        mode: '0755'
+      loop: "{{ export_objects }}"
+      delegate_to: localhost
+
+    - name: Export objects loop.  Loop through list and export those categories.
+      ansible.builtin.include_tasks:
+        file: "export_{{ item }}.yml"
+      loop: "{{ export_objects }}"

@@ -15,480 +15,478 @@
     add_groups: true
 
     #these are the objects you want to import into the server
-    export_objects: 
+    export_objects:
       - testing_value
-      - applications 
-      - credentials 
-      - credential_types 
+      - applications
+      - credentials
+      - credential_types
       - execution_environments
-      - projects 
+      - projects
       - inventory
       - inventory_sources
       - job_templates
-      - notification_templates 
-      - organizations 
-      - teams 
-      - users 
+      - notification_templates
+      - organizations
+      - teams
+      - users
       - workflow_job_templates
-      - schedules 
+      - schedules
 
-    #these are the users that won't be imported.  Recall these users will have their passwords and keys wiped.
-    #I'm using the admin user for importing so I want to ignore it.
+    # These are the users that won't be imported.  Recall these users will have their passwords and keys wiped.
+    # I'm using the admin user for importing so I want to ignore it.
     filter_user_import:
       - admin
 
-    #List of schedule names to remove when importing
-    #By default I'm removing all of the system defaults
-    schedules_to_remove: 
+    # List of schedule names to remove when importing
+    # By default I'm removing all of the system defaults
+    schedules_to_remove:
       - 'Cleanup Job Schedule'
       - 'Cleanup Activity Schedule'
       - 'Cleanup Expired Sessions'
       - 'Cleanup Expired OAuth 2 Tokens'
 
-  
   # setting up some env variables for connecting to the automation server
   environment:
     CONTROLLER_HOST: "https://{{ import_host }}"
     CONTROLLER_USERNAME: "{{ gen2_user }}"
     CONTROLLER_PASSWORD: "{{ gen2_pword }}"
-    CONTROLLER_VERIFY_SSL: False
+    CONTROLLER_VERIFY_SSL: false
 
   tasks:
   # the following tasks are making modifications to the config as code(cac) yaml files.
   # the existing modules and roles are using some old formatting of the default export
   # so some modification is required.
-  - name: Change file permissions on credential-type shell script
-    when: item == "credential_types"
-    ansible.builtin.file:
-      path: "{{ playbook_dir }}/credential-types-fix.sh"
-      mode: '0777'
-    loop: "{{ export_objects }}"
+    - name: Change file permissions on credential-type shell script
+      when: item == "credential_types"
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/credential-types-fix.sh"
+        mode: '0777'
+      loop: "{{ export_objects }}"
 
-  - name: use shell script to modify credentail types file
-    when: item == "credential_types"
-    ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
-    loop: "{{ export_objects }}"
+    - name: use shell script to modify credentail types file
+      when: item == "credential_types"
+      ansible.builtin.shell: "{{ playbook_dir }}/credential-types-fix.sh {{ playbook_dir }}/configs/credential_types.yml"
+      loop: "{{ export_objects }}"
 
-  - name: Fix credentials file by removing password fields
-    when: item == "credentials"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/credentials.yml"
-      regexp: '.*password:.*'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix credentials file by removing password fields
+      when: item == "credentials"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/credentials.yml"
+        regexp: '.*password:.*'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix wokflow job templates by removing any lines with null
-    when: item == "workflow_job_templates"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/workflow_job_templates.yml"
-      regexp: '.*null.*\n'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix wokflow job templates by removing any lines with null
+      when: item == "workflow_job_templates"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/workflow_job_templates.yml"
+        regexp: '.*null.*\n'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix schedules by removing any lines with null
-    when: item == "schedules"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/schedules.yml"
-      regexp: '.*null.*\n'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix schedules by removing any lines with null
+      when: item == "schedules"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/schedules.yml"
+        regexp: '.*null.*\n'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix project file by removing null credentials
-    when: item == "credentials"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/projects.yml"
-      regexp: ' +credential: null'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix project file by removing null credentials
+      when: item == "credentials"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/projects.yml"
+        regexp: ' +credential: null'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix organizations by removing empty EE entries
-    when: item == "organizations"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/organizations.yml"
-      regexp: ' +execution_environments: \[\]'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix organizations by removing empty EE entries
+      when: item == "organizations"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/organizations.yml"
+        regexp: ' +execution_environments: \[\]'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix organizations by removing null default environment
-    when: item == "organizations"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/organizations.yml"
-      regexp: ' +default_environment: null'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix organizations by removing null default environment
+      when: item == "organizations"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/organizations.yml"
+        regexp: ' +default_environment: null'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-  - name: Fix execution environments file by removing null organizations
-    when: item == "execution_environments"
-    ansible.builtin.replace:
-      path: "{{ playbook_dir }}/configs/execution_environments.yml"
-      regexp: ' +organization: null'
-      replace: ''
-    loop: "{{ export_objects }}"
+    - name: Fix execution environments file by removing null organizations
+      when: item == "execution_environments"
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/configs/execution_environments.yml"
+        regexp: ' +organization: null'
+        replace: ''
+      loop: "{{ export_objects }}"
 
-############# variable file imports
-  # this imports the variable files from the configs directory
-  - name: Include vars from config folder
-    ansible.builtin.include_vars:
-      dir: configs
+############# Variable file imports
+    # this imports the variable files from the configs directory
+    - name: Include vars from config folder
+      ansible.builtin.include_vars:
+        dir: configs
 ####################################
 
-  # the following tasks are modifying the imported variables.
-  # some were easier to modify as files, and some were easier once they were variables.
-  - name: Fix schedules variable - Filter out schedules based on provided names - system default schedules
-    when: schedules is defined
-    set_fact:
-      schedules: "{{ schedules | rejectattr('name', 'in', schedules_to_remove) | list }}"
+    # The following tasks are modifying the imported variables.
+    # Some were easier to modify as files, and some were easier once they were variables.
+    - name: Fix schedules variable - Filter out schedules based on provided names - system default schedules
+      when: schedules is defined
+      ansible.builtin.ansible.builtin.set_fact:
+        schedules: "{{ schedules | rejectattr('name', 'in', schedules_to_remove) | list }}"
 
-  - name: Job templates fix - remove nulls and comments from extra_vars
-    set_fact:
-      job_templates: >-
-        {{
-          job_templates + [
-            {
-              'name': item.name,
-              'extra_vars': (
-                item.extra_vars
-                | regex_replace('^\\s*#.*?$', '', multiline=True)
-                | regex_replace('\\s+', ' ')
-                | trim
-                if item.extra_vars != 'null' else omit
-              )
-            }
-          ]
-        }}
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
-    #output his huge otherwise, so no log to keep it small
-    no_log: true 
+    - name: Job templates fix - remove nulls and comments from extra_vars
+      ansible.builtin.ansible.builtin.set_fact:
+        job_templates: >-
+          {{
+            job_templates + [
+              {
+                'name': item.name,
+                'extra_vars': (
+                  item.extra_vars
+                  | regex_replace('^\\s*#.*?$', '', multiline=True)
+                  | regex_replace('\\s+', ' ')
+                  | trim
+                  if item.extra_vars != 'null' else omit
+                )
+              }
+            ]
+          }}
+      loop: "{{ job_templates }}"
+      when: item.extra_vars is string and item.extra_vars | length > 0 and job_templates is defined
+      # Output his huge otherwise, so no log to keep it small
+      no_log: true
 
-  - name: Job templates fix - Initialize an empty list for the updated job templates
-    set_fact:
-      updated_job_templates: []
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Job templates fix - Initialize an empty list for the updated job templates
+      ansible.builtin.set_fact:
+        updated_job_templates: []
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Job templates fix - Convert extra_vars in each job template to a dictionary
-    set_fact:
-      updated_job_templates: "{{ updated_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is defined and item.extra_vars | length > 0
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Job templates fix - Convert extra_vars in each job template to a dictionary
+      ansible.builtin.set_fact:
+        updated_job_templates: "{{ updated_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
+      loop: "{{ job_templates }}"
+      when: item.extra_vars is defined and item.extra_vars | length > 0
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Job templates fix - Add job templates without extra_vars to the list
-    set_fact:
-      updated_job_templates: "{{ updated_job_templates + [item] }}"
-    loop: "{{ job_templates }}"
-    when: item.extra_vars is not defined or item.extra_vars | length == 0
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Job templates fix - Add job templates without extra_vars to the list
+      ansible.builtin.set_fact:
+        updated_job_templates: "{{ updated_job_templates + [item] }}"
+      loop: "{{ job_templates }}"
+      when: item.extra_vars is not defined or item.extra_vars | length == 0
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Job templates fix - Overwrite job_templates with the updated list
-    set_fact:
-      job_templates: "{{ updated_job_templates }}"
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Job templates fix - Overwrite job_templates with the updated list
+      ansible.builtin.set_fact:
+        job_templates: "{{ updated_job_templates }}"
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  # - name: Debug a var before
-  #   debug:
-  #     var: workflow_job_templates
+    # - name: Debug a var before
+    #   debug:
+    #     var: workflow_job_templates
 
-  - name: Workflow job templates fix -  Initialize an empty list for the updated workflow job templates
-    set_fact:
-      updated_workflow_job_templates: []
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Workflow job templates fix -  Initialize an empty list for the updated workflow job templates
+      ansible.builtin.set_fact:
+        updated_workflow_job_templates: []
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Workflow job templates fix -  Convert extra_vars in each workflow job template to a dictionary
-    set_fact:
-      updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
-    loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is defined and item.extra_vars | length > 0
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Workflow job templates fix -  Convert extra_vars in each workflow job template to a dictionary
+      ansible.builtin.set_fact:
+        updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item | combine({'extra_vars': (item.extra_vars | default('{}') | from_yaml)})] }}"
+      loop: "{{ workflow_job_templates }}"
+      when: item.extra_vars is defined and item.extra_vars | length > 0
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Workflow job templates fix -  Add workflow job templates without extra_vars to the list
-    set_fact:
-      updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item] }}"
-    loop: "{{ workflow_job_templates }}"
-    when: item.extra_vars is not defined or item.extra_vars | length == 0
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Workflow job templates fix -  Add workflow job templates without extra_vars to the list
+      ansible.builtin.set_fact:
+        updated_workflow_job_templates: "{{ updated_workflow_job_templates + [item] }}"
+      loop: "{{ workflow_job_templates }}"
+      when: item.extra_vars is not defined or item.extra_vars | length == 0
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Workflow job templates fix -  Overwrite workflow job_templates with the updated list
-    set_fact:
-      workflow_job_templates: "{{ updated_workflow_job_templates }}"
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
+    - name: Workflow job templates fix -  Overwrite workflow job_templates with the updated list
+      ansible.builtin.set_fact:
+        workflow_job_templates: "{{ updated_workflow_job_templates }}"
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: Filter out users we don't want imported - user import fix
-    when: users is defined
-    set_fact:
-      users: "{{ users | rejectattr('natural_key.username', 'equalto', item) | list }}"
-    loop: "{{ filter_user_import }}"
+    - name: Filter out users we don't want imported - user import fix
+      when: users is defined
+      ansible.builtin.set_fact:
+        users: "{{ users | rejectattr('natural_key.username', 'equalto', item) | list }}"
+      loop: "{{ filter_user_import }}"
 
-  - name: Reformat the organization entry in applications variable to fix applications.  role formatting is old and needs fixing, but this is a workaround
-    when: applications is defined
-    set_fact:
-      applications: "{{ applications | json_query(query) }}"
-    vars:
-      query: "[].{authorization_grant_type: authorization_grant_type, client_type: client_type, description: description, name: name, natural_key: natural_key, organization: organization.name, redirect_uris: redirect_uris, skip_authorization: skip_authorization}"
-
-  - name: Fix EEs by modifying the credential field in the execution_environments variable.  The module doesn't recognize the current format
-    when: item.credential.name is defined and execution_environments is defined
-    set_fact:
-      execution_environments: "{{ execution_environments | map('combine', {'credential': item.credential.name}) | list }}"
-    loop: "{{ execution_environments }}"
-
-  - name: Create controller_hosts variable - Initialize controller_hosts
-    when: inventory is defined
-    set_fact:
-      controller_hosts: []
-
-  - name: Create controller_hosts variable - Extract and format hosts from inventory
-    when: inventory is defined
-    include_tasks: extract_hosts.yml
-    loop: "{{ inventory }}"
-    loop_control:
-      loop_var: inventory_item
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
-
-  - name: Create controller_hosts variable - Flatten controller_hosts list
-    when: inventory is defined
-    set_fact:
-      controller_hosts: "{{ controller_hosts | flatten }}"
-
-  - name: Create controller_groups variable - Initialize controller_groups
-    when: inventory is defined
-    set_fact:
-      controller_groups: []
-
-  - name: Create controller_groups variable - Extract and format hosts from inventory
-    when: inventory is defined
-    include_tasks: extract_groups.yml
-    loop: "{{ inventory }}"
-    loop_control:
-      loop_var: inventory_item
-    # really noisy, so use no_log to keep it quieter
-    no_log: true
-
-  - name: Create controller_groups variable - Flatten controller_groups list
-    when: inventory is defined
-    set_fact:
-      controller_groups: "{{ controller_groups | flatten }}"
-
-  # - name: Debug a var
-  #   debug:
-  #     var: workflow_job_templates
-
-####### start importing various information
-
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add credential types
-      when: item == "credential_types"
-      ansible.builtin.include_role:
-        name: credential_types
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add credential types - second attempt
-      ansible.builtin.include_role:
-        name: credential_types
-
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add credentials
-      when: item == "credentials"
-      ansible.builtin.include_role:
-        name: credentials
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add credentials - second attempt
-      ansible.builtin.include_role:
-        name: credentials
-
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add execution_environments
-      when: item == "execution_environments"
-      ansible.builtin.include_role:
-        name: execution_environments
-      loop: "{{ export_objects }}"
+    - name: Reformat the organization entry in applications variable to fix applications.  role formatting is old and needs fixing, but this is a workaround
+      when: applications is defined
+      ansible.builtin.set_fact:
+        applications: "{{ applications | json_query(query) }}"
       vars:
-        controller_execution_environments: 
-          - food: tacos #weird conditional they check for in the role(error in role)
-            day: tuesday
-    rescue:
-    - name: Add execution_environments - second attempt
-      ansible.builtin.include_role:
-        name: execution_environments
-      vars:
-        controller_execution_environments: 
-          - food: tacos #weird conditional they check for in the role(error in role)
-            day: tuesday
+        query: "[].{authorization_grant_type: authorization_grant_type, client_type: client_type, description: description, name: name, natural_key: natural_key, organization: organization.name, redirect_uris: redirect_uris, skip_authorization: skip_authorization}"
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add organizations
-      when: item == "organizations"
-      ansible.builtin.include_role:
-        name: organizations
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add organizations
-      ansible.builtin.include_role:
-        name: organizations
+    - name: Fix EEs by modifying the credential field in the execution_environments variable.  The module doesn't recognize the current format
+      when: item.credential.name is defined and execution_environments is defined
+      ansible.builtin.set_fact:
+        execution_environments: "{{ execution_environments | map('combine', {'credential': item.credential.name}) | list }}"
+      loop: "{{ execution_environments }}"
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add teams
-      when: item == "teams"
-      ansible.builtin.include_role:
-        name: teams
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add teams - second attempt
-      ansible.builtin.include_role:
-        name: teams
+    - name: Create controller_hosts variable - Initialize controller_hosts
+      when: inventory is defined
+      ansible.builtin.set_fact:
+        controller_hosts: []
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add users
-      when: item == "users"
-      ansible.builtin.include_role:
-        name: users
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add users - second attempt
-      ansible.builtin.include_role:
-        name: users
+    - name: Create controller_hosts variable - Extract and format hosts from inventory
+      when: inventory is defined
+      include_tasks: extract_hosts.yml
+      loop: "{{ inventory }}"
+      loop_control:
+        loop_var: inventory_item
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add projects
-      when: item == "projects"
-      ansible.builtin.include_role:
-        name: projects
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add projects - second attempt
-      ansible.builtin.include_role:
-        name: projects
+    - name: Create controller_hosts variable - Flatten controller_hosts list
+      when: inventory is defined
+      ansible.builtin.set_fact:
+        controller_hosts: "{{ controller_hosts | flatten }}"
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add inventory
-      when: item == "inventory"
-      ansible.builtin.include_role:
-        name: inventories
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add inventory - second attempt
-      ansible.builtin.include_role:
-        name: inventories
+    - name: Create controller_groups variable - Initialize controller_groups
+      when: inventory is defined
+      ansible.builtin.set_fact:
+        controller_groups: []
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add inventory sources
-      when: item == "inventory_sources"
-      ansible.builtin.include_role:
-        name: inventory_sources
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add inventory sources - second attempt
-      ansible.builtin.include_role:
-        name: inventory_sources
+    - name: Create controller_groups variable - Extract and format hosts from inventory
+      when: inventory is defined
+      include_tasks: extract_groups.yml
+      loop: "{{ inventory }}"
+      loop_control:
+        loop_var: inventory_item
+      # Really noisy, so use no_log to keep it quieter
+      no_log: true
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add hosts
-      when: item == "inventory" and add_hosts
-      ansible.builtin.include_role:
-        name: hosts
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add hosts - second attempt
-      ansible.builtin.include_role:
-        name: hosts
+    - name: Create controller_groups variable - Flatten controller_groups list
+      when: inventory is defined
+      ansible.builtin.set_fact:
+        controller_groups: "{{ controller_groups | flatten }}"
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add groups
-      when: item == "inventory" and add_groups
-      ansible.builtin.include_role:
-        name: groups
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add groups - second attempt
-      ansible.builtin.include_role:
-        name: groups
+    # - name: Debug a var
+    #   debug:
+    #     var: workflow_job_templates
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add applications
-      when: item == "applications"
-      ansible.builtin.include_role:
-        name: applications
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add applications - second attempt
-      ansible.builtin.include_role:
-        name: applications
+##  ##### start importing various information
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add job_templates
-      when: item == "job_templates"
-      ansible.builtin.include_role:
-        name: job_templates
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: sleep for 20 seconds to let some previous jobs finish
-      ansible.builtin.pause:
-        seconds: 20
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add credential types
+        when: item == "credential_types"
+        ansible.builtin.include_role:
+          name: credential_types
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add credential types - second attempt
+        ansible.builtin.include_role:
+          name: credential_types
 
-    - name: Add job_templates - second attempt
-      ansible.builtin.include_role:
-        name: job_templates
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add credentials
+        when: item == "credentials"
+        ansible.builtin.include_role:
+          name: credentials
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add credentials - second attempt
+        ansible.builtin.include_role:
+          name: credentials
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add workflow_job_templates
-      when: item == "workflow_job_templates"
-      ansible.builtin.include_role:
-        name: workflow_job_templates
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: sleep for 20 seconds to let some previous jobs finish
-      ansible.builtin.pause:
-        seconds: 20
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add execution_environments
+        when: item == "execution_environments"
+        ansible.builtin.include_role:
+          name: execution_environments
+        loop: "{{ export_objects }}"
+        vars:
+          controller_execution_environments: 
+            - food: tacos # Weird conditional they check for in the role(error in role)
+              day: tuesday
+      rescue:
+      - name: Add execution_environments - second attempt
+        ansible.builtin.include_role:
+          name: execution_environments
+        vars:
+          controller_execution_environments: 
+            - food: tacos # Weird conditional they check for in the role(error in role)
+              day: tuesday
 
-    - name: Add workflow_job_templates - second attempt
-      ansible.builtin.include_role:
-        name: workflow_job_templates
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add organizations
+        when: item == "organizations"
+        ansible.builtin.include_role:
+          name: organizations
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add organizations
+        ansible.builtin.include_role:
+          name: organizations
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add notification_templates
-      when: item == "notification_templates"
-      ansible.builtin.include_role:
-        name: notification_templates
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add notification_templates - second attempt
-      ansible.builtin.include_role:
-        name: notification_templates
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add teams
+        when: item == "teams"
+        ansible.builtin.include_role:
+          name: teams
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add teams - second attempt
+        ansible.builtin.include_role:
+          name: teams
 
-  - name: block and rescue for multiple attempts
-    block:
-    - name: Add schedules
-      when: item == "schedules"
-      ansible.builtin.include_role:
-        name: schedules
-      loop: "{{ export_objects }}"
-    rescue:
-    - name: Add schedules - second attempt
-      ansible.builtin.include_role:
-        name: schedules
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add users
+        when: item == "users"
+        ansible.builtin.include_role:
+          name: users
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add users - second attempt
+        ansible.builtin.include_role:
+          name: users
 
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add projects
+        when: item == "projects"
+        ansible.builtin.include_role:
+          name: projects
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add projects - second attempt
+        ansible.builtin.include_role:
+          name: projects
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add inventory
+        when: item == "inventory"
+        ansible.builtin.include_role:
+          name: inventories
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add inventory - second attempt
+        ansible.builtin.include_role:
+          name: inventories
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add inventory sources
+        when: item == "inventory_sources"
+        ansible.builtin.include_role:
+          name: inventory_sources
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add inventory sources - second attempt
+        ansible.builtin.include_role:
+          name: inventory_sources
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add hosts
+        when: item == "inventory" and add_hosts
+        ansible.builtin.include_role:
+          name: hosts
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add hosts - second attempt
+        ansible.builtin.include_role:
+          name: hosts
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add groups
+        when: item == "inventory" and add_groups
+        ansible.builtin.include_role:
+          name: groups
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add groups - second attempt
+        ansible.builtin.include_role:
+          name: groups
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add applications
+        when: item == "applications"
+        ansible.builtin.include_role:
+          name: applications
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add applications - second attempt
+        ansible.builtin.include_role:
+          name: applications
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add job_templates
+        when: item == "job_templates"
+        ansible.builtin.include_role:
+          name: job_templates
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: sleep for 20 seconds to let some previous jobs finish
+        ansible.builtin.pause:
+          seconds: 20
+
+      - name: Add job_templates - second attempt
+        ansible.builtin.include_role:
+          name: job_templates
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add workflow_job_templates
+        when: item == "workflow_job_templates"
+        ansible.builtin.include_role:
+          name: workflow_job_templates
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: sleep for 20 seconds to let some previous jobs finish
+        ansible.builtin.pause:
+          seconds: 20
+
+      - name: Add workflow_job_templates - second attempt
+        ansible.builtin.include_role:
+          name: workflow_job_templates
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add notification_templates
+        when: item == "notification_templates"
+        ansible.builtin.include_role:
+          name: notification_templates
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add notification_templates - second attempt
+        ansible.builtin.include_role:
+          name: notification_templates
+
+    - name: block and rescue for multiple attempts
+      block:
+      - name: Add schedules
+        when: item == "schedules"
+        ansible.builtin.include_role:
+          name: schedules
+        loop: "{{ export_objects }}"
+      rescue:
+      - name: Add schedules - second attempt
+        ansible.builtin.include_role:
+          name: schedules
