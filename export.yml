@@ -3,6 +3,9 @@
   hosts: save-files
   gather_facts: false
   vars:
+    # Var for setting repo destination for importing
+    # Can be passed as extra_vars in job template
+    # repo_dir: /path/to/repo/config # Change to path to your repo / fork 
     # These are the objects you wish to export.  Be sure to comment out any you don't want.
     export_objects: 
       - applications
@@ -41,6 +44,7 @@
       path: /tmp/export_files
       state: directory
       mode: '0755'
+    when: repo_dir is undefined
 
   - name: create all of the export files from template file
     ansible.builtin.template:
