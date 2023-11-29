@@ -295,7 +295,7 @@
           ansible.builtin.include_role:
             name: credential_types
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add credentials
           when: item == "credentials"
@@ -307,7 +307,7 @@
           ansible.builtin.include_role:
             name: credentials
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add execution_environments
           when: item == "execution_environments"
@@ -315,7 +315,7 @@
             name: execution_environments
           loop: "{{ export_objects }}"
           vars:
-            controller_execution_environments: 
+            controller_execution_environments:
               - food: tacos # Weird conditional they check for in the role(error in role)
                 day: tuesday
       rescue:
@@ -323,11 +323,11 @@
           ansible.builtin.include_role:
             name: execution_environments
           vars:
-            controller_execution_environments: 
+            controller_execution_environments:
               - food: tacos # Weird conditional they check for in the role(error in role)
                 day: tuesday
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add organizations
           when: item == "organizations"
@@ -339,7 +339,7 @@
           ansible.builtin.include_role:
             name: organizations
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add teams
           when: item == "teams"
@@ -351,7 +351,7 @@
           ansible.builtin.include_role:
             name: teams
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add users
           when: item == "users"
@@ -363,7 +363,7 @@
           ansible.builtin.include_role:
             name: users
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add projects
           when: item == "projects"
@@ -375,7 +375,7 @@
           ansible.builtin.include_role:
             name: projects
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add inventory
           when: item == "inventory"
@@ -387,7 +387,7 @@
           ansible.builtin.include_role:
             name: inventories
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add inventory sources
           when: item == "inventory_sources"
@@ -399,7 +399,7 @@
           ansible.builtin.include_role:
             name: inventory_sources
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add hosts
           when: item == "inventory" and add_hosts
@@ -411,7 +411,7 @@
           ansible.builtin.include_role:
             name: hosts
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add groups
           when: item == "inventory" and add_groups
@@ -423,7 +423,7 @@
           ansible.builtin.include_role:
             name: groups
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add applications
           when: item == "applications"
@@ -435,7 +435,7 @@
           ansible.builtin.include_role:
             name: applications
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add job_templates
           when: item == "job_templates"
@@ -451,7 +451,7 @@
           ansible.builtin.include_role:
             name: job_templates
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add workflow_job_templates
           when: item == "workflow_job_templates"
@@ -467,7 +467,7 @@
           ansible.builtin.include_role:
             name: workflow_job_templates
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add notification_templates
           when: item == "notification_templates"
@@ -479,7 +479,7 @@
           ansible.builtin.include_role:
             name: notification_templates
 
-    - name: block and rescue for multiple attempts
+    - name: Block and rescue for multiple attempts
       block:
         - name: Add schedules
           when: item == "schedules"
